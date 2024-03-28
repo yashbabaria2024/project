@@ -25,14 +25,14 @@ const displayJobFormData = async (req, res) => {
     let lang = await queryselect(`select * from lang_detail where emp_id = '${id}'`);
     let tech = await queryselect(`select * from tech_detail where emp_id = '${id}'`);
 
-    console.log(lang);
+    // console.log(lang);
     res.render('task11', { "basic": basic, "ref": ref, "pref": pref, "edu": edu, "exp": exp, "tech": tech, "lang": lang });
 }
 
 const createJobFormData = (req, res) => {
 
-    console.log("post data");
-    console.log(req.body);
+    // console.log("post data");
+    // console.log(req.body);
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const desg = req.body.desg;
@@ -63,7 +63,7 @@ const createJobFormData = (req, res) => {
         try {
             const id = await queryPromise1();
             let nob = req.body.nob;
-            console.log(nob);
+            // console.log(nob);
             for (let i = 0; i < nob.length; i++) {
                 nob = req.body.nob[i];
                 const passingyear = req.body.passingyear[i];
@@ -82,14 +82,14 @@ const createJobFormData = (req, res) => {
             let designation = req.body.designation;
             let from = req.body.from;
             let to = req.body.to;
-            console.log(companyname);
+            // console.log(companyname);
 
             for (let i = 0; i < companyname.length; i++) {
 
                 {
                     if (companyname[i] != "") {
                         let query3 = `insert into work_exp (emp_id,comp_name,desg,dt_from,dt_to) values ('${id}','${companyname[i]}','${designation[i]}','${from[i]}','${to[i]}')`;
-                        console.log(query3);
+                        // console.log(query3);
                         conn.query(query3, (err) => {
                             if (err) throw err;
                         })
@@ -158,7 +158,7 @@ const createJobFormData = (req, res) => {
             let oracle = req.body.oracle;
 
             let techarr = [php, mysql, laravel, oracle]
-            console.log(techarr);
+            // console.log(techarr);
             for (let i = 0; i < req.body.techlang.length; i++) {
                 techlang = req.body.techlang[i]
 
@@ -243,7 +243,7 @@ const updatejobFormData = () => {
                     if (req.body.refid[i] == undefined) {
                         if (refname != "") {
                             let query4 = `insert into ref_detail (emp_id,ref_name,ref_contact,ref_relation)values('${id}','${refname}','${refcontact}','${refrelation}')`;
-                            console.log(query4);
+                            // console.log(query4);
                             conn.query(query4, (err) => {
                                 if (err) throw err;
                             })
@@ -354,9 +354,9 @@ const updatejobFormData = () => {
                 let mysql = req.body.mysql;
                 let laravel = req.body.laravel;
 
-                console.log(req.body.techlang.length);
+                // console.log(req.body.techlang.length);
                 let techarr = [php, oracle, mysql, laravel]
-                console.log(techarr);
+                // console.log(techarr);
                 for (let i = 0; i < req.body.techlang.length; i++) {
 
                     techlang = req.body.techlang[i]

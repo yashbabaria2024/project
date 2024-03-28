@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
 var cookieParser = require('cookie-parser')
-
+const bodyParser = require("body-parser");
+app.use(bodyParser.json())
 const dotenv = require('dotenv');
-const login = require('./router/loginrouter')
+const login = require('./router/regrouter')
 const logout = require('./router/logout')
 const display = require('./router/displayrouter')
 const task6 = require('./router/dynamicgrid');

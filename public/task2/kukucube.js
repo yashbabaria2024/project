@@ -41,7 +41,7 @@ let b = Math.floor(Math.random(10)*255);
 let c = `rgb(${r},${g}, ${b})`;
 
 var tdlen =  document.getElementsByTagName("td");
-console.log(randomcolor)
+
 for(let i=0; i<tdlen.length; i++){
     tdlen[i].style.background = c;
 }

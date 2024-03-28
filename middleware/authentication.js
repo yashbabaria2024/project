@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 exports.authorization=(req,res,next)=>{
     const token=req.cookies.access_token;
-    console.log(token);
+    // console.log(token);
     if(!token){
         res.redirect('/')
     }

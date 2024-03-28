@@ -55,7 +55,7 @@ const handleSearch = (req, res) => {
 
         conn.query(`select * from stud_detail_50000 where firstname like '${firstname}%' ${operator} address like '${address}%' ${operator} branch like '${branch}%' order by ${field} ${orderby} limit ${startIndex}, ${pageField};`, (err, row) => {
             if (err) throw err;
-            console.log(row);
+            // console.log(row);
             res.render('task9/search', { "row": row, "id": id, "orderby": orderby, "field": field });
         }
         )

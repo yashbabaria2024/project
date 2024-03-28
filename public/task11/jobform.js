@@ -588,9 +588,7 @@ function langvalid() {
     let engknown = document.querySelectorAll('.langknownenglish')
     let gujid = document.getElementById('id_gujarati')
     let gujknown = document.querySelectorAll('.langknownguj')
-    console.log(hindiknown);
-    console.log(gujknown);
-    console.log(engknown);
+   
     let error1 = document.getElementById("id_language1")
     let error2 = document.getElementById("id_language2")
     let error3 = document.getElementById("id_language3")
@@ -642,7 +640,7 @@ function validationFun() {
 let arr = ["id_firstname", "id_lastname", "id_currentCTC", "id_expecedCTC", "id_designation", "id_email", "id_address", "id_contact", "id_city", "id_zipcode", "id_dateofbirth", "id_sscnob", "id_hscnob", "id_sscpassingyear", "id_hscpassingyear", "id_bepassingyear", "id_mepassingyear", "id_sscpercentage", "id_hscpercentage", , "id_bepercentage", "id_mepercentage", "id_becoursename", "id_desg1", "id_desg2", "id_desg3", "id_from1", "id_from2", "id_from3", "id_to1", "id_to2", "id_to3", "id_refContact1", "id_refContact2", "id_refContact3", "id_refrelation1", "id_refrelation2", "id_refrelation3", "id_noticeperiod", "id_department", "id_pref_location", "id_relationshipstatus", "id_state", "id_companyname1", "id_companyname2", "id_companyname3", "id_refname1", "id_refname2", "id_refname3", "id_mecoursename"];
    
 arr.forEach(element => {
-    console.log(document.querySelector("#" + element).value);
+   
     if (document.querySelector("#" + element).value != "" ) {
         let rt = document.querySelector("#" + element).setAttribute("class", "form-control is-valid")
 
@@ -672,10 +670,10 @@ educationDetailFun()
 add2Fun()
 workexpFun()
 refFun()
-selectInput(id_department)
-selectInput(id_state)
-selectInput(id_pref_location)
-selectInput(id_relationshipstatus)
+// selectInput(id_department)
+// selectInput(id_state)
+// selectInput(id_pref_location)
+// selectInput(id_relationshipstatus)
 
     if (flag == false) {
         console.log(flag, ":::::::::::::");

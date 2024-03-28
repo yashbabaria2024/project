@@ -27,7 +27,7 @@ const createlogin = (req, res) => {
 
           let token = createToken(req.body.email)  
          res.cookie("access_token", token, {
-             expires:new Date(Date.now() + 60000000000),
+             expires:"2m",
              httpOnly: true
          })
              res.status(200).redirect('/displ')

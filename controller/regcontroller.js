@@ -89,7 +89,7 @@ const createactivelink = (req, res) => {
     let password = psw.concat(result)
 
     let query = `update employee_details set password = '${md5(password)}',activestatus = 'active',saltkey = '${result}', resetkey = '${resetcode}' where activelink = '${link}'`
-    console.log(query);
+    // console.log(query);
     conn.query(query, (err) => {
         if (err) throw err
         res.redirect('/login')

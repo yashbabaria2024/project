@@ -1,4 +1,6 @@
-const {conn} = require('../connection/connection') 
+
+const {conn} = require('../connection/connection')
+
 
 const handlefetchCrud = (req, res) => {
     res.render('task12');

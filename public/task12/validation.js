@@ -655,13 +655,13 @@ function validationFun() {
     emptyInput(id_address)
     contactFun(id_contact)
     zipcodeFun()
-    selectInput(id_state)
+    // selectInput(id_state)
     dateFun(id_dateofbirth)
     educationDetailFun()
     add2Fun()
     workexpFun()
     refFun()
-    selectInput(id_relationshipstatus)
+    // selectInput(id_relationshipstatus)
 
     if (flag == false) {
         console.log(flag, ":::::::::::::");
