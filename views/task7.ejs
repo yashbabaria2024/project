@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/task7/attendancegrid.css">
+</head>
+
+<body>
+    <div class="tbl">
+        <h1>Attendance Grid</h1>
+        <div class="btn">
+                <% if(id == 1 ) { %>
+                    <a><<</a>
+                    <a><</a>
+                    <span><%= id %></span>
+                <% } else { %>
+                   <a href="/attendence?id=1&month=<%=month%>"><<</a>
+                    <a href="/attendence?id=<%= --id %>&month=<%=month%>"><</a>
+                    <span><%= ++id %></span>
+                <% } %>    
+                <% if(id == 20) { %>
+                         <a>></a>
+                        <a>>></a>
+                    <% } else { %>               
+            <a href="/attendence?id=<%= ++id %>&month=<%= month %>">></a>
+            <a href="/attendence?id=20&&month=<%= month %>">>></a>            
+                    <% } %>
+        
+    </div>   
+    <div class="select">
+        <label for="">Select Month:</label>
+    <select name="month" id="month" onchange="fun()"  > 
+        
+         <option disabled >select</option> 
+        <option value="12" id="dec" >December</option>
+        <option value="1" id="jan" >January</option>
+        <option value="2" id="feb" >February</option>
+    </select>
+</div>
+    <table>
+        <tr>
+            <td>Student id</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Present Day</td>
+            <td>Percentage</td>
+        </tr>
+        <% for(let i=0; i<row.length; i++) { %>
+        <tr>
+            <td><%= row[i].stud_id %></td>
+            <td><%= row[i].firstname %></td>
+            <td><%= row[i].lastname %></td>
+            <td><%= row[i].present %></td>
+            <td><%= row[i].percentage %></td>
+        </tr>
+
+    <%}%> 
+    </table>
+</div>
+<script>
+    document.getElementById("month").querySelector("option[value='"+location.href.split('=')[2]+"']").selected = true;
+      function fun()
+        {
+            var mon = document.getElementById("month").value;
+            location.href = `http://localhost:8000/attendence?id=<%= id %>&month=${mon}`;
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+    
+    .tbl {
+          display: flex;
+          flex-direction: column;
+          padding: 150px;
+          gap: 25px;
+          background-color: rgb(209, 228, 240);
+          color: rgb(153, 46, 46);
+      }
+  
+      .tbl h1 {
+          font-size: 22px;
+          margin: 0px auto;
+      }
+  
+      table {
+            height: auto;
+            width: 750px;
+            margin: 0px auto;
+          background-color: rgb(224, 237, 245);
+          }
+  
+      td {
+          width: calc(100%/12); 
+          padding: 10px 15px;
+          border: 1px solid rgb(130, 130, 130);
+          border-radius: 5px;
+          text-align: center;
+      }
+  
+      .header {
+          font-size: 20px;
+          font-weight: 600;
+      }
+  
+    .name
+    {
+        display: flex;
+        flex-direction: column;  
+        
+    }
+
+  .name label {
+  margin: 0px 390px;
+}
+  
+  </style>
+    <div class="tbl">
+        
+        <% for(let i=row.length-1; i<row.length; i++) { %>
+       <div class="name">
+          <label> Name: <%= row[i].firstname %> <%=  row[i].lastname %></label> 
+          
+        </div>
+        <% } %>
+    
+        <% for(let i=0; i<row.length; i+=6) { %>
+            <h1><%= row[i].exam %> Exam</h1>
+            <table>
+        <tr>
+            <td>Subject Id</td>
+            <td>Subject Name</td>
+            <td>ObtainMarks Theory</td>
+            <td>ObtainMarks Practical</td>
+            <td>Obtain Marks</td>
+            <td>Total Marks</td>
+        </tr>
+        <% let pr = 0 %>
+            <% for(let j=i; j < i+6; j++) { %>
+                <tr>
+            <td><%= row[j].sub_id %></td>
+            <td><%= row[j].sub_name %></td>
+            <td><%= row[j].th_obtain %></td>
+            <td><%= row[j].p_obtain %></td>
+            <td><%= row[j].obtainmarks %></td>
+            <td><%= row[j].totalmarks %></td>  
+            <%  pr += row[j].obtainmarks %>            
+        </tr>
+        <% } %>
+
+        <% if(row[i].totalmarks  == 50 ) { %>
+            <td colspan="6">Percentage:<%= ((pr/300)*100).toFixed(2) %></td>
+            <tr></tr>
+            <% } if(row[i].totalmarks  == 100 ) { %>
+                <td colspan="6">Percentage:<%= ((pr/600)*100).toFixed(2) %></td>
+            <% } %>
+        </table>
+        <% } %>
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/task9/search.css">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <div class="tbl">
+        <h1>Student Details</h1>
+        <div class="btn">
+                <% if(id == 1 ) { %>
+                    <a><<</a>
+                    <a><</a>
+                    <span><%= id %></span>
+                <% } else { %>
+                   <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=<%=orderby%>&field=<%= field %>"><<</a>
+                    <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=<%= --id %>&orderby=<%=orderby%>&field=<%= field %>"><</a>
+                    <span><%= ++id %></span>
+                <% } %>    
+                <% if(id == 151) { %>
+                         <a>></a>
+                        <a>>></a>
+                    <% } else { %>               
+            <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=<%= ++id %>&orderby=<%=orderby%>&field=<%= field %>">></a>
+            <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=151&orderby=<%=orderby%>&field=<%= field %>">>></a>            
+                    <% } %>
+        
+    </div>
+<% try{ %>
+    <div class="search">
+        <form  method="get">
+            <label for="search">search Student Id:</label>
+            <input type="text" name="stud_id">
+            <input type="submit" name="submit" id=""  value="search">
+        </form>
+    </div>
+    <button type="button" class="btn" onclick="hideFun()">Show More</button>
+    <div class="btn"  >
+        <form  method="get" id="showmenu" style="display: none;" >
+       <label for="firstname">Firstname:</label><input type="text" name="firstname" id="">
+        <label for="address">Address:</label><input type="text" name="address" id="">
+        <label for="branch">Branch:</label><input type="text" name="branch" id="">
+       <select name="operator" id="">
+        <option value="">SELECT</option>
+        <option value="and">AND</option>
+        <option value="or">OR</option>
+       </select>
+       <input type="submit" name="submit" id="" value="search">
+    </form>
+    </div>
+<% } catch(err){ console.log("error");} %>
+        <table>
+            <tr>
+
+                <td class="header">
+                    <div id="ab">Student ID <div id="db">
+                        
+                        <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=stud_id"><i class="fa fa-sort-asc" aria-hidden="true"></i></a>
+                        <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=stud_id" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">First name<div id="db"> 
+                <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=firstname "><i class="fa fa-sort-asc" aria-hidden="true"></i></a>
+                <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=firstname" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Middle name <div id="db"><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=mname "><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=mname" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Last name<div id="db"> <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=lastname "><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=lastname" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Date of Birth<div id="db"><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=dob "><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=dob" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Contact<div id="db"> <a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=contact "><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=contact" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Email <div id="db"><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=email "><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=email" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Branch <div id="db"><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=branch "><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=branch" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Blood Group <div id="db"><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=bloodgroup "><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=bloodgroup" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Gender <div id="db"><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=gender"><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=gender" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+
+
+                <td class="header"><div id="ab">Address <div id="db"><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=asc&field=address"><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                </a><a href="/search?firstname=<%=firstname%>&address=<%=address%>&branch=<%=branch%>&operator=<%=operator%>&id=1&orderby=desc&field=address" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
+                </a></div></div></td>
+            </tr>
+
+            <% for (let i=0; i< row.length; i++) { %>
+                <tr>
+
+                    <td>
+                        <%= row[i].stud_id %>
+                    </td>
+                    <td>
+                        <%= row[i].firstname %>
+                    </td>
+                    <td>
+                        <%= row[i].mname %>
+                    </td>
+                    <td>
+                        <%= row[i].lastname %>
+                    </td>
+                    <td>
+                        <%= row[i].dob %>
+                    </td>
+                    <td>
+                        <%= row[i].contact %>
+                    </td>
+                    <td>
+                        <%= row[i].email %>
+                    </td>
+                    <td>
+                        <%= row[i].branch %>
+                    </td>
+                    <td>
+                        <%= row[i].bloodgroup %>
+                    </td><td>
+                        <%= row[i].gender %>
+                    </td>
+                    <td>
+                        <%= row[i].address %>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+
+    <script>
+        function hideFun()
+        {
+            let hidemenu = document.getElementById("showmenu");
+            hidemenu.style= 'display:block'
+        }
+    </script>
+</body>
+</html>

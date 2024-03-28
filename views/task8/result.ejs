@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/task8/result.css">
+    <title>Document</title>
+</head>
+<body>
+   
+    <div class="tbl">
+        <h1>Result Grid</h1>
+        <div class="btn">
+                <% if(id == 1 ) { %>
+                    <a><<</a>
+                    <a><</a>
+                    <span><%= id %></span>
+                <% } else { %>
+                   <a href="/result?id=1"><<</a>
+                    <a href="/result?id=<%= --id %>"><</a>
+                    <span><%= ++id %></span>
+                <% } %>    
+                <% if(id == 20) { %>
+                         <a>></a>
+                        <a>>></a>
+                    <% } else { %>               
+            <a href="/result?id=<%= ++id %>">></a>
+            <a href="/result?id=20">>></a>            
+                    <% } %>
+        
+    </div>   
+    <table>
+        <tr>
+            <td>Student Id</td>
+            <td>First name</td>
+            <td>Last name</td>
+            <td>Prelims Practical marks </td>
+            <td>Prelims Theory marks</td>
+            <td>Terminal Practical marks </td>
+            <td>Terminal Theory marks</td>
+            <td>Final Practical marks </td>
+            <td>Final Theory marks</td>
+            <td>Total Marks</td>
+            <td>Obtain Marks </td>
+            <td>View Result</td>     
+        </tr>
+
+        <% for(let i=0; i<row.length; i++) { %>
+
+        <tr>
+            <td><%= row[i].stud_id %></td>
+            <td><%= row[i].firstname %></td>
+            <td><%= row[i].lastname %></td>
+            <td><%= row[i].prelim_pm %></td>
+            <td><%= row[i].prelim_tm %></td>
+            <td><%= row[i].terminal_pm %></td>
+            <td><%= row[i].terminal_tm %></td>
+            <td><%= row[i].final_pm %></td>
+            <td><%= row[i].final_tm %></td>
+            <td><%= row[i].total %></td>
+            <td><%= row[i].totalobtain %></td>
+            <td><a href="viewresult?sid= <%= row[i].stud_id %>" > View</a></td>
+        </tr>
+        <% } %>
+    </table>
+    </div>
+   
+</body>
+</html>

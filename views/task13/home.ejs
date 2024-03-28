@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container
+    {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+
+    .card
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        /* background-color: aliceblue; */
+        /* height: 750px;
+        width: 1000px; */
+    }
+     .box
+        {
+            
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            /* background-color: rgba(207, 204, 204, 0.122); */
+            height: 650px;
+            width: 800px;
+            padding: 25px;
+            margin: auto; 
+               }
+
+     .left-section, .right-section
+    {
+        width: calc(100%/2);
+           /* background-color: rgba(142, 217, 119, 0.643); */
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 45px;
+        padding: 25px;
+    }
+
+    .left-section a , .right-section a
+    {
+        text-decoration: none;
+        color: antiquewhite;
+    }
+
+    .reg, .login
+    {
+        background-color: #98c7c78f;
+        height: 450px;
+        width: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 35px
+    }
+
+    .cd
+    {
+        background-color: #75d1e16b;
+        height: 350px;
+        width: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 35px
+    }
+
+ .padding{
+    padding: 25px;
+    background-color: black;
+ }
+
+
+</style>
+<body>
+    <canvas></canvas>
+
+    <div class="container">
+        <div class="card">
+          
+            <div class="box">
+
+                <div class="left-section"><div class="reg"><div class="padding"><div class="cd"><a href="/register">Register</a></div></div></div></div>
+                <div class="right-section"><div class="login"><div class="padding"><div class="cd"><a href="/login">Login</a></div></div></div></div>
+            </div>
+        </div>
+    </div>
+      
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <title>Basic Details</title>
+</head>
+
+<body>
+
+   <h1>Job Applicatoin Form</h1>
+    <form name="myform" id="myform">
+        <div class="diplay basicdetail" id="basicdetail">
+            <h2>Basic Details</h2>
+            <table>
+                <tr>
+
+                    <td><label for="firstName" id="firstname">First Name</label></td>
+                    <td id="td"><input type="text" class="form-control" name="firstname"
+                            class="form-control empty-validation" id="id_firstname" placeholder="Enter First Name">
+                    </td>
+                    <td><label for="lastName">Last Name</label></td>
+                    <td><input type="text" class="form-control" name="lastname" id="id_lastname"
+                            class="form-control empty-validation" placeholder="Enter Last Name">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="designation">Designation</label></td>
+                    <td><input type="text" class="form-control empty-validation" name="desg" id="id_designation"
+                            placeholder="Enter Designation"></td>
+                    <td><label for="address1">Address1</label></td>
+                    <td><input type="text" name="address" id="id_address" class="form-control empty-validation"
+                            placeholder="Enter Address1"></input></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="text" name="email" id="id_email" class="form-control" placeholder="Enter Email">
+                    </td>
+                    <td><label for="address2">Address2</label></td>
+                    <td><input type="text" name="address2" id="id_address2" class="form-control empty-validation"
+                            placeholder="Enter Address2"></input></td>
+                </tr>
+                <tr>
+                    <td><label for="contact">Contact</label></td>
+                    <td><input type="text" name="contact" id="id_contact" class="form-control" placeholder="contact">
+                    </td>
+                    <td><label for="city">City</label></td>
+                    <td><input type="text" class="form-control empty-validation" placeholder="Enter City" name="city"
+                            id="id_city"></td>
+                </tr>
+                <tr>
+                    <td><Label for="gender">Gender</Label></td>
+                    <td><input type="radio" class="form-check-input" name="gender" id="id_male" value="male"
+                            checked><label for="id_male">Male</label>
+                        <input type="radio" class="form-check-input" name="gender" id="id_female" value="female"><label
+                            for="id_female">Female</label>
+                    </td>
+                    <td><label for="state">State</label></td>
+                    <td><select class="form-select" name="state" id="id_state">
+                            <option value="select" hidden>Select</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Chattisgrah">Chattisgrah</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><label for="relationshipstatus">Relationship Status</label></td>
+                    <td rowspan="2"> <select class="form-select" name="relationshipstatus" id="id_relationshipstatus">
+                            <option value="select" hidden>Select</option>
+                            <option value="single">Single</option>
+                            <option value="marital">Marital</option>
+                        </select></td>
+                    <td><label for="zipcode">Zipcode</label></td>
+                    <td><input type="text" class="form-control empty-validation" name="zipcode" id="id_zipcode"
+                            placeholder="Enter Zipcode"></td>
+                    <td><label for="dateofbirth">dateofbirth</label></td>
+                    <td><input type="text" name="dateofbirth" class="form-control" id="id_dateofbirth"
+                            placeholder="ex:yyyy-mm-dd"></td>
+                </tr>
+            </table>
+
+
+
+            <a class="btn btn-primary" onclick="next()">Next </a>
+        </div>
+        <div class="diplay" id="edudetail">
+            <table>
+                <label for="SSC result">SSC result</label>
+
+                <tr>
+                    <input type="text" name="edu_id" id="" hidden>
+                    <td><label>Name of Board:</label><select name="nob" id="id_sscnob">
+                            <option value="">Select</option>
+                            <option value="SSC GSEB"><label>SSC GSEB</label></option>
+                            <option value="SSC CBSE"><label>SSC CBSE</label></option>
+                            <option value="SSC NCERT"><label>SSC NCERT</label></option>
+                            <option value="SSC NIOS"><label>SSC NIOS</label></option>
+                        </select></td>
+                    <td><label for="Passing Year">Passing Year</label> <input type="text" class="form-control "
+                            name="passingyear" id="id_sscpassingyear" placeholder="Passing Year"></td>
+                    <td><label for="Percentage ">Percentage </label><input type="text" class="form-control"
+                            name="percentage" id="id_sscpercentage" placeholder="Percentage"></td>
+                </tr>
+
+                <tr>
+                    <input type="text" name="edu_id" id="" hidden>
+                    <td><label for="HSC result">HSC result</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Name of Board:</label><select name="nob" id="id_hscnob">
+                            <option value="">Select</option>
+                            <option value="HSC GSEB"><label>HSC GSEB</label></option>
+                            <option value="HSC CBSE"><label>HSC CBSE</label></option>
+                            <option value="HSC NCERT"><label>HSC NCERT</label></option>
+                            <option value="HSC NIOS"><label>HSC NIOS</label></option>
+                        </select></td>
+                    <td><label for="Passing Year">Passing Year</label> <input type="text" class="form-control"
+                            name="passingyear" id="id_hscpassingyear" placeholder="Passing Year"></td>
+                    <td><label for="Percentage ">Percentage </label><input type="text" class="form-control"
+                            name="percentage" id="id_hscpercentage" placeholder="Percentage"></td>
+                </tr>
+
+
+                <tr>
+                    <td><label for="be">Bachelor degree</label>
+                    </td>
+                </tr>
+                <tr>
+                    <input type="text" name="edu_id" id="" hidden>
+                    <td><label>Course Name:</label><select name="nob" id="id_becoursename">
+                            <option value="">Select</option>
+                            <option value="BE CE"><label>BE CE</label></option>
+                            <option value="BE IT"><label>BE IT</label></option>
+                            <option value="BE ICT"><label>BE ICT</label></option>
+                            <option value="BE EC"><label>BE EC</label></option>
+                            <option value="BE IC"><label>BE IC</label></option>
+                            <option value="BCA"><label>BCA</label></option>
+                            <option value="BSC IT"><label>BSC IT</label></option>
+                            <option value="B.VOC IT"><label>B.VOC IT</label>
+                            </option>
+
+                        </select></td>
+                    <td><label for="Passing Year ">Passing Year </label><input type="text" class="form-control"
+                            name="passingyear" placeholder="passingyear" id="id_bepassingyear"></td>
+                    <td><label for="Percentage">Percentage</label> <input type="text" class="form-control"
+                            name="percentage" id="id_bepercentage" placeholder="Percentage"></td>
+                </tr>
+
+                <tr>
+                    <td><label for="me">Master degree</label>
+                <tr>
+                    <input type="text" name="edu_id" id="" hidden>
+                    <td><label>Course Name:</label><select name="nob" id="id_mecoursename">
+                            <option value="">Select</option>
+                            <option value="ME CE"><label>ME CE</label>
+                            </option>
+                            <option value="ME IT"><label>ME IT</label>
+                            </option>
+                            <option value="ME ICT"><label>ME ICT</label>
+                            </option>
+                            <option value="ME EC"><label>ME EC</label>
+                            </option>
+                            <option value="ME IC"><label>ME IC</label>
+                            </option>
+                            <option value="MCA"><label>MCA</label></option>
+                            <option value="MSC IT"><label>MSC IT</label>
+                            </option>
+                            <option value="M.VOC IT"><label>M.VOC IT</label>
+                            </option>
+
+                        </select></td>
+                    <td><label for="Passing Year ">Passing Year
+                        </label><input type="text" class="form-control" name="passingyear" id="id_mepassingyear"
+                            placeholder="passingyear"></td>
+                    <td><label for="Percentage">Percentage</label> <input type="text" class="form-control"
+                            name="percentage" id="id_mepercentage" placeholder="Percentage"></td>
+                </tr>
+            </table>
+
+            </table>
+            <a class="btn btn-primary" onclick="prev()">Prev </a>
+            <a class="btn btn-primary" onclick="next()">Next </a>
+
+        </div>
+
+        <div class="diplay" id="expdetail">
+            <table>
+                <table>
+                    <input type="text" name="work_id" id="" hidden>
+                    <td><label for="Company name">Company name</label><input type="text" class="form-control"
+                            name="companyname" id="id_companyname1" placeholder="companyname"></td>
+                    <td><label for="Designation">Designation</label> <input type="text" class="form-control"
+                            name="designation" id="id_desg1" placeholder="Designation"></td>
+                    <td><label for="From">From</label> <input type="text" class="form-control" name="dt_from"
+                            id="id_from1" placeholder="ex:yyyy-mm-dd"></td>
+                    <td><label for="To">To</label> <input type="text" class="form-control" name="dt_to" id="id_to1"
+                            placeholder="ex:yyyy-mm-dd"></td>
+
+                    <tr>
+                        <input type="text" name="work_id" id="" hidden>
+                        <td><label for="Company name">Company name</label><input type="text" class="form-control"
+                                name="companyname" id="id_companyname2" placeholder="companyname"></td>
+                        <td><label for="Designation">Designation</label> <input type="text" class="form-control"
+                                name="designation" id="id_desg2" placeholder="Designation"></td>
+                        <td><label for="From">From</label> <input type="text" class="form-control" name="dt_from"
+                                id="id_from2" placeholder="ex:yyyy-mm-dd"></td>
+                        <td><label for="To">To</label> <input type="text" class="form-control" name="dt_to" id="id_to2"
+                                placeholder="ex:yyyy-mm-dd"></td>
+                    </tr>
+                    <tr> <input type="text" name="work_id" id="" hidden>
+                        <td><label for="Company name">Company name</label><input type="text" class="form-control"
+                                name="companyname" id="id_companyname3" placeholder="companyname"></td>
+                        <td><label for="Designation">Designation</label> <input type="text" class="form-control"
+                                name="designation" id="id_desg3" placeholder="Designation"></td>
+                        <td><label for="From">From</label> <input type="text" class="form-control" name="dt_from"
+                                id="id_from3" placeholder="ex:yyyy-mm-dd"></td>
+                        <td><label for="To">To</label> <input type="text" class="form-control" name="dt_to" id="id_to3"
+                                placeholder="ex:yyyy-mm-dd"></td>
+                    </tr>
+                </table>
+            </table>
+            <a class="btn btn-primary" onclick="prev()">Prev </a>
+            <a class="btn btn-primary" onclick="next()">Next </a>
+        </div>
+
+
+        <div class="diplay" id="langknown">
+            <h3>Language Known</h3>
+
+            <table>
+                <tr>
+                    <input type="text" name="lang_id" id="" hidden>
+                    <td><input type="checkbox" class="form-check-input" name="lang" id="id_hindi" value="hindi"><label
+                            for="id_hindi"> Hindi </label>
+                    </td>
+                    <td><input type="checkbox" class="langknownhindi form-check-input" name="read_hindi"
+                            id="id_readhindi" value="1"><label for="id_readhindi">Read</label>
+                    </td>
+                    <td><input type="checkbox" class="langknownhindi form-check-input" name="write_hindi"
+                            id="id_writehindi" value="1"><label for="id_writehindi">Write
+                    </td>
+                    <td><input type="checkbox" class="langknownhindi form-check-input" name="speak_hindi"
+                            id="id_speakhindi" value="1"><label for="id_speakhindi">Speak
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <input type="text" name="lang_id" id="" hidden>
+                    <td><input type="checkbox" class="form-check-input" name="lang" id="id_english"
+                            value="english"><label for="id_english">English</label>
+                    </td>
+                    <td><input type="checkbox" class="langknownenglish form-check-input " name="read_english"
+                            id="id_readenglish" value="1"><label for="id_readenglish ">Read</label>
+                    </td>
+                    <td><input type="checkbox" class="langknownenglish form-check-input " name="write_english"
+                            id="id_writeenglish" value="1"><label for="id_writeenglish">Write</label>
+                    </td>
+                    <td><input type="checkbox" class="langknownenglish form-check-input " name="speak_english"
+                            id="id_speakenglish" value="1"><label for="id_speakenglish">Speak</label>
+                    </td>
+
+                </tr>
+                <tr>
+                    <input type="text" name="lang_id" id="" hidden>
+                    <td><input type="checkbox" class="form-check-input" name="lang" id="id_gujarati"
+                            value="gujarati"><label for="id_gujarati">Gujarati</label>
+                    </td>
+                    <td><input type="checkbox" class="form-check-input langknownguj" name="read_gujarati"
+                            id="id_readgujarati" value="1"><label for="id_readgujarati langknownguj">Read</label>
+                    </td>
+                    <td><input type="checkbox" class="form-check-input langknownguj" name="write_gujarati"
+                            id="id_writegujarati" value="1"><label for="id_writegujarati">Write</label>
+                    </td>
+                    <td><input type="checkbox" class="form-check-input" name="speak_gujarati" id="id_speakgujarati"
+                            value="1"><label for="id_speakgujarati">Speak</label>
+                    </td>
+
+                </tr>
+            </table>
+            <a class="btn btn-primary" onclick="prev()">Prev </a>
+            <a class="btn btn-primary" onclick="next()">Next </a>
+        </div>
+        <div id="techknown">
+            <legend>Tech you Known</legend>
+            <table>
+                <tr>
+                    <input type="text" name="tech_id" id="" hidden>
+                    <td><input type="checkbox" class="form-check-input" name="techlang" id="id_PHP" value="php"><label
+                            for="id_PHP">PHP</label>
+                    </td>
+                    <td><input type="radio" class="form-check-input" name="php" id="id_BeginerPHP"
+                            value="Beginer"><label for="id_BeginerPHP">Beginer</label>
+                    </td>
+                    <td><input type="radio" class="form-check-input" name="php" id="id_MideatorPHP"
+                            value="Mideator"><label for="id_MideatorPHP">Mideator</label></td>
+                    <td><input type="radio" class="form-check-input" name="php" id="id_ExpertPHP" value="Expert"><label
+                            for="id_ExpertPHP">Expert</label>
+                    </td>
+
+                </tr>
+                <tr>
+                    <input type="text" name="tech_id" id="" hidden>
+                    <td><input type="checkbox" class="form-check-input" name="techlang" id="id_Mysql"
+                            value="mysql"><label for="id_Mysql">Mysql</label>
+                    </td>
+                    <td><input type="radio" class="form-check-input" name="mysql" id="id_BeginerMysql"
+                            value="Beginer"><label for="id_BeginerMysql">Beginer</label>
+                    </td>
+                    <td><input type="radio" class="form-check-input" name="mysql" id="id_MideatorMysql"
+                            value="Mideator"><label for="id_MideatorMysql">Mideator</label></td>
+                    <td><input type="radio" class="form-check-input" name="mysql" id="id_ExpertMysql"
+                            value="Expert"><label for="id_ExpertMysql">Expert</label>
+                    </td>
+
+                </tr>
+                <tr>
+                    <input type="text" name="tech_id" id="" hidden>
+                    <td><input type="checkbox" class="form-check-input" name="techlang" id="id_Oracle"
+                            value="oracle"><label for="id_Oracle">Oracle</label>
+                    </td>
+                    <td><input type="radio" class="form-check-input" name="oracle" id="id_BeginerOracle"
+                            value="Beginer"><label for="id_BeginerOracle">Beginer</label>
+                    </td>
+                    <td><input type="radio" class="form-check-input" name="oracle" id="id_MideatorOracle"
+                            value="Mideator"><label for="id_MideatorOracle">Mideator</label></td>
+                    <td><input type="radio" class="form-check-input" name="oracle" id="id_ExpertOracle"
+                            value="Expert"><label for="id_ExpertOracle">Expert</label>
+                    </td>
+
+                </tr>
+                <tr>
+                    <input type="text" name="tech_id" id="" hidden>
+                    <td><input type="checkbox" class="form-check-input" name="techlang" id="id_laravel"
+                            value="laravel"><label for="id_laravel">Laravel</label>
+                    </td>
+                    <td><input type="radio" class="form-check-input" name="laravel" id="id_BeginerLaravel"
+                            value="Beginer"><label for="id_BeginerLaravel">Beginer</label>
+                    </td>
+                    <td><input type="radio" class="form-check-input" name="laravel" id="id_MideatorLaravel"
+                            value="Mideator"> <label for="id_MideatorLaravel">Mideator</label></td>
+                    <td><input type="radio" class="form-check-input" name="laravel" id="id_ExpertLaravel"
+                            value="Expert"><label for="id_ExpertLaravel">Expert</label>
+                    </td>
+                </tr>
+            </table>
+            <a class="btn btn-primary" onclick="prev()">Prev </a>
+            <a class="btn btn-primary" onclick="next()">Next </a>
+        </div>
+
+        <div class="diplay" id="refdetail">
+            <h3>Referance</h3>
+
+            <table>
+                <tr>
+                    <input type="text" name="ref_id" id="" hidden>
+                    <td><label for="Name">Name</label> <input type="text" class="form-control" name="refname"
+                            id="id_refname1" placeholder="Enter Name"></td>
+                    <td><label for="Contact Number">Contact Number</label> <input type="text" class="form-control"
+                            name="refcontact" id="id_refContact1" placeholder="Enter Contact Number"></td>
+                    <td><label for="Relation">Relation</label> <input type="text" class="form-control"
+                            name="refrelation" id="id_refrelation1" placeholder="Enter Relation"></td>
+                </tr>
+
+                <tr>
+                    <input type="text" name="ref_id" id="" hidden>
+                    <td><label for="Name">Name</label> <input type="text" class="form-control" name="refname"
+                            id="id_refname2" placeholder="Enter Name"></td>
+                    <td><label for="Contact Number">Contact Number</label> <input type="text" class="form-control"
+                            name="refcontact" id="id_refContact2" placeholder="Enter Contact Number"></td>
+                    <td><label for="Relation">Relation</label> <input type="text" class="form-control"
+                            name="refrelation" id="id_refrelation2" placeholder="Enter Relation"></td>
+                </tr>
+
+                <tr>
+                    <input type="text" name="ref_id" id="" hidden>
+                    <td><label for="Name">Name</label> <input type="text" class="form-control" name="refname"
+                            id="id_refname3" placeholder="Enter Name"></td>
+                    <td><label for="Contact Number">Contact Number</label>
+                        <input type="text" class="form-control" name="refcontact" id="id_refContact3"
+                            placeholder="Enter Contact Number">
+                    </td>
+                    <td><label for="Relation">Relation</label> <input type="text" class="form-control"
+                            name="refrelation" id="id_refrelation3" placeholder="Enter Relation"></td>
+                </tr>
+
+            </table>
+            <a class="btn btn-primary" onclick="prev()">Prev </a>
+            <a class="btn btn-primary" onclick="next()">Next </a>
+        </div>
+
+        <div class="diplay" id="prefdetail">
+
+            <h3>Preferance</h3>
+            <table>
+                <tr><input type="text" name="pref_id" id="" hidden>
+                    <td><label for="Prefered Location">Prefered Location</label>
+                        <select class="form-select" name="preferedlocation" id="id_pref_location">
+                            <option value="select"><label for="select" hidden>Select</label></option>
+
+                            <option value="Ahmedabad"><label for="Ahmedabad">Ahmedabad</label></option>
+                            <option value="Surat"><label for="Surat">Surat</label></option>
+                            <option value="Rajkot"><label for="Rajkot">Rajkot</label></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Notice Period">Notice Period</label>
+                        <input type="text" class="form-control" name="noticeperiod" id="id_noticeperiod"
+                            placeholder="noticeperiod">
+                    </td>
+                    <td><label for="Expected CTC">Expected CTC</label>
+                        <input type="text" class="form-control" name="expecedCTC" id="id_expecedCTC"
+                            placeholder="Expected CTC">
+                    </td>
+                    <td><label for="Current CTC">Current CTC</label>
+                        <input type="text" class="form-control" name="currentCTC" id="id_currentCTC"
+                            placeholder="Current CTC">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Department">Department</label>
+                        <select class="form-select" name="Department" id="id_department">
+                            <option value="select" hidden>Select</option>
+                            <option value="Design">Design</option>
+                            <option value="Marketing">Marketing</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+            <a class="btn btn-primary" onclick="prev()">Prev </a>
+            <input type="button" name="submit" id="id_submit" value="submit" class="btn btn-primary"
+                onclick="postData()">
+
+    </form>
+    </div>
+    <script src="/task12/validation.js"></script>
+    <script src="/task12/page.js"></script>
+    <script src="/task12/fetchdata.js"></script>
+
+    <script>
+
+      
+
+
+
+
+    </script>
+
+</body>
+
+</html>

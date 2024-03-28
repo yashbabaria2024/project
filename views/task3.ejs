@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Trigger Table</title>
+    <link rel="stylesheet" href="/task3/dom.css">
+    
+</head>
+<body>
+
+   <h1 id="heading">Name:Yash Babaria &nbsp; Emp id:24DEV013 &nbsp;Date: 31-01-2024</h1>
+   <h2 id="task">Task: Event Trigger Table</h2>
+    <table >
+        <tr>
+            <td onclick="eonclick()" class="black">Onclick</td>
+            <td onmouseover="eonmouseover()" id="mover" class="white">onmouseover</td>
+            <td class="black">ondblclick <input type="text" name="onblur" id="onblur" ondblclick="eondblclick()"></td>
+            <td class="white"><p style="border: 2px solid black;">Context Menu Show</p>
+               <p style="border: 2px solid black;" oncontextmenu ="contextMenu()" id="menu1">Context menu hide</p> 
+            </td>
+          
+        </tr>
+        <tr>
+            <td class="white">onfocusout <input type="text" name="onfocusout" id="onfocusout" onfocusout="eonfocusout()"></td>
+            <td class="black">oncopy <input type="text" name="copy" id="copy" value="Copy these text" oncopy ="eoncopy()" ></td>
+            <td class="white">oncut <input type="text" name="cut" id="cut" value="Cut these text" oncut ="eoncut()" ></td>
+            <td class="black">onpaste <input type="text" name="paste" id="paste" value="Paste these text" onpaste ="epaste()" ></td>
+         
+        </tr>
+        <tr>
+            <td id="menter" class="black" onmouseenter="menterFun()">Mouse Enter</td>
+            <td id="mleave" class="white" onmouseleave="mleaveFun()">Mouse Leave</td>
+            <td id="mup" class="black" onmouseup="mupFun()">Mouse Up </td>
+            <td class="white">Blur Event<input type="text" name="blur" id="id_blur" onblur="blurFun()"></td>
+        </tr>
+        <tr>
+            <td class="white">oninvalid <form action=""><input type="text" name="invalid" id="invalid" required >
+                <input type="submit" name="submit" id="submit" value="submit"></form></td>
+                <td class="black">input <input type="text" name="input" id="id_input" oninput="onInput()">
+                    <p id="id_value"></p></td>    
+                 <td class="white">onError <img src="abc.jpg" id="id_error" ><p id="msg"></p></td>  <!-- onerror="errorFun()" -->
+                <td class="black">Select<input type="text" id="id_select"></td>
+        </tr>
+        <tr>
+            <td class="black">onkeypress <input type="text" name="onkeypress" id="onkeypress" onkeypress="eonkeypress()"></td>
+            <td class="white">onblur <input type="text" name="onblur" id="onblur" onblur="eonblur()"></td>
+            <td class="black">onfocus <input type="text" name="onfocus" id="onfocus" onfocus="eonfocus()"></td>
+            <td class="white">onfocusin <input type="text" name="onfocusin" id="onfocusin" onfocusin="eonfocusin()"></td>
+        </tr>
+    </table>
+    
+
+    
+    <script src="/task3/dom.js"></script>
+</body>
+</html>
+
+

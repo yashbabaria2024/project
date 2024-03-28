@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Applicatoin Form4</title>
+
+</head>
+
+<body>
+    <style>
+        .btn {
+            width: 100px;
+            margin: 0 auto;
+            margin-bottom: 10px;
+
+        }
+
+        .grid {
+            margin: 0 auto;
+        }
+    </style>
+
+    <% try { %>
+        <div class="container grid"></div>
+        <h3>Job Applicatoin Form</h3>
+
+        <form class="row g-3 needs-validation" name="myform" method="post" onsubmit="return validationFun()">
+            <fieldset>
+                <legend>Basic Detial</legend>
+
+                <table>
+                    <tr>
+                       
+                        <td><label for="firstName" id="firstname">First Name</label></td>
+
+                        <td id="td"><input type="text" class="form-control" name="firstname"
+                                class="form-control empty-validation" id="id_firstname" placeholder="Enter First Name"
+                                <% if(locals.basic) { %>
+                            value="<%= basic[0].first_name %>"
+                                <% } %>
+                                    ></td>
+                        <td><label for="lastName">Last Name</label></td>
+                        <td><input type="text" class="form-control" name="lastname" id="id_lastname"
+                                class="form-control empty-validation" placeholder="Enter Last Name" <% if (locals.basic)
+                                {%> value="<%= basic[0].last_name %>"<% } %> ></td>
+                    </tr>
+                    <tr>
+                        <td><label for="designation">Designation</label></td>
+                        <td><input type="text" class="form-control empty-validation" name="desg" id="id_designation"
+                                placeholder="Enter Designation" <% if (locals.basic) { %>
+                            value="<%= basic[0].desg %>"
+                                <% } %> ></td>
+                        <td><label for="address1">Address1</label></td>
+                        <td><input name="address" id="id_address" class="form-control empty-validation"
+                                placeholder="Enter Address1" <% if (locals.basic) { %>
+                            value="<%= basic[0].add1 %>"
+                                <% } %> ></input></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email</label></td>
+                        <td><input type="text" name="email" id="id_email" class="form-control" placeholder="Enter Email"
+                                <% if (locals.basic) { %>
+                            value="<%= basic[0].email %>"
+                                <% } %> ></td>
+                        <td><label for="address2">Address2</label></td>
+                        <td><input name="address2" id="id_address2" class="form-control empty-validation"
+                                placeholder="Enter Address2" <% if (locals.basic) { %>
+                            value="<%= basic[0].add2 %>"
+                                <% } %>></input></td>
+                    </tr>
+                    <tr>
+                        <td><label for="contact">Contact</label></td>
+                        <td><input type="text" name="contact" id="id_contact" class="form-control" placeholder="contact"
+                                <% if (locals.basic) { %>
+                            value="<%= basic[0].contact %>"
+                                <% } %>></td>
+                        <td><label for="city">City</label></td>
+                        <td><input type="text" class="form-control empty-validation" placeholder="Enter City"
+                                name="city" id="id_city" <% if (locals.basic) { %>
+                            value="<%= basic[0].city %>"
+                                <% } %>></td>
+                    </tr>
+                    <tr>
+                        <td><Label for="gender">Gender</Label></td>
+                        <td><input type="radio" class="form-check-input" name="gender" id="id_male" value="male"
+                                checked><label for="id_male">Male</label>
+                            <input type="radio" class="form-check-input" name="gender" id="id_female"
+                                value="female"><label for="id_female">Female</label>
+                        </td>
+                        <td><label for="state">State</label></td>
+                        <td><select class="form-select" name="state" id="id_state">
+                                <option value="select" hidden>Select</option>
+                                <% if (locals.basic) { %>
+                                    <option value="<%= basic[0].state %>" selected hidden>
+                                        <%= basic[0].state %>
+                                    </option>
+                                    <% } %>
+                                        <option value="Gujarat">Gujarat</option>
+                                        <option value="Maharashtra">Maharashtra</option>
+                                        <option value="Assam">Assam</option>
+                                        <option value="Goa">Goa</option>
+                                        <option value="Chattisgrah">Chattisgrah</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><label for="relationshipstatus">Relationship Status</label></td>
+                        <td rowspan="2"> <select class="form-select" name="relationshipstatus"
+                                id="id_relationshipstatus">
+                                <option value="select" hidden>Select</option>
+                                <% if (locals.basic) { %>
+                                    <option value="<%= basic[0].relation_status %>" selected hidden>
+                                        <%= basic[0].relation_status %>
+                                    </option>
+                                    <% } %>
+                                        <option value="single">Single</option>
+                                        <option value="marital">Marital</option>
+                            </select></td>
+                        <td><label for="zipcode">Zipcode</label></td>
+                        <td><input type="text" class="form-control empty-validation" name="zipcode" id="id_zipcode"
+                                placeholder="Enter Zipcode" <% if (locals.basic) { %>
+                            value="<%= basic[0].zip_code %>"
+                                <% } %>></td>
+                        <td><label for="dateofbirth">dateofbirth</label></td>
+                        <td><input type="text" name="dateofbirth" class="form-control" id="id_dateofbirth"
+                                placeholder="ex:yyyy-mm-dd" <% if (locals.basic) { %>
+                            value="<%= basic[0].dob %>"
+                                <% } %>></td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Education Detail</legend>
+                <table>
+                    <label for="SSC result">SSC result</label>
+
+                    <% if(locals.edu && edu[0]) {%>
+                        <tr>
+                            <% if(locals.edu[0]) {%>
+                                <input type="text" name="eduid[]" id="eduid" value="<%= edu[0].edu_id %>" hidden>
+                                <% } %>
+                                    <td><label>Name of Board:</label><select name="nob" id="id_sscnob">
+                                            <option value="">Select</option>
+                                            <% if (locals.edu) { %>
+                                                <option value="<%= edu[0].nob %>" selected hidden>
+                                                    <%= edu[0].nob %>
+                                                </option>
+                                                <% } %>
+                                                    <option value="SSC GSEB"><label>SSC GSEB</label></option>
+                                                    <option value="SSC CBSE"><label>SSC CBSE</label></option>
+                                                    <option value="SSC NCERT"><label>SSC NCERT</label></option>
+                                                    <option value="SSC NIOS"><label>SSC NIOS</label></option>
+                                        </select></td>
+                                    <td><label for="Passing Year">Passing Year</label> <input type="text"
+                                            class="form-control " name="passingyear" id="id_sscpassingyear"
+                                            placeholder="Passing Year" <% if (locals.edu) { %>
+                                        value="<%= edu[0].passing_yr %>"
+                                            <% } %>></td>
+                                    <td><label for="Percentage ">Percentage </label><input type="text"
+                                            class="form-control" name="percentage" id="id_sscpercentage"
+                                            placeholder="Percentage" <% if (locals.edu) { %>
+                                        value="<%= edu[0].percentage %>"
+                                            <% } %> ></td>
+                        </tr>
+                        <% } else {%>
+                            <tr>
+
+                                <td><label>Name of Board:</label><select name="nob" id="id_sscnob">
+                                        <option value="">Select</option>
+                                        <option value="SSC GSEB"><label>SSC GSEB</label></option>
+                                        <option value="SSC CBSE"><label>SSC CBSE</label></option>
+                                        <option value="SSC NCERT"><label>SSC NCERT</label></option>
+                                        <option value="SSC NIOS"><label>SSC NIOS</label></option>
+                                    </select></td>
+                                <td><label for="Passing Year">Passing Year</label> <input type="text"
+                                        class="form-control " name="passingyear" id="id_sscpassingyear"
+                                        placeholder="Passing Year"></td>
+                                <td><label for="Percentage ">Percentage </label><input type="text" class="form-control"
+                                        name="percentage" id="id_sscpercentage" placeholder="Percentage"></td>
+                            </tr>
+
+                            <% } if(locals.edu && edu[1]){ %>
+                                <tr>
+                                    <td><label for="HSC result">HSC result</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <% if(locals.edu[1]) {%>
+                                        <input type="text" name="eduid[]" id="eduid" value="<%= edu[1].edu_id %>"
+                                            hidden>
+                                        <% } %>
+                                            <td><label>Name of Board:</label><select name="nob" id="id_hscnob">
+                                                    <option value="">Select</option>
+                                                    <% if (locals.edu) { %>
+                                                        <option value="<%= edu[1].nob %>" selected hidden>
+                                                            <%= edu[1].nob %>
+                                                        </option>
+                                                        <% } %>
+                                                            <option value="HSC GSEB"><label>HSC GSEB</label></option>
+                                                            <option value="HSC CBSE"><label>HSC CBSE</label></option>
+                                                            <option value="HSC NCERT"><label>HSC NCERT</label></option>
+                                                            <option value="HSC NIOS"><label>HSC NIOS</label></option>
+                                                </select></td>
+                                            <td><label for="Passing Year">Passing Year</label> <input type="text"
+                                                    class="form-control" name="passingyear" id="id_hscpassingyear"
+                                                    placeholder="Passing Year" <% if (locals.edu) { %>
+                                                value="<%= edu[1].passing_yr %>"
+                                                    <% } %>></td>
+                                            <td><label for="Percentage ">Percentage </label><input type="text"
+                                                    class="form-control" name="percentage" id="id_hscpercentage"
+                                                    placeholder="Percentage" <% if (locals.edu) { %>
+                                                value="<%= edu[1].percentage %>"
+                                                    <% } %>></td>
+                                </tr>
+                                <% } else {%>
+                                    <tr>
+                                        <td><label for="HSC result">HSC result</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Name of Board:</label><select name="nob" id="id_hscnob">
+                                                <option value="">Select</option>
+                                                <option value="HSC GSEB"><label>HSC GSEB</label></option>
+                                                <option value="HSC CBSE"><label>HSC CBSE</label></option>
+                                                <option value="HSC NCERT"><label>HSC NCERT</label></option>
+                                                <option value="HSC NIOS"><label>HSC NIOS</label></option>
+                                            </select></td>
+                                        <td><label for="Passing Year">Passing Year</label> <input type="text"
+                                                class="form-control" name="passingyear" id="id_hscpassingyear"
+                                                placeholder="Passing Year"></td>
+                                        <td><label for="Percentage ">Percentage </label><input type="text"
+                                                class="form-control" name="percentage" id="id_hscpercentage"
+                                                placeholder="Percentage"></td>
+                                    </tr>
+                                    <% } if(locals.edu && edu[2]) {%>
+                                        <tr>
+                                            <td><label for="be">Bachelor degree</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <% if(locals.edu[2]) {%>
+                                                <input type="text" name="eduid[]" id="eduid"
+                                                    value="<%= edu[2].edu_id %>" hidden>
+                                                <% } %>
+                                                    <td><label>Course Name:</label><select name="nob"
+                                                            id="id_becoursename">
+                                                            <option value="">Select</option>
+                                                            <% if (locals.edu) { %>
+                                                                <option value="<%= edu[2].nob %>" selected hidden>
+                                                                    <%= edu[2].nob %>
+                                                                </option>
+                                                                <% } %>
+                                                                    <option value="BE CE"><label>BE CE</label></option>
+                                                                    <option value="BE IT"><label>BE IT</label></option>
+                                                                    <option value="BE ICT"><label>BE ICT</label>
+                                                                    </option>
+                                                                    <option value="BE EC"><label>BE EC</label></option>
+                                                                    <option value="BE IC"><label>BE IC</label></option>
+                                                                    <option value="BCA"><label>BCA</label></option>
+                                                                    <option value="BSC IT"><label>BSC IT</label>
+                                                                    </option>
+                                                                    <option value="B.VOC IT"><label>B.VOC IT</label>
+                                                                    </option>
+
+                                                        </select></td>
+                                                    <td><label for="Passing Year ">Passing Year </label><input
+                                                            type="text" class="form-control" name="passingyear"
+                                                            placeholder="passingyear" id="id_bepassingyear" <% if
+                                                            (locals.edu) { %>
+                                                        value="<%= edu[2].passing_yr %>"
+                                                            <% } %>></td>
+                                                    <td><label for="Percentage">Percentage</label> <input type="text"
+                                                            class="form-control" name="percentage" id="id_bepercentage"
+                                                            placeholder="Percentage" <% if (locals.edu) { %>
+                                                        value="<%= edu[2].percentage %>"
+                                                            <% } %>></td>
+                                        </tr>
+                                        <% } else {%>
+                                            <tr>
+                                                <td><label for="be">Bachelor degree</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><label>Course Name:</label><select name="nob" id="id_becoursename">
+                                                        <option value="">Select</option>
+                                                        <option value="BE CE"><label>BE CE</label></option>
+                                                        <option value="BE IT"><label>BE IT</label></option>
+                                                        <option value="BE ICT"><label>BE ICT</label></option>
+                                                        <option value="BE EC"><label>BE EC</label></option>
+                                                        <option value="BE IC"><label>BE IC</label></option>
+                                                        <option value="BCA"><label>BCA</label></option>
+                                                        <option value="BSC IT"><label>BSC IT</label></option>
+                                                        <option value="B.VOC IT"><label>B.VOC IT</label>
+                                                        </option>
+
+                                                    </select></td>
+                                                <td><label for="Passing Year ">Passing Year </label><input type="text"
+                                                        class="form-control" name="passingyear"
+                                                        placeholder="passingyear" id="id_bepassingyear"></td>
+                                                <td><label for="Percentage">Percentage</label> <input type="text"
+                                                        class="form-control" name="percentage" id="id_bepercentage"
+                                                        placeholder="Percentage"></td>
+                                            </tr>
+                                            <% } if(locals.edu && edu[3]) {%>
+                                                <tr>
+                                                    <td><label for="me">Master degree</label>
+                                                <tr>
+                                                    <% if(locals.edu[3]) {%>
+                                                        <input type="text" name="eduid[]" id="eduid"
+                                                            value="<%= edu[3].edu_id %>" hidden>
+                                                        <% } %>
+                                                            <td><label>Course Name:</label><select name="nob"
+                                                                    id="id_mecoursename">
+                                                                    <option value="">Select</option>
+                                                                    <% if (locals.edu) { %>
+                                                                        <option value="<%= edu[3].nob %>" selected
+                                                                            hidden>
+                                                                            <%= edu[3].nob %>
+                                                                        </option>
+                                                                        <% } %>
+                                                                            <option value="ME CE"><label>ME CE</label>
+                                                                            </option>
+                                                                            <option value="ME IT"><label>ME IT</label>
+                                                                            </option>
+                                                                            <option value="ME ICT"><label>ME ICT</label>
+                                                                            </option>
+                                                                            <option value="ME EC"><label>ME EC</label>
+                                                                            </option>
+                                                                            <option value="ME IC"><label>ME IC</label>
+                                                                            </option>
+                                                                            <option value="MCA"><label>MCA</label>
+                                                                            </option>
+                                                                            <option value="MSC IT"><label>MSC IT</label>
+                                                                            </option>
+                                                                            <option value="M.VOC IT"><label>M.VOC
+                                                                                    IT</label>
+                                                                            </option>
+
+                                                                </select></td>
+                                                            <td><label for="Passing Year ">Passing Year </label><input
+                                                                    type="text" class="form-control" name="passingyear"
+                                                                    id="id_mepassingyear" placeholder="passingyear" <%
+                                                                    if (locals.edu) { %>
+                                                                value="<%= edu[3].passing_yr %>"
+                                                                    <% } %>></td>
+                                                            <td><label for="Percentage">Percentage</label> <input
+                                                                    type="text" class="form-control" name="percentage"
+                                                                    id="id_mepercentage" placeholder="Percentage" <% if
+                                                                    (locals.edu) { %>
+                                                                value="<%= edu[3].percentage %>"
+                                                                    <% } %>></td>
+                                                </tr>
+                                                <% } else {%>
+                                                    <tr>
+                                                        <td><label for="me">Master degree</label>
+                                                    <tr>
+                                                        <td><label>Course Name:</label><select name="nob"
+                                                                id="id_mecoursename">
+                                                                <option value="">Select</option>
+                                                                <option value="ME CE"><label>ME CE</label>
+                                                                </option>
+                                                                <option value="ME IT"><label>ME IT</label>
+                                                                </option>
+                                                                <option value="ME ICT"><label>ME ICT</label>
+                                                                </option>
+                                                                <option value="ME EC"><label>ME EC</label>
+                                                                </option>
+                                                                <option value="ME IC"><label>ME IC</label>
+                                                                </option>
+                                                                <option value="MCA"><label>MCA</label></option>
+                                                                <option value="MSC IT"><label>MSC IT</label>
+                                                                </option>
+                                                                <option value="M.VOC IT"><label>M.VOC IT</label>
+                                                                </option>
+
+                                                            </select></td>
+                                                        <td><label for="Passing Year ">Passing Year
+                                                            </label><input type="text" class="form-control"
+                                                                name="passingyear" id="id_mepassingyear"
+                                                                placeholder="passingyear"></td>
+                                                        <td><label for="Percentage">Percentage</label> <input
+                                                                type="text" class="form-control" name="percentage"
+                                                                id="id_mepercentage" placeholder="Percentage"></td>
+                                                    </tr>
+                                                    <% } %>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Work Experience</legend>
+                <table>
+                    <% if (locals.exp && exp[0]) { %>
+                        <tr>
+                            <% if(locals.exp[0]) {%>
+                                <input type="text" name="expid[]" id="expid" value="<%= exp[0].work_id %>" hidden>
+                                <% } %>
+                                    <td><label for="Company name">Company name</label><input type="text"
+                                            class="form-control" name="companyname" id="id_companyname1"
+                                            placeholder="companyname" <% if (locals.exp) { %>
+                                        value="<%= exp[0].comp_name %>"
+                                            <% } %>></td>
+                                    <td><label for="Designation">Designation</label> <input type="text"
+                                            class="form-control" name="designation" id="id_desg1"
+                                            placeholder="Designation" <% if (locals.exp) { %>
+                                        value="<%= exp[0].desg %>"
+                                            <% } %>></td>
+                                    <td><label for="From">From</label> <input type="text" name="from"
+                                            class="form-control" id="id_from1" placeholder="ex:yyyy-mm-dd" <% if
+                                            (locals.exp) { %>
+                                        value="<%= exp[0].dt_from %>"
+                                            <% } %>></td>
+                                    <td><label for="To">To</label> <input type="text" name="to" class="form-control"
+                                            id="id_to1" placeholder="ex:yyyy-mm-dd" <% if (locals.exp) { %>
+                                        value="<%= exp[0].dt_to %>"
+                                            <% } %>></td>
+                        </tr>
+                        <% } else { %>
+                            <td><label for="Company name">Company name</label><input type="text" class="form-control"
+                                    name="companyname" id="id_companyname1" placeholder="companyname"></td>
+                            <td><label for="Designation">Designation</label> <input type="text" class="form-control"
+                                    name="designation" id="id_desg1" placeholder="Designation"></td>
+                            <td><label for="From">From</label> <input type="text" class="form-control" name="from"
+                                    id="id_from1" placeholder="ex:yyyy-mm-dd"></td>
+                            <td><label for="To">To</label> <input type="text" class="form-control" name="to" id="id_to1"
+                                    placeholder="ex:yyyy-mm-dd"></td>
+                            <% } if(locals.exp && exp[1]) { %>
+                                <tr>
+                                    <% if(locals.exp[1]) {%>
+                                        <input type="text" name="expid[]" id="expid" value="<%= exp[1].work_id %>"
+                                            hidden>
+                                        <% } %>
+                                            <td><label for="Company name">Company name</label><input type="text"
+                                                    class="form-control" name="companyname" id="id_companyname2"
+                                                    placeholder="companyname" <% if (locals.exp) { %>
+                                                value="<%= exp[1].comp_name %>"
+                                                    <% } %>></td>
+                                            <td><label for="Designation">Designation</label> <input type="text"
+                                                    class="form-control" name="designation" id="id_desg2"
+                                                    placeholder="Designation" <% if (locals.exp) { %>
+                                                value="<%= exp[1].desg %>"
+                                                    <% } %>></td>
+                                            <td><label for="From">From</label> <input type="text" class="form-control"
+                                                    name="from" id="id_from2" placeholder="ex:yyyy-mm-dd" <% if
+                                                    (locals.exp) { %>
+                                                value="<%= exp[1].dt_from %>"
+                                                    <% } %>></td>
+                                            <td><label for="To">To</label> <input type="text" class="form-control"
+                                                    name="to" id="id_to2" placeholder="ex:yyyy-mm-dd" <% if (locals.exp)
+                                                    { %>
+                                                value="<%= exp[1].dt_to %>"
+                                                    <% } %>></td>
+                                </tr>
+                                <% } else { %>
+                                    <tr>
+                                        <td><label for="Company name">Company name</label><input type="text"
+                                                class="form-control" name="companyname" id="id_companyname2"
+                                                placeholder="companyname"></td>
+                                        <td><label for="Designation">Designation</label> <input type="text"
+                                                class="form-control" name="designation" id="id_desg2"
+                                                placeholder="Designation"></td>
+                                        <td><label for="From">From</label> <input type="text" class="form-control"
+                                                name="from" id="id_from2" placeholder="ex:yyyy-mm-dd"></td>
+                                        <td><label for="To">To</label> <input type="text" class="form-control" name="to"
+                                                id="id_to2" placeholder="ex:yyyy-mm-dd"></td>
+                                    </tr>
+                                    <% } if(locals.exp && exp[2]){ %>
+                                        <tr>
+                                            <% if(locals.exp[2]) {%>
+                                                <input type="text" name="expid[]" id="expid"
+                                                    value="<%= exp[2].work_id %>" hidden>
+                                                <% } %>
+                                                    <td><label for="Company name">Company name</label><input type="text"
+                                                            class="form-control" name="companyname" id="id_companyname3"
+                                                            placeholder="companyname" <% if (locals.exp) { %>
+                                                        value="<%= exp[2].comp_name %>"
+                                                            <% } %>></td>
+                                                    <td><label for="Designation">Designation</label> <input type="text"
+                                                            class="form-control" name="designation" id="id_desg3"
+                                                            placeholder="Designation" <% if (locals.exp) { %>
+                                                        value="<%= exp[2].desg %>"
+                                                            <% } %>></td>
+                                                    <td><label for="From">From</label> <input type="text" name="from"
+                                                            class="form-control" id="id_from3"
+                                                            placeholder="ex:yyyy-mm-dd" <% if (locals.exp) { %>
+                                                        value="<%= exp[2].dt_from %>"
+                                                            <% } %>></td>
+                                                    <td><label for="To">To</label> <input type="text" name="to"
+                                                            id="id_to3" class="form-control" placeholder="ex:yyyy-mm-dd"
+                                                            <% if (locals.exp) { %>
+                                                        value="<%= exp[2].dt_to %>"
+                                                            <% } %>></td>
+                                        </tr>
+                                        <% } else { %>
+                                            <td><label for="Company name">Company name</label><input type="text"
+                                                    class="form-control" name="companyname" id="id_companyname3"
+                                                    placeholder="companyname"></td>
+                                            <td><label for="Designation">Designation</label> <input type="text"
+                                                    class="form-control" name="designation" id="id_desg3"
+                                                    placeholder="Designation"></td>
+                                            <td><label for="From">From</label> <input type="text" class="form-control"
+                                                    name="from" id="id_from3" placeholder="ex:yyyy-mm-dd"></td>
+                                            <td><label for="To">To</label> <input type="text" class="form-control"
+                                                    name="to" id="id_to3" placeholder="ex:yyyy-mm-dd"></td>
+                                            <% } %>
+                </table>
+            </fieldset>
+            <fieldset>
+
+                <legend> Language Known</legend>
+                <p id="id_language" style="color: red;"></p>
+                <table>
+                    <% if(locals.lang) { %> <input type="text" name="langid[]" id="langid"
+                                value="<%=lang[0].lang_id %>" hidden>
+                            <% } %>
+                    <tr>
+                    <td><input type="checkbox" class="form-check-input" name="lang" id="id_hindi"
+                                value="hindi" <% if(locals.lang && lang[0].lang_name=="hindi" ) {%> checked
+                                    <% } %>><label for="id_hindi"> Hindi </label></td>
+                        <td><input type="checkbox" class="langknownhindi form-check-input" name="read_hindi[]" id="id_readhindi" value="1" <% if(locals.lang && lang[0].lang_read=='1' ) {%> checked
+                                    <% } %> ><label for="id_readhindi">Read</label>
+                        </td>
+                        <td><input type="checkbox" class="langknownhindi form-check-input" name="write_hindi[]" id="id_writehindi"
+                                value="1"  <% if(locals.lang && lang[0].lang_write=='1' ) {%> checked
+                                    <% } %> ><label for="id_writehindi">Write</td>
+                        <td><input type="checkbox" class="langknownhindi form-check-input" name="speak_hindi[]" id="id_speakhindi"
+                                value="1"  <% if(locals.lang && lang[0].lang_speak=='1' ) {%> checked
+                                    <% } %> ><label for="id_speakhindi">Speak</td>
+                        <td>
+                            <p id="id_language1" style="color: red;"></p>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <% if(locals.lang) { %> <input type="text" name="langid[]" id="langid"
+                                value="<%=lang[1].lang_id %>" hidden>
+                            <% } %>
+                        <td><input type="checkbox" class="form-check-input" name="lang" id="id_english"
+                                value="english"  <% if(locals.lang && lang[1].lang_name=='english' ) {%> checked
+                                    <% } %>><label for="id_english">English</label>
+                        </td>
+                        <td><input type="checkbox" class="langknownenglish form-check-input " name="read_english[]" id="id_readenglish" 
+                                value="1"  <% if(locals.lang && lang[1].lang_read=='1' ) {%> checked
+                                    <% } %> ><label for="id_readenglish ">Read</label></td>
+                        <td><input type="checkbox" class="langknownenglish form-check-input " name="write_english[]" id="id_writeenglish"
+                                value="1"  <% if(locals.lang && lang[1].lang_write=='1' ) {%> checked
+                                    <% } %> ><label for="id_writeenglish">Write</label>
+                        </td>
+                        <td><input type="checkbox" class="langknownenglish form-check-input " name="speak_english[]" id="id_speakenglish"
+                                value="1"  <% if(locals.lang && lang[1].lang_speak=='1' ) {%> checked
+                                    <% } %> ><label for="id_speakenglish">Speak</label>
+                        </td>
+                        <td>
+                            <p id="id_language2" style="color: red;"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <% if(locals.lang) { %> <input type="text" name="langid[]" id="langid"
+                                value="<%=lang[2].lang_id %>" hidden>
+                            <% } %>
+                        <td><input type="checkbox" class="form-check-input" name="lang" id="id_gujarati"
+                                value="gujarati"  <% if(locals.lang && lang[2].lang_name=='gujarati' ) {%> checked
+                                    <% } %>><label for="id_gujarati">Gujarati</label>
+                        </td>
+                        <td><input type="checkbox" class="form-check-input langknownguj" name="read_gujarati[]" id="id_readgujarati"
+                                value="1"  <% if(locals.lang && lang[2].lang_read=='1' ) {%> checked
+                                    <% } %> ><label for="id_readgujarati langknownguj">Read</label></td>
+                        <td><input type="checkbox" class="form-check-input langknownguj" name="write_gujarati[]"
+                                id="id_writegujarati" value="1"  <% if(locals.lang && lang[2].lang_write=='1' ) {%> checked
+                                    <% } %> ><label for="id_writegujarati">Write</label>
+                        </td>
+                        <td><input type="checkbox" class="form-check-input" name="speak_gujarati[]"
+                                id="id_speakgujarati" value="1"  <% if(locals.lang && lang[2].lang_speak=='1' ) {%> checked
+                                    <% } %> ><label for="id_speakgujarati">Speak</label>
+                        </td>
+                        <td>
+                            <p id="id_language3" style="color: red;"></p>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+
+                <legend>Tech you Known</legend>
+                <p id="id_tech"></p>
+                <table>
+                    <tr>
+                        <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
+                                value="<%=tech[0].tech_id %>" hidden>
+                            <% } %>
+                                <td><input type="checkbox" class="form-check-input" name="techlang" id="id_PHP"
+                                        value="php" <% if(locals.tech && tech[0].tech_name=='php' ) {%> checked <% } %>
+                                        ><label for="id_PHP">PHP</label>
+                                </td>
+                                <td><input type="radio" class="form-check-input" name="php[]" id="id_BeginerPHP"
+                                        value="Beginer" <% if(locals.tech && tech[0].tech_level=='Beginer' ) {%> checked
+                                    <% } %> ><label for="id_BeginerPHP">Beginer</label></td>
+                                <td><input type="radio" class="form-check-input" name="php[]" id="id_MideatorPHP"
+                                        value="Mideator" <% if(locals.tech && tech[0].tech_level=='Mideator' ) {%>
+                                    checked <% } %> ><label for="id_MideatorPHP">Mideator</label></td>
+                                <td><input type="radio" class="form-check-input" name="php[]" id="id_ExpertPHP"
+                                        value="Expert" <% if(locals.tech && tech[0].tech_level=='Expert' ) {%> checked
+                                    <% } %> ><label for="id_ExpertPHP">Expert</label></td>
+                                <td>
+                                    <p id="id_tech1" style="color: red;"></p>
+                                </td>
+                    </tr>
+                    <tr>
+                        <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
+                                value="<%=tech[1].tech_id %>" hidden>
+                            <% } %>
+                                <td><input type="checkbox" class="form-check-input" name="techlang" id="id_Mysql"
+                                        value="mysql" <% if(locals.tech && tech[1].tech_name=='mysql' ) {%> checked <% }
+                                        %> ><label for="id_Mysql">Mysql</label>
+                                </td>
+                                <td><input type="radio" class="form-check-input" name="mysql[]" id="id_BeginerMysql"
+                                        value="Beginer" <% if(locals.tech && tech[1].tech_level=='Beginer' ) {%> checked
+                                    <% } %> ><label for="id_BeginerMysql">Beginer</label></td>
+                                <td><input type="radio" class="form-check-input" name="mysql[]" id="id_MideatorMysql"
+                                        value="Mideator" <% if(locals.tech && tech[1].tech_level=='Mideator' ) {%>
+                                    checked <% } %> ><label for="id_MideatorMysql">Mideator</label></td>
+                                <td><input type="radio" class="form-check-input" name="mysql[]" id="id_ExpertMysql"
+                                        value="Expert" <% if(locals.tech && tech[1].tech_level=='Expert' ) {%> checked
+                                    <% } %> ><label for="id_ExpertMysql">Expert</label></td>
+                                <td>
+                                    <p id="id_tech2" style="color: red;"></p>
+                                </td>
+                    </tr>
+                    <tr>
+                        <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
+                                value="<%=tech[2].tech_id %>" hidden>
+                            <% } %>
+                                <td><input type="checkbox" class="form-check-input" name="techlang" id="id_Oracle"
+                                        value="oracle" <% if(locals.tech && tech[2].tech_name=='oracle' ) {%> checked <%
+                                        } %> ><label for="id_Oracle">Oracle</label>
+                                </td>
+                                <td><input type="radio" class="form-check-input" name="oracle[]" id="id_BeginerOracle"
+                                        value="Beginer" <% if(locals.tech && tech[2].tech_level=='Beginer' ) {%> checked
+                                    <% } %> ><label for="id_BeginerOracle">Beginer</label></td>
+                                <td><input type="radio" class="form-check-input" name="oracle[]" id="id_MideatorOracle"
+                                        value="Mideator" <% if(locals.tech && tech[2].tech_level=='Mideator' ) {%>
+                                    checked <% } %> ><label for="id_MideatorOracle">Mideator</label></td>
+                                <td><input type="radio" class="form-check-input" name="oracle[]" id="id_ExpertOracle"
+                                        value="Expert" <% if(locals.tech && tech[2].tech_level=='Expert' ) {%> checked
+                                    <% } %> ><label for="id_ExpertOracle">Expert</label></td>
+                                <td>
+                                    <p id="id_tech4" style="color: red;"></p>
+                                </td>
+                    </tr>
+                    <tr>
+                        <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
+                                value="<%=tech[3].tech_id %>" hidden>
+                            <% } %>
+                                <td><input type="checkbox" class="form-check-input" name="techlang[]" id="id_laravel"
+                                        value="laravel" <% if(locals.tech && tech[3].tech_name=='laravel' ) {%> checked
+                                    <% } %> ><label for="id_laravel">Laravel</label>
+                                </td>
+                                <td><input type="radio" class="form-check-input" name="laravel[]" id="id_BeginerLaravel"
+                                        value="Beginer" <% if(locals.tech && tech[3].tech_level=='Beginer' ) {%> checked
+                                    <% } %> ><label for="id_BeginerLaravel">Beginer</label></td>
+                                <td><input type="radio" class="form-check-input" name="laravel[]"
+                                        id="id_MideatorLaravel" value="Mideator" <% if(locals.tech &&
+                                        tech[3].tech_level=='Mideator' ) {%> checked <% } %> ><label
+                                            for="id_MideatorLaravel">Mideator</label></td>
+                                <td><input type="radio" class="form-check-input" name="laravel[]" id="id_ExpertLaravel"
+                                        value="Expert" <% if(locals.tech && tech[3].tech_level=='Expert' ) {%> checked
+                                    <% } %> ><label for="id_ExpertLaravel">Expert</label></td>
+                                <td>
+                                    <p id="id_tech3" style="color: red;"></p>
+                                </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Referance</legend>
+                <table>
+                    <% if(locals.ref && ref[0]){ %>
+                        <tr>
+                            <% if(locals.ref[0]) {%>
+                                <input type="text" name="refid[]" id="refid" value="<%= ref[0].ref_id %>" hidden>
+                                <% } %>
+                                    <td><label for="Name">Name</label> <input type="text" class="form-control"
+                                            name="refname" id="id_refname1" placeholder="Enter Name" <% if (locals.ref)
+                                            { %>
+                                        value="<%= ref[0].ref_name%>"
+                                            <% } %>></td>
+                                    <td><label for="Contact Number">Contact Number</label> <input type="text"
+                                            class="form-control" name="refcontact" id="id_refContact1"
+                                            placeholder="Enter Contact Number" <% if (locals.ref) { %>
+                                        value="<%= ref[0].ref_contact%>"
+                                            <% } %>></td>
+                                    <td><label for="Relation">Relation</label> <input type="text" class="form-control"
+                                            name="refrelation" id="id_refrelation1" placeholder="Enter Relation" <% if
+                                            (locals.ref) { %>
+                                        value="<%= ref[0].ref_relation %>"
+                                            <% } %>></td>
+                        </tr>
+                        <% }else{%>
+                            <tr>
+                                <td><label for="Name">Name</label> <input type="text" class="form-control"
+                                        name="refname" id="id_refname1" placeholder="Enter Name"></td>
+                                <td><label for="Contact Number">Contact Number</label> <input type="text"
+                                        class="form-control" name="refcontact" id="id_refContact1"
+                                        placeholder="Enter Contact Number"></td>
+                                <td><label for="Relation">Relation</label> <input type="text" class="form-control"
+                                        name="refrelation" id="id_refrelation1" placeholder="Enter Relation"></td>
+                            </tr>
+                            <%}%>
+
+                                <% if(locals.ref && ref[1]){ %>
+                                    <tr>
+                                        <% if(locals.ref[1]) {%>
+                                            <input type="text" name="refid[]" id="refid" value="<%= ref[1].ref_id %>"
+                                                hidden>
+                                            <% } %>
+
+                                                <td><label for="Name">Name</label> <input type="text"
+                                                        class="form-control" name="refname" id="id_refname2"
+                                                        placeholder="Enter Name" <% if (locals.ref) { %>
+                                                    value="<%= ref[1].ref_name %>"
+                                                        <% } %>></td>
+                                                <td><label for="Contact Number">Contact Number</label> <input
+                                                        type="text" class="form-control" name="refcontact"
+                                                        id="id_refContact2" placeholder="Enter Contact Number" <% if
+                                                        (locals.ref) { %>
+                                                    value="<%= ref[1].ref_contact %>"
+                                                        <% } %>></td>
+                                                <td><label for="Relation">Relation</label> <input type="text"
+                                                        class="form-control" name="refrelation" id="id_refrelation2"
+                                                        placeholder="Enter Relation" <% if (locals.ref) { %>
+                                                    value="<%= ref[1].ref_relation %>"
+                                                        <% } %>></td>
+                                    </tr>
+
+                                    <% }else{%>
+                                        <tr>
+                                            <td><label for="Name">Name</label> <input type="text" class="form-control"
+                                                    name="refname" id="id_refname2" placeholder="Enter Name"></td>
+                                            <td><label for="Contact Number">Contact Number</label> <input type="text"
+                                                    class="form-control" name="refcontact" id="id_refContact2"
+                                                    placeholder="Enter Contact Number"></td>
+                                            <td><label for="Relation">Relation</label> <input type="text"
+                                                    class="form-control" name="refrelation" id="id_refrelation2"
+                                                    placeholder="Enter Relation"></td>
+                                        </tr>
+                                        <% }%>
+                                            <% if(locals.ref &&ref[2]){%>
+                                                <tr>
+                                                    <% if(locals.ref[2]) {%>
+                                                        <input type="text" name="refid[]" id="refid"
+                                                            value="<%= ref[2].ref_id %>" hidden>
+                                                        <% } %>
+                                                            <td><label for="Name">Name</label> <input type="text"
+                                                                    class="form-control" name="refname" id="id_refname3"
+                                                                    placeholder="Enter Name" <% if (locals.ref) { %>
+                                                                value="<%= ref[2].ref_name %>"
+                                                                    <% } %>></td>
+                                                            <td><label for="Contact Number">Contact Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="refcontact" id="id_refContact3"
+                                                                    placeholder="Enter Contact Number" <% if
+                                                                    (locals.ref) { %>
+                                                                value="<%= ref[2].ref_contact %>"
+                                                                    <% } %>>
+                                                            </td>
+                                                            <td><label for="Relation">Relation</label> <input
+                                                                    type="text" class="form-control" name="refrelation"
+                                                                    id="id_refrelation3" placeholder="Enter Relation" <%
+                                                                    if (locals.ref) { %>
+                                                                value="<%= ref[2].ref_relation %>"
+                                                                    <% } %>></td>
+                                                </tr>
+                                                <%} else{%>
+                                                    <tr>
+                                                        <td><label for="Name">Name</label> <input type="text"
+                                                                class="form-control" name="refname" id="id_refname3"
+                                                                placeholder="Enter Name"></td>
+                                                        <td><label for="Contact Number">Contact Number</label>
+                                                            <input type="text" class="form-control" name="refcontact"
+                                                                id="id_refContact3" placeholder="Enter Contact Number">
+                                                        </td>
+                                                        <td><label for="Relation">Relation</label> <input type="text"
+                                                                class="form-control" name="refrelation"
+                                                                id="id_refrelation3" placeholder="Enter Relation"></td>
+                                                    </tr>
+
+                                                    <%}%>
+
+
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Preferance</legend>
+                <table>
+                    <tr>
+                <td><label for="Prefered Location">Prefered Location</label> 
+                    <select  class="form-select" name="preferedlocation" id="id_pref_location">
+                    <option value="select"><label for="select" hidden>Select</label></option>
+                    <% if (locals.pref) { %>
+                        <option value="<%= pref[0].pref_location %>" selected hidden>
+                        <%= pref[0].pref_location %>
+                                    </option>
+                                    <% } %>
+                    <option value="Ahmedabad"><label for="Ahmedabad">Ahmedabad</label></option>
+                    <option value="Surat"><label for="Surat">Surat</label></option>
+                    <option value="Rajkot"><label for="Rajkot">Rajkot</label></option>
+                </select></td>
+            </tr>
+                    <tr>
+                        <td><label for="Notice Period">Notice Period</label>
+                            <input type="text" class="form-control" name="noticeperiod" id="id_noticeperiod"
+                                placeholder="noticeperiod" <% if (locals.pref) { %>
+                            value="<%= pref[0].notice_period %>"
+                                <% } %>>
+                        </td>
+                        <td><label for="Expected CTC">Expected CTC</label>
+                            <input type="text" class="form-control" name="expecedCTC" id="id_expecedCTC"
+                                placeholder="Expected CTC" <% if (locals.pref) { %>
+                            value="<%= pref[0].expacted_ctc %>"
+                                <% } %> >
+                        </td>
+                        <td><label for="Current CTC">Current CTC</label>
+                            <input type="text" class="form-control" name="currentCTC" id="id_currentCTC"
+                                placeholder="Current CTC" <% if(locals.pref) { %> value="<%= pref[0].current_ctc %>" <%
+                                    } %>>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="Department">Department</label>
+                            <select class="form-select" name="Department" id="id_department">
+                                <% if(locals.pref) {%>
+                                    <option value="<%= pref[0].department %>" selected hidden>
+                                        <%= pref[0].department %>
+                                    </option>
+                                    <% } %>
+                                        <option value="select" hidden>Select</option>
+                                        <option value="Design">Design</option>
+                                        <option value="Marketing">Marketing</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                </table>
+            </fieldset>
+
+            <input type="submit" name="submit" id="submit" class="btn btn-outline-primary btn" value="submit">
+        </form>
+        </div>
+
+
+        <% } catch(err){ console.log("error");} %>
+
+<script src="/task11/jobform.js">
+
+
+
+    </script>
+</body>
+
+</html>

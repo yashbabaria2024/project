@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Task</title>
+</head>
+<body>
+    <style>
+
+       
+        * {
+             box-sizing: border-box;
+          }
+
+          body {
+            font-family: "Albert Sans", sans-serif;
+            margin: 0px;
+            padding: 0px;
+            }
+
+        .container
+        {
+            padding: 3px;
+            margin: 0 auto;
+            max-width: 1440px;      
+        }
+
+        .center-content
+        {
+           padding: 200px; 
+        }
+
+        .box-grid
+        {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* padding: 50px; */
+        }
+
+        .box
+        {
+            padding: 25px;
+            width: 20%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            height: 180px;
+            border: 1px solid black;
+        }
+
+        .box a 
+        {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
+    <div class="container">
+        <div><button onclick="logout()">Logout</button></div> 
+        <div class="center-content">
+           
+
+        <div class="box-grid">
+    <div class="box"><a href="http://localhost:8000/task/1"><h4>Task1</h4><label for="">Dynamic Table</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/2"><h4>Task2</h4><label for="">Kuku Cube</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/3"><h4>Task3</h4><label for="">DOM Table</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/4"><h4>Task4</h4><label for="">Tic-Tac-Toe</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/5"><h4>Task5</h4><label for="">Sorting</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/7"><h4>Task7</h4><label for="">Attendance Grid</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/8"><h4>Task8</h4><label for="">Result Grid</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/9"><h4>Task9</h4><label for="">Pagination Searching Sorting</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/10"><h4>Task10</h4><label for="">Delimeter Searching</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/11"><h4>Task11</h4><label for="">CRUD & Validation</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/12"><h4>Task12</h4><label for="">CRUD using Fetch API</label></a></div>
+    <div class="box"><a href="http://localhost:8000/task/13"><h4>Task13</h4><label for="">Registration</label></a></div>
+</div></div>
+</div>
+<script>
+
+    function logout()
+    {
+      let link =  'Are You sure you want to logout?'
+        if(confirm(link) == true)
+        {
+            window.location.href = 'http://localhost:8000/'
+        }
+        else
+        {
+            window.location.href
+        }
+       
+    }
+</script>
+</body>
+</html>

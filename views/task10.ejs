@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delimeter Searching Grid</title>
+</head>
+
+<body>
+    <style>
+        .page {
+            padding: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .inp {
+            display: flex;
+            gap: 20px;
+        }
+
+        .note-label {
+            display: flex;
+            gap: 20px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="page">
+
+            <form action="/delimitersearch" method="post">
+                <div class="inp">
+                    <input type="text" name="search" id="search" placeholder="search hear" class="form-control"
+                        value=<%=search %>>
+                    <input type="submit" name="submit" id="submit" value="search" class="btn btn-primary">
+                </div>
+            </form>
+
+            <div class="note-label">
+                <label for="">NOTE:-</label>
+                <label for="">'_': firstname</label>
+                <label for="">':': middlename</label>
+                <label for="">'^': lastname</label>
+                <label for="">'$': email</label>
+                <label for="">'{': branch</label>
+                <label for="">'}': address</label>
+            </div>
+
+            <table class="table table-bordered">
+                <tr>
+
+                    <td>student Id</td>
+                    <td>firstname</td>
+                    <td>middlename</td>
+                    <td>lastname</td>
+                    <td>date of birth</td>
+                    <td>contact</td>
+                    <td>email</td>
+                    <td>branch</td>
+                    <td>bloodgroup</td>
+                    <td>gender</td>
+                    <td>address</td>
+
+                </tr>
+
+                <% for(let i=0; i< row.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= row[i].stud_id %>
+                        </td>
+                        <td>
+                            <%= row[i].firstname %>
+                        </td>
+                        <td>
+                            <%= row[i].mname %>
+                        </td>
+                        <td>
+                            <%= row[i].lastname %>
+                        </td>
+                        <td>
+                            <%= row[i].dob %>
+                        </td>
+                        <td>
+                            <%= row[i].contact %>
+                        </td>
+                        <td>
+                            <%= row[i].email %>
+                        </td>
+                        <td>
+                            <%= row[i].branch %>
+                        </td>
+                        <td>
+                            <%= row[i].bloodgroup %>
+                        </td>
+                        <td>
+                            <%= row[i].gender %>
+                        </td>
+                        <td>
+                            <%= row[i].address %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.getElementById("search").focus();
+    </script>
+</body>
+
+</html>

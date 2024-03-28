@@ -1,0 +1,33 @@
+.cell
+{
+    height: 50px;
+    width: 50px;
+    background-color: brown;
+    border: 1px solid black;
+}
+body
+{
+ background-color: antiquewhite; 
+}
+
+#task
+{
+    color: gray;
+    text-align: center;
+}
+
+#heading
+{
+    color: gray;
+    font-size: 18px;
+    text-align: center;
+}
+
+#mytbl
+{
+    display: flex;
+    justify-content: center;
+}
+
+
+
