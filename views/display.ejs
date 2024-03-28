@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Task</title>
 </head>
@@ -31,15 +32,16 @@
 
         .center-content
         {
-           padding: 200px; 
+           padding: 50px; 
         }
 
         .box-grid
         {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            /* padding: 50px; */
+            padding: 50px;
+            text-align: center;
+            flex-direction: column;
+            font-size: 18px;
         }
 
         .box
@@ -61,25 +63,28 @@
 
     </style>
     <div class="container">
-        <div><button onclick="logout()">Logout</button></div> 
-        <div class="center-content">
+        <!-- <div><button onclick="logout()">Logout</button></div> 
+         -->
+         <div class="center-content">
+            <a href="/logout">Logout</a>
            
 
         <div class="box-grid">
-    <div class="box"><a href="http://localhost:8000/task/1"><h4>Task1</h4><label for="">Dynamic Table</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/2"><h4>Task2</h4><label for="">Kuku Cube</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/3"><h4>Task3</h4><label for="">DOM Table</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/4"><h4>Task4</h4><label for="">Tic-Tac-Toe</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/5"><h4>Task5</h4><label for="">Sorting</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/7"><h4>Task7</h4><label for="">Attendance Grid</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/8"><h4>Task8</h4><label for="">Result Grid</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/9"><h4>Task9</h4><label for="">Pagination Searching Sorting</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/10"><h4>Task10</h4><label for="">Delimeter Searching</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/11"><h4>Task11</h4><label for="">CRUD & Validation</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/12"><h4>Task12</h4><label for="">CRUD using Fetch API</label></a></div>
-    <div class="box"><a href="http://localhost:8000/task/13"><h4>Task13</h4><label for="">Registration</label></a></div>
-</div></div>
-</div>
+   
+    <a class="list-group-item list-group-item-action list-group-item-primary" href="http://localhost:8000/task/1"><h5><label>Task1:- Dynamic Table</label></h5></a>
+    <a  class="list-group-item list-group-item-action list-group-item-secondary" href="http://localhost:8000/task/2"><h5><label for="">Task2 Kuku Cube</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-primary"  href="http://localhost:8000/task/3"><h5><label for="">Task3 DOM:- Table</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-secondary"  href="http://localhost:8000/task/4"><h5><label for="">Task4:- Tic-Tac-Toe</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-primary"  href="http://localhost:8000/task/5"><h5><label for="">Task5:- Sorting</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-secondary"  href="http://localhost:8000/task/6"><h5><label for="">Task6:- Dynamic Grid</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-primary"  href="http://localhost:8000/task/7"><h5><label for="">Task7:- Attendance Grid</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-secondary"  href="http://localhost:8000/task/8"><h5><label for="">Task8:- Result Grid</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-primary"  href="http://localhost:8000/task/9"><h5><label for="">Task9:- Pagination Searching Sorting</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-secondary"  href="http://localhost:8000/task/10"><h5><label for="">Task10:- Delimeter Searching</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-primary"  href="http://localhost:8000/task/11"><h5><label for="">Task11:- CRUD & Validation</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-secondary"  href="http://localhost:8000/task/12"><h5><label for="">Task12:- CRUD using Fetch API</label></h5></a>
+    <a class="list-group-item list-group-item-action list-group-item-primary"  href="http://localhost:8000/task/13"><h5><label for="">Task13:- Registration</label></h5></a>
+</div></div></div>
 <script>
 
     function logout()

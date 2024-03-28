@@ -1,20 +1,17 @@
-const express = require('express')
-const router = express.Router()
-const {conn} = require('/home/yash-babariya/Task/connection.js') 
-const bodyParser = require("body-parser");
-var urlencodedParser = bodyParser.urlencoded({ extended: true })
+const {conn} = require('../connection/connection') 
 
 var search;
-router.get('/delimitersearch', (req, res) => {
 
-    let q = `select * from stud_detail_50000 limit 0,200`;
-    conn.query(`${q}`, (err, row) => {
-        if (err) throw err
-        res.render('task10', { 'row': row, search: search })
-    })
-})
+const searchDelim =  (req, res) => {
 
-router.post('/delimitersearch', urlencodedParser, (req, res) => {
+        let q = `select * from stud_detail_50000 limit 0,200`;
+        conn.query(`${q}`, (err, row) => {
+            if (err) throw err
+            res.render('task10', { 'row': row, search: search })
+        })
+    }
+
+const searchData = (req, res) => {
 
     search = req.body.search;
     var p = search.replace(/(?=[$-/:-?{-~!"^_`\[\]])/gi, ",");
@@ -103,7 +100,6 @@ router.post('/delimitersearch', urlencodedParser, (req, res) => {
         }
     })
 
-})
-
-
-module.exports = router
+}
+ 
+module.exports = {searchDelim, searchData}

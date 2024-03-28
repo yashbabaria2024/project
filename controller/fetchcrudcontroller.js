@@ -1,15 +1,10 @@
-const express = require('express')
-const app = express()
-const router = express.Router()
-const {conn} = require('/home/yash-babariya/Task/connection.js') 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json())
+const {conn} = require('../connection/connection') 
 
-router.get('/fetchcrud', (req, res) => {
+const handlefetchCrud = (req, res) => {
     res.render('task12');
-})
+}
 
-router.get('/fbasicdetail/:id', (req, res) => {
+const handleBasicDetail =  (req, res) => {
     id = req.params.id;
     let basic = `select first_name as firstname,last_name as lastname,desg,email,contact,gender,relation_status as relationshipstatus, add1 as address, add2 as address2, city, state,zip_code as zipcode, dob as dateofbirth from basic_detail where emp_id = '${id}';`
     conn.query(basic, (err, result) => {
@@ -17,19 +12,18 @@ router.get('/fbasicdetail/:id', (req, res) => {
         res.json(result);
     })
 
-})
+}
 
-router.get('/fedudetail/:id', (req, res) => {
+const handleEduDetail = (req, res) => {
     id = req.params.id;
     let edu = `select edu_id,nob,passing_yr as passingyear, percentage from edu_detail where emp_id = '${id}';`
     conn.query(edu, (err, result) => {
         if (err) throw err;
         res.json(result);
     })
+}
 
-})
-
-router.get('/fworkexp/:id', (req, res) => {
+const handleexpdetail = (req, res) => {
     id = req.params.id;
     let exp = `select work_id,comp_name as companyname, desg as designation, dt_from, dt_to from work_exp where emp_id = '${id}';`
     conn.query(exp, (err, result) => {
@@ -37,9 +31,9 @@ router.get('/fworkexp/:id', (req, res) => {
         res.json(result);
     })
 
-})
+}
 
-router.get('/flangdetail/:id', (req, res) => {
+const handlelangdetail = (req, res) => {
     id = req.params.id;
     lang = `select lang_id, lang_name as lang, lang_read as read_lang, lang_write as write_lang , lang_speak as speak_lang from lang_detail where emp_id = '${id}'`
     conn.query(lang, (err, result) => {
@@ -47,9 +41,9 @@ router.get('/flangdetail/:id', (req, res) => {
         res.json(result);
     })
 
-})
+}
 
-router.get('/frefdetail/:id', (req, res) => {
+const handlerefdetail = (req, res) => {
     id = req.params.id;
     let ref = `select ref_id,ref_name as refname, ref_contact as refcontact, ref_relation as refrelation from ref_detail where emp_id = '${id}';`
     conn.query(ref, (err, result) => {
@@ -57,9 +51,9 @@ router.get('/frefdetail/:id', (req, res) => {
         res.json(result);
     })
 
-})
+}
 
-router.get('/fprefdetail/:id', (req, res) => {
+const handleprefdetail = (req, res) => {
     id = req.params.id;
     let pref = `select pref_id,pref_location as preferedlocation, notice_period as noticeperiod, expacted_ctc as expecedCTC, current_ctc as currentCTC, department as Department from pref_detail where emp_id = '${id}';`
     conn.query(pref, (err, result) => {
@@ -67,24 +61,24 @@ router.get('/fprefdetail/:id', (req, res) => {
         res.json(result);
     })
 
-})
+}
 
-router.get('/ftechdetail/:id', (req, res) => {
+const handletechdetail =  (req, res) => {
     id = req.params.id
     tech = `select tech_id, tech_name as techlang, tech_level from tech_detail where emp_id = '${id}'`
     conn.query(tech, (err, result) => {
         if (err) throw err;
         res.json(result);
     })
-})
+}
 
-router.get('/fuser/:id', (req, res) => {
+const handleuser =  (req, res) => {
     id = req.params.id;
     res.render('task12')
-})
+}
 
-router.post('/finsertUser', (req, res) => {
-    console.log(req.body);
+const createuser = (req, res) => {
+
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const desg = req.body.desg;
@@ -107,7 +101,7 @@ router.post('/finsertUser', (req, res) => {
                 if (error) {
                     return reject(error);
                 }
-                // console.log(results.insertId);
+          
                 return resolve(results.insertId);
             });
         });
@@ -126,7 +120,7 @@ router.post('/finsertUser', (req, res) => {
 
                 if (nob[i] != "" && passingyear[i] != "" && percentage[i] != "") {
                     const edu = `insert into edu_detail (emp_id,nob,passing_yr,percentage) values ('${id}','${nob[i]}','${passingyear[i]}','${percentage[i]}');`
-                    // console.log(edu);
+       
                     conn.query(edu, (err) => {
                         if (err) throw err;
                     })
@@ -137,14 +131,13 @@ router.post('/finsertUser', (req, res) => {
             let designation = req.body.designation.split(',');
             let from = req.body.from.split(',');
             let to = req.body.to.split(',');
-            // console.log(companyname);
-
+    
             for (let i = 0; i < companyname.length; i++) {
 
                 {
                     if (companyname[i] != "") {
                         let query3 = `insert into work_exp (emp_id,comp_name,desg,dt_from,dt_to) values ('${id}','${companyname[i]}','${designation[i]}','${from[i]}','${to[i]}')`;
-                        // console.log(query3);
+                       
                         conn.query(query3, (err) => {
                             if (err) throw err;
                         })
@@ -157,9 +150,9 @@ router.post('/finsertUser', (req, res) => {
             for (let i = 0; i < lang.length; i++) {
                 if (lang[i] != "") {
                     let read = req.body["read_" + lang[i]]
-                    // console.log("read_" + lang[i]);
+                  
                     let write = req.body["write_" + lang[i]]
-                    // console.log("write_" + lang[i]);
+              
                     let speak = req.body["speak_" + lang[i]]
                     if (read == undefined) {
                         read = 0;
@@ -188,7 +181,7 @@ router.post('/finsertUser', (req, res) => {
 
             let techarr = [php, mysql, oracle, laravel]
 
-            // console.log(techarr);
+           
             for (let i = 0; i < techlang.length; i++) {
 
                 query7 = `insert into tech_detail (emp_id,tech_name,tech_level) values ('${id}','${techlang[i]}','${techarr[i]}');`
@@ -223,20 +216,20 @@ router.post('/finsertUser', (req, res) => {
 
             if (preferedlocation != "") {
                 let query5 = `insert into pref_detail (emp_id,pref_location,notice_period,expacted_ctc,current_ctc,department)values('${id}','${preferedlocation}','${noticeperiod}','${expecedCTC}','${currentCTC}','${Department}');`
-                // console.log(query5);
+              
                 conn.query(query5, (err) => {
                     if (err) throw err;
                 })
             }
 
         } catch (error) {
-            // console.log("insert error" + error)
+
         }
     }
     sequentialQueries()
-})
+}
 
-router.post('/fuser/:id', (req, res) => {
+const updateuser = (req, res) => {
 
     let id = req.params.id;
   
@@ -257,14 +250,14 @@ router.post('/fuser/:id', (req, res) => {
 
     let query1 = `update  basic_detail set first_name = '${firstname}',last_name = '${lastname}',desg = '${desg}',email = '${email}' ,contact = '${contact}',gender='${gender}',relation_status ='${relationshipstatus}',add1='${address}',add2='${address2}',city='${city}',state='${state}',zip_code='${zipcode}',dob='${dateofbirth}' where emp_id = ${id};`
 
-    // // console.log(query1);
+
     const updatebasic = () => {
         return new Promise((resolve, reject) => {
             conn.query(query1, (error, results) => {
                 if (error) {
                     return reject(error);
                 }
-                // // console.log(id);
+       
                 return resolve(id);
             });
         });
@@ -275,17 +268,16 @@ router.post('/fuser/:id', (req, res) => {
 
             const id = await updatebasic();
             let pref_id = req.body.pref_id;
-            // // console.log("pref_id:"+pref_id);
+           
             let preferedlocation = req.body.preferedlocation
             let noticeperiod = req.body.noticeperiod;
             let expecedCTC = req.body.expecedCTC;
             let currentCTC = req.body.currentCTC;
             let Department = req.body.Department;
-            // console.log(pref_id);
-            // console.log(noticeperiod);
+           
             if (pref_id == "") {
                 let query5 = `insert into pref_detail (emp_id,pref_location,notice_period,expacted_ctc,current_ctc,department)values('${id}','${preferedlocation}','${noticeperiod}','${expecedCTC}','${currentCTC}','${Department}');`
-                // console.log(query5);
+                
                 conn.query(query5, (err) => {
                     if (err) throw err;
                 })
@@ -293,7 +285,7 @@ router.post('/fuser/:id', (req, res) => {
             else {
                 if (pref_id != "") {
                     let query2 = `update pref_detail set pref_location = '${preferedlocation}' , notice_period = '${noticeperiod}', expacted_ctc = '${expecedCTC}', current_ctc = '${currentCTC}', department = '${Department}' where emp_id = '${id}';`
-                    // console.log(query2);
+                   
                     conn.query(query2, (err) => { if (err) throw err; })
                 }
             }
@@ -307,11 +299,11 @@ router.post('/fuser/:id', (req, res) => {
             let refcontact = req.body.refcontact.split(',');
             let refrelation = req.body.refrelation.split(',');
             for (let i = 0; i < refname.length; i++) {
-                // console.log(ref_id[i]);
+              
                 if (ref_id[i] == "") {
                     if (refname[i] != "") {
                         let query4 = `insert into ref_detail (emp_id,ref_name,ref_contact,ref_relation)values('${id}','${refname}','${refcontact[i]}','${refrelation[i]}')`;
-                        // console.log(query4);
+                       
                         conn.query(query4, (err) => {
                             if (err) throw err;
                         })
@@ -320,7 +312,7 @@ router.post('/fuser/:id', (req, res) => {
                 else {
                     if (ref_id[i] != "") {
                         let query4 = `update ref_detail set ref_name = '${refname[i]}',ref_contact = '${refcontact[i]}',ref_relation='${refrelation[i]}' where emp_id = ${id} and ref_id = ${ref_id[i]}`;
-                        // console.log(query4);
+                      
                         conn.query(query4, (err) => {
                             if (err) throw err;
                         })
@@ -446,6 +438,19 @@ router.post('/fuser/:id', (req, res) => {
     }
 
     updateFun()
-})
+}
 
-module.exports = router
+
+module.exports = {
+    handlefetchCrud,
+handleBasicDetail,
+handleEduDetail,
+handleexpdetail,
+handlelangdetail,
+handlerefdetail,
+handleprefdetail,
+handletechdetail,
+handleuser,
+createuser,
+updateuser
+}

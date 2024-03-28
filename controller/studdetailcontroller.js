@@ -1,11 +1,6 @@
-const express = require('express')
-const router = express.Router()
-const {conn} = require('/home/yash-babariya/Task/connection.js') 
+const {conn} = require('../connection/connection'); 
 
-
-
-
-router.get('/studdetail', (req, res) => {
+const handleStudDetail = (req, res) => {
 
     let id, field, orderby;
    
@@ -26,10 +21,9 @@ router.get('/studdetail', (req, res) => {
            if (err) throw err;
            res.render('task9/display', { "row": row, "id": id, "orderby": orderby, "field": field });
        });
-   });
+   }
 
-
-   router.get('/search', (req, res) => {
+const handleSearch = (req, res) => {
     let id, field, orderby;
 
     if (req.query.id == undefined || req.query.orderby == undefined || req.query.field == undefined) {
@@ -66,6 +60,6 @@ router.get('/studdetail', (req, res) => {
         }
         )
     }
-})
+}
 
-module.exports = router
+module.exports = {handleStudDetail,handleSearch}

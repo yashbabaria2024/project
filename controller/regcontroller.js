@@ -1,20 +1,14 @@
-const express = require('express')
-const router = express.Router()
-const {conn} = require('/home/yash-babariya/Task/connection.js') 
-const bodyParser = require("body-parser");
+const {conn} = require('../connection/connection') 
 const md5 = require('md5');
-var urlencodedParser = bodyParser.urlencoded({ extended: true })
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+dotenv.config();
 
-
-router.get('/home', (req, res) => {
+const homecontroller = (req, res) => {
     res.render('task13/home');
-})
+}
 
-router.get('/register', (req, res) => {
-    res.render('task13/register');
-})
-
-router.post('/register', urlencodedParser, (req, res) => {
+const createuser = (req, res) => {
 
     let firstname = req.body.firstname
     let lastname = req.body.lastname
@@ -53,9 +47,9 @@ router.post('/register', urlencodedParser, (req, res) => {
             res.render('task13/thank', { "link": link })
         }
     })
-})
+}
 
-router.get('/activelink/:link', (req, res) => {
+const activelinkcontroller = (req, res) => {
 
     let link = req.params.link;
 
@@ -70,9 +64,9 @@ router.get('/activelink/:link', (req, res) => {
             res.send("Your Link Expired")
         }
     })
-})
+}
 
-router.post('/activelink/:link',urlencodedParser, (req, res) => {
+const createactivelink = (req, res) => {
 
     let link = req.params.link
     let psw = req.body.password;
@@ -101,36 +95,53 @@ router.post('/activelink/:link',urlencodedParser, (req, res) => {
         res.redirect('/login')
     })
 
-})
+}
 
-router.get('/login', (req, res) => {
+const handleregisterpage =  (req, res) => {
+    res.render('task13/register');
+}
+
+function createToken(email){
+    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY)
+       return Token
+ }
+
+const handlelogin =  (req, res) => {
     res.render('task13/login')
-})
+}
 
-router.post('/login',urlencodedParser, (req, res) => {
+const createlogin = (req, res) => {
+
 
     conn.query(`select saltkey from employee_details where email='${req.body.email}'`, (err, result) => {
-        if (err) throw err
-    
-        let fail = "fail"
-        conn.query(`select count(*) as count from employee_details where email='${req.body.email}' and password = '${md5(req.body.password + result[0].saltkey)}'`, (err, row) => {
-            if (err) throw err;
-            console.log(row[0].count);
-            if (row[0].count == 1) {
-                res.render('task13/succes')
-            }
-            else {
-                res.render('task13/login',{fail:fail})
-            }
-        })
-    });
-})
+     if (err) throw err
+ 
+     let fail = "fail"
+     conn.query(`select count(*) as count from employee_details where email='${req.body.email}' and password = '${md5(req.body.password + result[0].saltkey)}'`, (err, row) => {
+         if (err) throw err;
 
-router.get('/reset', (req, res) => {
+         if (row[0].count == 1) {
+
+          let token = createToken(req.body.email)  
+         res.cookie("access_token", token, {
+             expires:new Date(Date.now() + 60000000000),
+             httpOnly: true
+         })
+             res.status(200).redirect('/displ')
+             
+         }
+         else {
+             res.render('task13/login',{fail:fail})
+         }
+     })
+ });
+}
+
+const resetget = (req, res) => {
     res.render('task13/resetpsw')
-})
+}
 
-router.post('/reset',urlencodedParser, (req, res) => {
+const resetpost = (req, res) => {
 
     conn.query(`select count(*) as count, resetkey from employee_details where email = '${req.body.emailreset}'`, (err, row) => {
         if (err) throw err;
@@ -143,14 +154,14 @@ router.post('/reset',urlencodedParser, (req, res) => {
         }
 
     })
-})
+}
 
-router.get('/reset/:resetkey', (req, res) => {
+const handleResetKey = (req, res) => {
     req.params.resetkey
     res.render('task13/password')
-})
+}
 
-router.post('/reset/:resetkey',urlencodedParser, (req, res) => {
+const createresetKey =  (req, res) => {
 
     let resetkey = req.params.resetkey
     let psw = req.body.password;
@@ -173,11 +184,13 @@ router.post('/reset/:resetkey',urlencodedParser, (req, res) => {
 
     let query = `update employee_details set password = '${md5(password)}',saltkey = '${result}', resetkey = '${resetcode}' where resetkey = '${resetkey}'`
 
-    console.log(query);
+    // console.log(query);
     conn.query(query, (err) => {
         if (err) throw err
         res.redirect('/login')
     })
-});
+}
 
-module.exports = router
+
+// module.exports = {handlelogin,createlogin,resetget,resetpost,handleResetKey,createresetKey }
+module.exports = {handleregisterpage,homecontroller,createuser,activelinkcontroller,createactivelink,handlelogin,createlogin,resetget,resetpost,handleResetKey,createresetKey}
