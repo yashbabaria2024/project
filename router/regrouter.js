@@ -4,9 +4,10 @@ const bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({ extended: true })
 
 const {handlelogin,createlogin,handleResetKey,createresetKey, resetpost, resetget } = require('../controller/logincontroller')
+
 const {handleregisterpage,homecontroller,createuser,activelinkcontroller,createactivelink} = require('../controller/regcontroller')
 
-router.get('/home',homecontroller) 
+router.get('/',homecontroller) 
 
 router.get('/register',handleregisterpage)
 
@@ -15,8 +16,8 @@ router.get('/activelink/:link',activelinkcontroller)
 
 router.post('/activelink/:link',urlencodedParser,createactivelink) 
 
-router.get('/',handlelogin)
-router.post('/',urlencodedParser,createlogin) 
+router.get('/login',handlelogin)
+router.post('/login',urlencodedParser,createlogin) 
 
 router.get('/reset',resetget) 
 
