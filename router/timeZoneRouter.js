@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {timeZoneFun} = require('../controller/timeZoneController')
-router.get('/timeZone', timeZoneFun)
+const authorization = require('../middleware/authentication')
+router.get('/timeZone',authorization.authorization, timeZoneFun)
 
 module.exports = router

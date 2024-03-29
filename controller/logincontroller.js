@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 dotenv.config();
 
 function createToken(email){
-    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY)
+    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY,{expiresIn: '10m'})
        return Token
  }
 
@@ -27,24 +27,9 @@ const createlogin = (req, res) => {
 
           let token = createToken(req.body.email)  
 
-        //   function createCookie(name,value,minutes) {
-        //     if (minutes) {
-        //         var date = new Date();
-        //         date.setTime(date.getTime()+(minutes*60*1000));
-        //         var expires = "; expires="+date.toGMTString();
-        //     } else {
-        //         var expires = "";
-        //     }
-        //     document.cookie = name+"="+value+expires+"; path=/";
-        // }
-        
-        // createCookie("name", "value", 5)
+  
 
-        // var date = new Date().toString;
-        // console.log(date);
-        // date.setTime(date.getTime() + (60 * 1000));
-
-         res.cookie("access_token", token, { maxAge:9000 } )
+         res.cookie("access_token", token)
              res.status(200).redirect('/displ')
              
          }
