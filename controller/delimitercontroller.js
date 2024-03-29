@@ -7,7 +7,7 @@ const searchDelim =  (req, res) => {
         let q = `select * from stud_detail_50000 limit 0,200`;
         conn.query(`${q}`, (err, row) => {
             if (err) throw err
-            res.render('task10', { 'row': row, search: search })
+            res.status(200).render('task10', { 'row': row, search: search })
         })
     }
 
@@ -96,7 +96,7 @@ const searchData = (req, res) => {
     conn.query(`${query}`, (err, row) => {
         if (err) throw err;
         else {
-            res.render('task10', { row: row, search: search })
+            res.status(200).render('task10', { row: row, search: search })
         }
     })
 

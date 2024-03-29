@@ -26,7 +26,7 @@ const displayJobFormData = async (req, res) => {
     let tech = await queryselect(`select * from tech_detail where emp_id = '${id}'`);
 
     // console.log(lang);
-    res.render('task11', { "basic": basic, "ref": ref, "pref": pref, "edu": edu, "exp": exp, "tech": tech, "lang": lang });
+    res.status(200).render('task11', { "basic": basic, "ref": ref, "pref": pref, "edu": edu, "exp": exp, "tech": tech, "lang": lang });
 }
 
 const createJobFormData = (req, res) => {

@@ -1,3 +1,100 @@
+document.getElementById('edudetail').style.display = "none"
+document.getElementById('langknown').style.display = "none"
+document.getElementById('techknown').style.display = "none"
+document.getElementById('refdetail').style.display = "none"
+document.getElementById('prefdetail').style.display = "none"
+document.getElementById('expdetail').style.display = "none"
+
+let count = 0;
+
+function next() {
+    let flag = validationFun()
+
+    if (flag != false) {
+        count++
+       switch (count) {
+            case 0:
+                document.getElementById('edudetail').style.display = "none"
+                document.getElementById('basicdetail').style.display = "block"
+                break;
+
+            case 1:
+                document.getElementById('basicdetail').style.display = "none"
+                document.getElementById('edudetail').style.display = "block"
+                break;
+
+            case 2:
+                document.getElementById('edudetail').style.display = "none"
+                document.getElementById('expdetail').style.display = "block"
+                break;
+
+            case 3:
+                document.getElementById('expdetail').style.display = "none"
+                document.getElementById('langknown').style.display = "block"
+                break;
+            case 4:
+                document.getElementById('langknown').style.display = "none"
+                document.getElementById('techknown').style.display = "block"
+                break;
+
+            case 5:
+                document.getElementById('techknown').style.display = "none"
+                document.getElementById('refdetail').style.display = "block"
+                break;
+
+            case 6:
+                document.getElementById('refdetail').style.display = "none"
+                document.getElementById('prefdetail').style.display = "block"
+                break;
+        }
+       
+    }
+}
+
+function prev() {
+    let flag = validationFun()
+
+    if (flag != false) {
+        count--
+        switch (count) {
+            case 0:
+                console.log(count);
+                document.getElementById('edudetail').style.display = "none"
+                document.getElementById('basicdetail').style.display = "block"
+                break;
+
+            case 1:
+                console.log(count);
+                document.getElementById('expdetail').style.display = "none"
+                document.getElementById('edudetail').style.display = "block"
+                break;
+
+            case 2:
+                console.log(count);
+                document.getElementById('langknown').style.display = "none"
+                document.getElementById('expdetail').style.display = "block"
+                break;
+            case 3:
+
+                document.getElementById('techknown').style.display = "none"
+                document.getElementById('langknown').style.display = "block"
+                break;
+
+            case 4:
+                document.getElementById('refdetail').style.display = "none"
+                document.getElementById('techknown').style.display = "block"
+                break;
+
+            case 5:
+                document.getElementById('prefdetail').style.display = "none"
+                document.getElementById('refdetail').style.display = "block"
+                break;
+        }
+        
+    }
+}
+
+
 function MainFun(id) {
     let nm = document.getElementById(`${id.id}`).value
     var regex = /^[a-zA-Z ]{2,30}$/
@@ -21,6 +118,11 @@ function MainFun(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
+    else
+    {
+        flag = true
+    }
+  
 }
 
 function contactFun(id) {
@@ -380,26 +482,6 @@ function workexpFun() {
 }
 
 
-function checkvalue(lang, error, name) {
-    let arr = []
-    if (lang.checked) {
-        name.forEach(element => {
-
-            if (element.checked) {
-                arr.push(element)
-            }
-            if (arr.length === 0) {
-                error.innerHTML = "Please select any one skill"
-                flag = false
-            }
-            else {
-                error.innerHTML = " "
-                flag = true
-            }
-        })
-    }
-
-}
 
 function refFun() {
 
@@ -458,7 +540,7 @@ function refFun() {
 function add2Fun() {
     let add2 = document.getElementById("id_address2").value
     if (add2 != "") {
-        document.getElementById("id_address2").setAttribute("class", "form-control is-valid")
+        document.getElementById("id_address2").setAttribute("class", "form-control ")
     }
 }
 
@@ -538,98 +620,11 @@ function add2Fun() {
 
 // techknown()
 
-// function lang() {
-//     let langhindi = document.querySelectorAll('.langknownhindi')
 
-//     let langguj = document.querySelectorAll('.langknownguj')
-//     let langeng = document.querySelectorAll('.langknownenglish')
-//     let hindiid = document.getElementById('id_hindi')
-//     let engid = document.getElementById('id_english')
-//     let gujid = document.getElementById('id_gujarati')
-
-//  const a = () => langhindi.forEach(ele => {
-//         if(ele.checked == true && hindiid.checked == true)
-//         {langvalid()}
-//         flag = true
-//     });
-
-//     const b = () => langguj.forEach(ele => {
-//         if(ele.checked == true && gujid.checked == true)
-//       {langvalid()}
-//       flag = true
-//     });
-
-//     const c = () =>  langeng.forEach(ele => {
-//         if(ele.checked == true && engid.checked == true)
-//         {langvalid()}
-//         flag = true
-//         });
-
-
-//    flag = false
-// }
-
-
-
-
-
-// function langvalid() {
-
-//     let hindiid = document.getElementById('id_hindi')
-//     let hindiknown = document.querySelectorAll('.langknownhindi')
-//     let engid = document.getElementById('id_english')
-//     let engknown = document.querySelectorAll('.langknownenglish')
-//     let gujid = document.getElementById('id_gujarati')
-//     let gujknown = document.querySelectorAll('.langknownguj')
-//     console.log(hindiknown);
-//     console.log(gujknown);
-//     console.log(engknown);
-//     let error1 = document.getElementById("id_language1")
-//     let error2 = document.getElementById("id_language2")
-//     let error3 = document.getElementById("id_language3")
-
-//     let phpid = document.getElementById('id_PHP')
-//     let phpknown = document.getElementsByName('php')
-//     let mysqlid = document.getElementById('id_Mysql')
-//     let mysqlknown = document.getElementsByName('mysql')
-//     let laravelid = document.getElementById('id_laravel')
-//     let laravelknown = document.getElementsByName('laravel')
-//     let oracleid = document.getElementById('id_Oracle')
-//     let oracleknown = document.getElementsByName('oracle')
-//     let error4 = document.getElementById("id_tech1")
-//     let error5 = document.getElementById("id_tech2")
-//     let error6 = document.getElementById("id_tech3")
-//     let error7 = document.getElementById("id_tech4")
-
-
-//     if (hindiid.checked == true) {
-//         checkvalue(hindiid, error1, hindiknown)
-
-//     }
-//     if (gujid.checked == true) {
-//         checkvalue(gujid, error3, gujknown)
-//     }
-//     if (engid.checked == true) {
-//         checkvalue(engid, error2, engknown)
-//     }
-//     if (phpid.checked == true) {
-//         checkvalue(phpid, error4, phpknown)
-//     }
-//     if (mysqlid.checked == true) {
-//         checkvalue(mysqlid, error5, mysqlknown)
-//     }
-//     if (laravelid.checked == true) {
-//         checkvalue(laravelid, error6, laravelknown)
-//     }
-//     if (oracleid.checked == true) {
-//         checkvalue(oracleid, error7, oracleknown)
-
-//     }
-//    flag = true
-// }
 
 
 let flag
+
 function validationFun() {
 
     let arr = ["id_firstname", "id_lastname", "id_designation", "id_email", "id_address", "id_contact", "id_city", "id_zipcode", "id_dateofbirth", "id_sscnob", "id_hscnob", "id_sscpassingyear", "id_hscpassingyear", "id_bepassingyear", "id_mepassingyear", "id_sscpercentage", "id_hscpercentage", , "id_bepercentage", "id_mepercentage", "id_becoursename", "id_desg1", "id_desg2", "id_desg3", "id_from1", "id_from2", "id_from3", "id_to1", "id_to2", "id_to3", "id_refContact1", "id_refContact2", "id_refContact3", "id_refrelation1", "id_refrelation2", "id_refrelation3", "id_relationshipstatus", "id_state", "id_companyname1", "id_companyname2", "id_companyname3", "id_refname1", "id_refname2", "id_refname3", "id_mecoursename"];
@@ -637,7 +632,7 @@ function validationFun() {
     arr.forEach(element => {
         
         if (document.querySelector("#" + element).value != "") {
-            let rt = document.querySelector("#" + element).setAttribute("class", "form-control is-valid")
+            let rt = document.querySelector("#" + element).setAttribute("class", "form-control")
 
         }
     });
@@ -646,7 +641,9 @@ function validationFun() {
     for (let i = 0; i < span.length; i++) {
         span[i].remove()
     }
+
   
+
     MainFun(id_firstname)
     MainFun(id_lastname)
     MainFun(id_designation)
@@ -655,18 +652,24 @@ function validationFun() {
     emptyInput(id_address)
     contactFun(id_contact)
     zipcodeFun()
-    // selectInput(id_state)
+    selectInput(id_state)
     dateFun(id_dateofbirth)
     educationDetailFun()
     add2Fun()
     workexpFun()
     refFun()
-    // selectInput(id_relationshipstatus)
-
+    selectInput(id_relationshipstatus)
+    console.log(flag);
     if (flag == false) {
-        console.log(flag, ":::::::::::::");
+      
         return false;
     }
+    else
+    {
+        return true
+    }
+    
+   
 }
 
 

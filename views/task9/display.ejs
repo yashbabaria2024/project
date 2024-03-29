@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
     <link rel="stylesheet" href="/task9/display.css">
     <title>Document</title>
 </head>
-
 
 <body>
 
@@ -35,7 +35,7 @@
     </div>
 
     <div class="search">
-        <form action="/search" method="get">
+        <form action="/idsearch" method="get">
             <label for="search">search Student Id:</label>
             <input type="text" name="stud_id">
             <input type="submit" name="submit" id=""  value="search">
@@ -88,7 +88,7 @@
                 </a></div></div></td>
 
 
-                <td class="header"><div id="ab">Contact<div id="db"> <a href="studdetail/?id=1&orderby=asc&field=contact "><i class="fa fa-sort-asc" aria-hidden="true"></i>
+                <td class="header"><div id="ab">Contact<div id="db"> <a href="/studdetail?id=1&orderby=asc&field=contact "><i class="fa fa-sort-asc" aria-hidden="true"></i>
                 </a><a href="/studdetail?id=1&orderby=desc&field=contact" ><i class="fa fa-sort-desc" aria-hidden="true"></i>
                 </a></div></div></td>
 

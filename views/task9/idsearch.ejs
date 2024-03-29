@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/task9/display.css">
+    <title>Document</title>
+</head>
+<style>
+     .tbl {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 150px;
+        gap: 25px;
+        background-color: rgb(209, 228, 240);
+        color: rgb(153, 46, 46);
+    }
+
+    .tbl h1 {
+        font-size: 22px;
+        margin: 0px;
+    }
+
+    table {
+        background-color: rgb(224, 237, 245);
+        gap: 10px;
+    }
+
+    td {
+        padding: 10px 15px;
+        border: 1px solid rgb(130, 130, 130);
+        border-radius: 5px;
+        text-align: center;
+        color: rgb(153, 46, 46);
+    }
+
+    .header {
+        font-size: 20px;
+        font-weight: 600;
+        padding: 9px;
+        color: rgb(153, 46, 46);
+    }
+
+    .btn
+    {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    #ab
+    {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+   
+</style>
+
+
+<body>
+<div class="tbl">
+    <h1>Student Details</h1>
+    <div class="search">
+        <form action="/idsearch" method="get">
+            <label for="search">search Student Id:</label>
+            <input type="text" name="stud_id">
+            <input type="submit" name="submit" id=""  value="search">
+        </form>
+    </div>
+    <button type="button" class="btn" onclick="hideFun()">Show More</button>
+    <div class="btn"  >
+        <form action="/search" method="get" id="showmenu" style="display: none;" >
+       <label for="firstname">Firstname:</label><input type="text" name="firstname" id="">
+        <label for="address">Address:</label><input type="text" name="address" id="">
+        <label for="branch">Branch:</label><input type="text" name="branch" id="">
+       <select name="operator" id="">
+        <option value="">SELECT</option>
+        <option value="and">AND</option>
+        <option value="or">OR</option>
+       </select>
+       <input type="submit" name="submit" id="" value="search">
+    </form>
+    </div>
+    <table>
+        <td class="header">Student Id</td>
+        <td class="header">First Name</td>
+        <td class="header">Middle Name</td>
+        <td class="header">Last Name</td>
+        <td class="header">Date of Birth</td>
+        <td class="header">Contact</td>
+        <td class="header">Email</td>
+        <td class="header">Branch</td>
+        <td class="header">Blood Group</td>
+        <td class="header">Gender</td>
+        <td class="header">Address</td>
+
+
+
+<% for (let i=0; i< row.length; i++) { %>
+                <tr>
+
+                    <td>
+                        <%= row[i].stud_id %>
+                    </td>
+                    <td>
+                        <%= row[i].firstname %>
+                    </td>
+                    <td>
+                        <%= row[i].mname %>
+                    </td>
+                    <td>
+                        <%= row[i].lastname %>
+                    </td>
+                    <td>
+                        <%= row[i].dob %>
+                    </td>
+                    <td>
+                        <%= row[i].contact %>
+                    </td>
+                    <td>
+                        <%= row[i].email %>
+                    </td>
+                    <td>
+                        <%= row[i].branch %>
+                    </td>
+                    <td>
+                        <%= row[i].bloodgroup %>
+                    </td><td>
+                        <%= row[i].gender %>
+                    </td>
+                    <td>
+                        <%= row[i].address %>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+</div>
+    <script>
+        function hideFun()
+        {
+            let hidemenu = document.getElementById("showmenu");
+            hidemenu.style= 'display:block'
+        }
+    </script>

@@ -670,14 +670,19 @@ educationDetailFun()
 add2Fun()
 workexpFun()
 refFun()
-// selectInput(id_department)
-// selectInput(id_state)
-// selectInput(id_pref_location)
-// selectInput(id_relationshipstatus)
+selectInput(id_department)
+selectInput(id_state)
+selectInput(id_pref_location)
+selectInput(id_relationshipstatus)
 
+// console.log(flag);
     if (flag == false) {
-        console.log(flag, ":::::::::::::");
+        
         return false;
+    }
+    else
+    {
+        return true
     }
 
 }

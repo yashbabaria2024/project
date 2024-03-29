@@ -3,9 +3,9 @@ const router = express.Router()
 const bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({ extended: true })
 
-const {handlelogin,createlogin,handleResetKey,createresetKey, resetpost, resetget } = require('../controller/logincontroller')
+// const {handlelogin,createlogin,handleResetKey,createresetKey, resetpost, resetget } = require('../controller/logincontroller')
 
-const {handleregisterpage,homecontroller,createuser,activelinkcontroller,createactivelink} = require('../controller/regcontroller')
+const {handleregisterpage,homecontroller,createuser,activelinkcontroller,createactivelink,handlelogin,createlogin,resetget,resetpost,handleResetKey,createresetKey} = require('../controller/regcontroller')
 
 router.get('/',homecontroller) 
 

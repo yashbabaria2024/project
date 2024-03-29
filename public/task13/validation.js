@@ -64,7 +64,7 @@ function selectInput(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
-    flag = true
+   
 
 }
 
@@ -168,6 +168,7 @@ function validation()
         span[i].remove()
     }
 
+    flag = true
 
     MainFun(id_firstname)
     MainFun(id_lastname)

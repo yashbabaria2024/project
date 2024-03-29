@@ -1,7 +1,7 @@
 
 const handleDisplay = (req, res) => {
 
-    res.render('display')
+    res.status(200).render('display')
 }
 
 const handleRoute = (req, res) => {
@@ -10,59 +10,66 @@ const handleRoute = (req, res) => {
 
     switch (id) {
         case '1':
-            res.render('task1')
+            res.status(200).render('task1')
             break;
 
         case '2':
-            res.render('task2')
+            res.status(200).render('task2')
             break;
 
         case '3':
-            res.render('task3')
+            res.status(200).render('task3')
             break;
 
         case '4':
-            res.render('task4')
+            res.status(200).render('task4')
             break;
 
         case '5':
-            res.render('task5')
+            res.status(200).render('task5')
             break;
         
         case '6':
-            res.redirect('/dynamicgrid')
+            res.status(200).redirect('/dynamicgrid')
             break;
         case '7':
-            res.redirect('/attendence')
+            res.status(200).redirect('/attendence')
             break;
 
         case '8':
-            res.redirect('/result')
+            res.status(200).redirect('/result')
             break;
 
         case '9':
-            res.redirect('/studdetail')
+            res.status(200).redirect('/studdetail')
             break;
 
         case '10':
-            res.redirect('/delimitersearch')
+            res.status(200).redirect('/delimitersearch')
             break;
 
         case '11':
-            res.redirect('/jobform')
+            res.status(200).redirect('/jobform')
             break;
 
         case '12':
-            res.redirect('/fetchcrud')
+            res.status(200).redirect('/fetchcrud')
             break;
 
         case '13':
-            res.redirect('/')
+            res.status(200).redirect('/')
             break;
-
+            
+         case '14':
+            res.status(200).redirect('/citystate')
+            break; 
+         
+        case '15':
+            res.status(200).redirect('/timeZone')
+            break; 
+            
         default:
-            res.end("end")
-            // res.redirect('/')
+            res.status(204).end("end")
             break;
     }
 }

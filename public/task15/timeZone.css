@@ -1,0 +1,40 @@
+.container {
+    max-width: 1440px;
+}
+
+.form-select {
+    width: 50%;
+}
+
+.card {
+    height: 600px;
+    width: 750px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 25px;
+
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.gap {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.card-subtitle {
+    font-size: 30px;
+}

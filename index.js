@@ -14,7 +14,8 @@ const task9 = require('./router/studdetailrouter')
 const task10 = require('./router/delimiterrouter')
 const task11 = require('./router/crudrouter')
 const task12 = require('./router/fetchcrudrouter')
-
+const task14 = require('./router/ajaxcityrouter')
+const task15 = require('./router/timeZoneRouter')
 app.use(cookieParser())
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
@@ -28,7 +29,8 @@ app.use('/', task9)
 app.use('/', task10)
 app.use('/', task11)
 app.use('/', task12)
-
+app.use('/', task14)
+app.use('/',task15)
 app.use('/', logout)
 
 dotenv.config();

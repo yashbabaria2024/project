@@ -1,7 +1,7 @@
 const {conn} = require('../connection/connection')
 
 const displComponent = (req,res)=>{
-    res.render('task6')
+    res.status(200).render('task6')
 }
 let id
 const postComponent = (req, res)=>{
@@ -18,7 +18,7 @@ const postComponent = (req, res)=>{
             conn.query(`${id}`, (err,row,fields) =>{
           if(err)
           {
-             return res.redirect('/dynamicgrid');
+             return res.status(406).redirect('/dynamicgrid');
           }
           else
           {   
@@ -48,10 +48,10 @@ const postComponent = (req, res)=>{
         conn.query(q, (err,row)=>{
             if(err)
               {
-                 return res.redirect('/dynamicgrid');
+                 return res.status(406).redirect('/dynamicgrid');
               }
               
-              return res.render('task6', {'row':row, 'pid':pid,'col':col,'id':id,'q':q, 'pagefield':pagefield, 'recordset':recordset})
+              return res.status(200).render('task6', {'row':row, 'pid':pid,'col':col,'id':id,'q':q, 'pagefield':pagefield, 'recordset':recordset})
         })
         })
        

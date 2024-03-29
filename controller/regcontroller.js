@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 dotenv.config();
 
 const homecontroller = (req, res) => {
-    res.render('task13/home');
+    res.status(200).render('task13/home');
 }
 
 const createuser = (req, res) => {
@@ -33,18 +33,16 @@ const createuser = (req, res) => {
         return activelink
     }
 
-    let alertmsg = "alert"
-
     let link = activeFun()
-
+    let alert = "alert"
     let query = `insert into employee_details (first_name,last_name,desg,email,contact,gender,relation_status,add1,add2,city,state,zip_code,dob,activelink, activestatus ) values ('${firstname}','${lastname}','${desg}','${email}','${contact}','${gender}','${relationshipstatus}','${address}','${address2}','${city}','${state}','${zipcode}','${dateofbirth}','${link}','deactive') `
 
     conn.query(query, (err) => {
         if (err) {
-            res.render('task13/register', { alertmsg: alertmsg })
+            res.status(404).render('task13/register', {alert:alert});
         }
         else {
-            res.render('task13/thank', { "link": link })
+            res.status(200).render('task13/thank', { "link": link })
         }
     })
 }
@@ -58,10 +56,10 @@ const activelinkcontroller = (req, res) => {
         let currentime = new Date().toTimeString()
         let acivelinktime = new Date(new Date(result[0].employee_registered).getTime() + 500 * 600000000000).toTimeString();
         if (currentime < acivelinktime) {
-            res.render('task13/password')
+            res.status(200).render('task13/password')
         }
         else {
-            res.send("Your Link Expired")
+            res.status(408).send("Your Link is Expired");
         }
     })
 }
@@ -92,22 +90,22 @@ const createactivelink = (req, res) => {
     // console.log(query);
     conn.query(query, (err) => {
         if (err) throw err
-        res.redirect('/login')
+        res.status(302).redirect('/login')
     })
 
 }
 
 const handleregisterpage =  (req, res) => {
-    res.render('task13/register');
+    res.status(200).render('task13/register');
 }
 
 function createToken(email){
-    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY)
+    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY,{expiresIn: "10s"})
        return Token
  }
 
 const handlelogin =  (req, res) => {
-    res.render('task13/login')
+    res.status(200).render('task13/login')
 }
 
 const createlogin = (req, res) => {
@@ -124,33 +122,32 @@ const createlogin = (req, res) => {
 
           let token = createToken(req.body.email)  
          res.cookie("access_token", token, {
-             expires:new Date(Date.now() + 60000000000),
              httpOnly: true
          })
              res.status(200).redirect('/displ')
              
          }
          else {
-             res.render('task13/login',{fail:fail})
+             res.status(401).render('task13/login',{fail:fail})
          }
      })
  });
 }
 
 const resetget = (req, res) => {
-    res.render('task13/resetpsw')
+    res.status(202).render('task13/resetpsw')
 }
 
 const resetpost = (req, res) => {
-
+let alert = "alert"
     conn.query(`select count(*) as count, resetkey from employee_details where email = '${req.body.emailreset}'`, (err, row) => {
         if (err) throw err;
 
         if (row[0].count == 1) {
-            res.redirect(`/reset/${row[0].resetkey}`)
+            res.status(202).redirect(`/reset/${row[0].resetkey}`)
         }
         else {
-            res.send("Email id does not exist")
+            res.status(404).render('task13/resetpsw',{alert:alert})
         }
 
     })
@@ -158,7 +155,7 @@ const resetpost = (req, res) => {
 
 const handleResetKey = (req, res) => {
     req.params.resetkey
-    res.render('task13/password')
+    res.status(202).render('task13/password')
 }
 
 const createresetKey =  (req, res) => {
@@ -187,7 +184,7 @@ const createresetKey =  (req, res) => {
     // console.log(query);
     conn.query(query, (err) => {
         if (err) throw err
-        res.redirect('/login')
+        res.status(200).redirect('/login')
     })
 }
 

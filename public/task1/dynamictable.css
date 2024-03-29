@@ -1,4 +1,4 @@
-body
+/* body
 {
     background-color: rgb(232, 250, 215);
 }
@@ -13,7 +13,7 @@ body
     color: gray;
     font-size: 18px;
     text-align: center;
-}
+} */
 
 tr:nth-child(odd) td:nth-child(odd)
 {

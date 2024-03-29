@@ -26,10 +26,25 @@ const createlogin = (req, res) => {
          if (row[0].count == 1) {
 
           let token = createToken(req.body.email)  
-         res.cookie("access_token", token, {
-             expires:new Date(Date.now() + 60000),
-             httpOnly: true
-         })
+
+        //   function createCookie(name,value,minutes) {
+        //     if (minutes) {
+        //         var date = new Date();
+        //         date.setTime(date.getTime()+(minutes*60*1000));
+        //         var expires = "; expires="+date.toGMTString();
+        //     } else {
+        //         var expires = "";
+        //     }
+        //     document.cookie = name+"="+value+expires+"; path=/";
+        // }
+        
+        // createCookie("name", "value", 5)
+
+        // var date = new Date().toString;
+        // console.log(date);
+        // date.setTime(date.getTime() + (60 * 1000));
+
+         res.cookie("access_token", token, { maxAge:9000 } )
              res.status(200).redirect('/displ')
              
          }

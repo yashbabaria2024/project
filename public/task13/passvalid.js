@@ -1,14 +1,14 @@
-function passwordFun(id,id2) {
-    
-   let psw = document.getElementById(`${id.id}`).value
-     let cpsw = document.getElementById(`${id2.id}`).value
+function passwordFun(id, id2) {
+
+    let psw = document.getElementById(`${id.id}`).value
+    let cpsw = document.getElementById(`${id2.id}`).value
 
 
-    if (psw.length < 8  ) {
+    if (psw.length < 8) {
         let error = document.createElement("span");
         error.setAttribute("class", "invalid-feedback");
         error.setAttribute("id", "remove")
-        error.textContent = "Your Password Length should be 8 " 
+        error.textContent = "Your Password Length should be 8 "
         document.getElementById(`${id.id}`).setAttribute("class", "form-control is-invalid")
         document.getElementById(`${id2.id}`).setAttribute("class", "form-control is-invalid")
         document.getElementById(`${id2.id}`).after(error);
@@ -23,10 +23,9 @@ function passwordFun(id,id2) {
         document.getElementById(`${id2.id}`).setAttribute("class", "form-control is-invalid")
         document.getElementById(`${id.id}`).setAttribute("class", "form-control is-invalid")
         document.getElementById(`${id2.id}`).after(error);
-       flag = false
+        flag = false
     }
-    else
-    {
+    else {
         flag = true
     }
 }
@@ -35,12 +34,11 @@ function passwordFun(id,id2) {
 
 
 let flag
-function valid()
-{
- 
-    arr = ["id_password","id_cpassword"]
+function valid() {
+
+    arr = ["id_password", "id_cpassword"]
     arr.forEach(element => {
-        
+
         if (document.querySelector("#" + element).value != "") {
             let rt = document.querySelector("#" + element).setAttribute("class", "form-control is-valid")
 
@@ -53,12 +51,11 @@ function valid()
         span[i].remove()
     }
 
-    passwordFun(id_password,id_cpassword);
-    
-    if(flag == false)
-    {
+    passwordFun(id_password, id_cpassword);
+
+    if (flag == false) {
         console.log(false);
-        return false 
+        return false
     }
 }
 

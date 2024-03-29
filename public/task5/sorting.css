@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: antiquewhite;
 }
 
@@ -11,7 +11,7 @@ body {
     color: gray;
     font-size: 18px;
     text-align: center;
-}
+} */
 
 #div1 {
     display: flex;
