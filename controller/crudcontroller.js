@@ -113,6 +113,7 @@ const createJobFormData = (req, res) => {
             }
 
             let lang = req.body.lang
+            
             for (let i = 0; i < lang.length; i++) {
                 if (lang[i] != "") {
                     let read = req.body["read_" + lang[i]]

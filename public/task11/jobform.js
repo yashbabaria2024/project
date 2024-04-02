@@ -394,12 +394,12 @@ function checkvalue(lang, error, name) {
             }
             else {
                 error.innerHTML = " "
-                flag = true
             }
         })
     }
-
 }
+
+
 
 function refFun() {
 
@@ -457,183 +457,6 @@ function refFun() {
 
 
 
-
-
-
-// function techknown() {
-//     document.querySelector('#id_PHP').addEventListener("change", () => {
-//         event.currentTarget.checked
-
-//         if (event.currentTarget.checked) {
-//             document.querySelector("#id_BeginerPHP").disabled = false;
-//             document.querySelector("#id_MideatorPHP").disabled = false;
-//             document.querySelector("#id_ExpertPHP").disabled = false;
-//         }
-//         else {
-//             document.querySelector("#id_BeginerPHP").disabled = true;
-//             document.querySelector("#id_MideatorPHP").disabled = true;
-//             document.querySelector("#id_ExpertPHP").disabled = true;
-//             document.querySelector("#id_BeginerPHP").checked = false
-//             document.querySelector("#id_MideatorPHP").checked = false
-//             document.querySelector("#id_ExpertPHP").checked = false
-//         }
-//     })
-
-//     document.querySelector('#id_Mysql').addEventListener("change", () => {
-//         event.currentTarget.checked
-
-//         if (event.currentTarget.checked) {
-//             document.querySelector("#id_BeginerMysql").disabled = false;
-//             document.querySelector("#id_MideatorMysql").disabled = false;
-//             document.querySelector("#id_ExpertMysql").disabled = false;
-//         }
-//         else {
-//             document.querySelector("#id_BeginerMysql").disabled = true;
-//             document.querySelector("#id_MideatorMysql").disabled = true;
-//             document.querySelector("#id_ExpertMysql").disabled = true;
-//             document.querySelector("#id_BeginerMysql").checked = false
-//             document.querySelector("#id_MideatorMysql").checked = false
-//             document.querySelector("#id_ExpertMysql").checked = false
-//         }
-//     })
-
-//     document.querySelector('#id_laravel').addEventListener("change", () => {
-//         event.currentTarget.checked
-
-//         if (event.currentTarget.checked) {
-//             document.querySelector("#id_BeginerLaravel").disabled = false;
-//             document.querySelector("#id_MideatorLaravel").disabled = false;
-//             document.querySelector("#id_ExpertLaravel").disabled = false;
-//         }
-//         else {
-//             document.querySelector("#id_BeginerLaravel").disabled = true;
-//             document.querySelector("#id_MideatorLaravel").disabled = true;
-//             document.querySelector("#id_ExpertLaravel").disabled = true;
-//             document.querySelector("#id_BeginerLaravel").checked = false
-//             document.querySelector("#id_MideatorLaravel").checked = false
-//             document.querySelector("#id_ExpertLaravel").checked = false
-//         }
-//     })
-
-//     document.querySelector('#id_Oracle').addEventListener("change", () => {
-//         event.currentTarget.checked
-
-//         if (event.currentTarget.checked) {
-//             document.querySelector("#id_BeginerOracle").disabled = false;
-//             document.querySelector("#id_MideatorOracle").disabled = false;
-//             document.querySelector("#id_ExpertOracle").disabled = false;
-//         }
-//         else {
-//             document.querySelector("#id_BeginerOracle").disabled = true;
-//             document.querySelector("#id_MideatorOracle").disabled = true;
-//             document.querySelector("#id_ExpertOracle").disabled = true;
-//             document.querySelector("#id_BeginerOracle").checked = false
-//             document.querySelector("#id_MideatorOracle").checked = false
-//             document.querySelector("#id_ExpertOracle").checked = false
-//         }
-//     })
-// }
-
-// techknown()
-
-
-
-
-
-
-
-function add2Fun() {
-    let add2 = document.getElementById("id_address2").value
-    if (add2 != "") {
-        document.getElementById("id_address2").setAttribute("class", "form-control is-valid")
-    }
-}
-
-function lang() {
-    let langhindi = document.querySelectorAll('.langknownhindi')
-   
-    let langguj = document.querySelectorAll('.langknownguj')
-    let langeng = document.querySelectorAll('.langknownenglish')
-    let hindiid = document.getElementById('id_hindi')
-    let engid = document.getElementById('id_english')
-    let gujid = document.getElementById('id_gujarati')
-
- const a = () => langhindi.forEach(ele => {
-        if(ele.checked == true && hindiid.checked == true)
-        {langvalid()}
-        return true
-    });
-
-    const b = () => langguj.forEach(ele => {
-        if(ele.checked == true && gujid.checked == true)
-      {langvalid()}
-      return true
-    });
-
-    const c = () =>  langeng.forEach(ele => {
-        if(ele.checked == true && engid.checked == true)
-        {langvalid()}
-        return true
-        });
-
-  
-   return false
-}
-
-function langvalid() {
-
-    let hindiid = document.getElementById('id_hindi')
-    let hindiknown = document.querySelectorAll('.langknownhindi')
-    let engid = document.getElementById('id_english')
-    let engknown = document.querySelectorAll('.langknownenglish')
-    let gujid = document.getElementById('id_gujarati')
-    let gujknown = document.querySelectorAll('.langknownguj')
-   
-    let error1 = document.getElementById("id_language1")
-    let error2 = document.getElementById("id_language2")
-    let error3 = document.getElementById("id_language3")
-
-    let phpid = document.getElementById('id_PHP')
-    let phpknown = document.getElementsByName('php[]')
-    let mysqlid = document.getElementById('id_Mysql')
-    let mysqlknown = document.getElementsByName('mysql[]')
-    let laravelid = document.getElementById('id_laravel')
-    let laravelknown = document.getElementsByName('laravel[]')
-    let oracleid = document.getElementById('id_Oracle')
-    let oracleknown = document.getElementsByName('oracle[]')
-    let error4 = document.getElementById("id_tech1")
-    let error5 = document.getElementById("id_tech2")
-    let error6 = document.getElementById("id_tech3")
-    let error7 = document.getElementById("id_tech4")
-
-
-    if (hindiid.checked == true) {
-        checkvalue(hindiid, error1, hindiknown)
-
-    }
-    if (gujid.checked == true) {
-        checkvalue(gujid, error3, gujknown)
-    }
-    if (engid.checked == true) {
-        checkvalue(engid, error2, engknown)
-    }
-    if (phpid.checked == true) {
-        checkvalue(phpid, error4, phpknown)
-    }
-    if (mysqlid.checked == true) {
-        checkvalue(mysqlid, error5, mysqlknown)
-    }
-    if (laravelid.checked == true) {
-        checkvalue(laravelid, error6, laravelknown)
-    }
-    if (oracleid.checked == true) {
-        checkvalue(oracleid, error7, oracleknown)
-
-    }
-   return true
-}
-
-
 let flag
 function validationFun() {
 
@@ -652,8 +475,8 @@ for (let i = 0; i < span.length; i++) {
     span[i].remove()
 }
 
+flag = true;
 
-// lang()
 MainFun(id_firstname)
 MainFun(id_lastname)
 MainFun(id_designation)
