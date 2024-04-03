@@ -30,7 +30,7 @@ const result = (req, res) => {
    from result_master inner join student_detail on result_master.stud_id = student_detail.stud_id group by result_master.stud_id limit ${currentPage},${pagefield}`, (err, row) => {
         if (err) throw err;
 
-        res.status(200).render('task8/result', { 'row': row, 'id': id })
+        res.status(200).render('resultgrid/result', { 'row': row, 'id': id })
     })
 }
 
@@ -43,7 +43,7 @@ const resultView = (req, res) => {
     inner join student_detail on result_master.stud_id = student_detail.stud_id 
     where result_master.stud_id = ${sid}`, (err, row) => {
         if (err) throw err
-        res.status(200).render('task8/gen', { 'row': row, 'sid': sid })
+        res.status(200).render('resultgrid/gen', { 'row': row, 'sid': sid })
     })
 }
 

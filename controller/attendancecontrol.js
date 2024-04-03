@@ -16,7 +16,7 @@ const attendancecontrol = (req, res) => {
 
     conn.query(`select student_detail.stud_id ,firstname,lastname,count(student_detail.stud_id) as present, concat(round((count(*)/30 * 100),2), '%') as percentage from student_detail inner join attend_detail  on student_detail.stud_id = attend_detail.stud_id where  month(attend_date) = ${month} and attend_type= 'present' group by student_detail.stud_id limit  ${currentpage}, ${pagefield} `, (err, row) => {
         if (err) throw err;
-        res.status(200).render('task7', { 'row': row, "month": month })
+        res.status(200).render('attendancegrid', { 'row': row, "month": month })
     });
 }
 

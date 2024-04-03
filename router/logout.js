@@ -3,5 +3,5 @@ const router = express.Router()
 const authorization = require('../middleware/authentication')
 const {logout} = require('../controller/logoutcontroller')
 
-router.get('/logout', authorization.authorization,logout)
+router.get('/logout', logout)
 module.exports = router

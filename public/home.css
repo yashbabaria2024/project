@@ -1,0 +1,49 @@
+
+* {
+     box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Albert Sans", sans-serif;
+    margin: 0px;
+    padding: 0px;
+    }
+
+.container
+{
+    padding: 3px;
+    margin: 0 auto;
+    max-width: 1440px;      
+}
+
+.center-content
+{
+   padding: 50px; 
+}
+
+.box-grid
+{
+    display: flex;
+    padding: 50px;
+    text-align: center;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.box
+{
+    padding: 25px;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 180px;
+    border: 1px solid black;
+}
+
+.box a 
+{
+    text-decoration: none;
+    color: black;
+}
+

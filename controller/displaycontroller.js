@@ -10,23 +10,23 @@ const handleRoute = (req, res) => {
 
     switch (id) {
         case '1':
-            res.status(200).render('task1')
+            res.status(200).render('dynamictable')
             break;
 
         case '2':
-            res.status(200).render('task2')
+            res.status(200).render('kukucube')
             break;
 
         case '3':
-            res.status(200).render('task3')
+            res.status(200).render('domtable')
             break;
 
         case '4':
-            res.status(200).render('task4')
+            res.status(200).render('tictac')
             break;
 
         case '5':
-            res.status(200).render('task5')
+            res.status(200).render('sorting')
             break;
         
         case '6':

@@ -1,3 +1,100 @@
+document.getElementById('edudetail').style.display = "none"
+document.getElementById('langknown').style.display = "none"
+document.getElementById('techknown').style.display = "none"
+document.getElementById('refdetail').style.display = "none"
+document.getElementById('prefdetail').style.display = "none"
+document.getElementById('expdetail').style.display = "none"
+
+let count = 0;
+
+function next() {
+    let flag = validationFun()
+
+    if (flag != false) {
+        count++
+       switch (count) {
+            case 0:
+                document.getElementById('edudetail').style.display = "none"
+                document.getElementById('basicdetail').style.display = "block"
+                break;
+
+            case 1:
+                document.getElementById('basicdetail').style.display = "none"
+                document.getElementById('edudetail').style.display = "block"
+                break;
+
+            case 2:
+                document.getElementById('edudetail').style.display = "none"
+                document.getElementById('expdetail').style.display = "block"
+                break;
+
+            case 3:
+                document.getElementById('expdetail').style.display = "none"
+                document.getElementById('langknown').style.display = "block"
+                break;
+            case 4:
+                document.getElementById('langknown').style.display = "none"
+                document.getElementById('techknown').style.display = "block"
+                break;
+
+            case 5:
+                document.getElementById('techknown').style.display = "none"
+                document.getElementById('refdetail').style.display = "block"
+                break;
+
+            case 6:
+                document.getElementById('refdetail').style.display = "none"
+                document.getElementById('prefdetail').style.display = "block"
+                break;
+        }
+       
+    }
+}
+
+function prev() {
+    let flag = validationFun()
+
+    if (flag != false) {
+        count--
+        switch (count) {
+            case 0:
+                console.log(count);
+                document.getElementById('edudetail').style.display = "none"
+                document.getElementById('basicdetail').style.display = "block"
+                break;
+
+            case 1:
+                console.log(count);
+                document.getElementById('expdetail').style.display = "none"
+                document.getElementById('edudetail').style.display = "block"
+                break;
+
+            case 2:
+                console.log(count);
+                document.getElementById('langknown').style.display = "none"
+                document.getElementById('expdetail').style.display = "block"
+                break;
+            case 3:
+
+                document.getElementById('techknown').style.display = "none"
+                document.getElementById('langknown').style.display = "block"
+                break;
+
+            case 4:
+                document.getElementById('refdetail').style.display = "none"
+                document.getElementById('techknown').style.display = "block"
+                break;
+
+            case 5:
+                document.getElementById('prefdetail').style.display = "none"
+                document.getElementById('refdetail').style.display = "block"
+                break;
+        }
+        
+    }
+}
+
+
 function MainFun(id) {
     let nm = document.getElementById(`${id.id}`).value
     var regex = /^[a-zA-Z ]{2,30}$/
@@ -21,6 +118,11 @@ function MainFun(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
+    else
+    {
+        flag = true
+    }
+  
 }
 
 function contactFun(id) {
@@ -79,7 +181,7 @@ function selectInput(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
-   
+
 }
 
 
@@ -380,26 +482,6 @@ function workexpFun() {
 }
 
 
-function checkvalue(lang, error, name) {
-    let arr = []
-    if (lang.checked) {
-        name.forEach(element => {
-
-            if (element.checked) {
-                arr.push(element)
-            }
-            if (arr.length === 0) {
-                error.innerHTML = "Please select any one skill"
-                flag = false
-            }
-            else {
-                error.innerHTML = " "
-            }
-        })
-    }
-}
-
-
 
 function refFun() {
 
@@ -457,57 +539,133 @@ function refFun() {
 
 
 
-let flag
-function validationFun() {
 
-let arr = ["id_firstname", "id_lastname", "id_currentCTC", "id_expecedCTC", "id_designation", "id_email", "id_address", "id_contact", "id_city", "id_zipcode", "id_dateofbirth", "id_sscnob", "id_hscnob", "id_sscpassingyear", "id_hscpassingyear", "id_bepassingyear", "id_mepassingyear", "id_sscpercentage", "id_hscpercentage", , "id_bepercentage", "id_mepercentage", "id_becoursename", "id_desg1", "id_desg2", "id_desg3", "id_from1", "id_from2", "id_from3", "id_to1", "id_to2", "id_to3", "id_refContact1", "id_refContact2", "id_refContact3", "id_refrelation1", "id_refrelation2", "id_refrelation3", "id_noticeperiod", "id_department", "id_pref_location", "id_relationshipstatus", "id_state", "id_companyname1", "id_companyname2", "id_companyname3", "id_refname1", "id_refname2", "id_refname3", "id_mecoursename"];
-   
-arr.forEach(element => {
-   
-    if (document.querySelector("#" + element).value != "" ) {
-        let rt = document.querySelector("#" + element).setAttribute("class", "form-control is-valid")
+function checkvalue(lang, error, name) {
+    let arr = []
+    if (lang.checked) {
+        name.forEach(element => {
 
+            if (element.checked) {
+                arr.push(element)
+            }
+            if (arr.length === 0) {
+                error.innerHTML = "Please select any one skill"
+            }
+            else {
+                error.innerHTML = " "
+            }
+        })
     }
-});
-
-let span = document.querySelectorAll('span')
-for (let i = 0; i < span.length; i++) {
-    span[i].remove()
+    if(flag != false)
+    {
+        flag = true
+    }
+   
 }
 
-flag = true;
+function checklang(name, error, lang) {
+    let arr = []
+ 
+    name.forEach(element => {
+        if (element.checked) {
+           
+            if (!lang.checked)
+           {
+            error.innerHTML = "Please select skill"
+            flag = false
+           }
+           else {
+            error.innerHTML = " " 
+            flag = true   
+        }
+        } 
+    })
+    if(flag != false)
+    {
+        flag = true
+    }   
+}
 
-MainFun(id_firstname)
-MainFun(id_lastname)
-MainFun(id_designation)
-MainFun(id_city)
-emailFun(id_email)
-emptyInput(id_address)
-emptyInput(id_currentCTC)
-emptyInput(id_expecedCTC)
-emptyInput(id_noticeperiod)
-contactFun(id_contact)
-zipcodeFun()
-dateFun(id_dateofbirth)
-educationDetailFun()
-add2Fun()
-workexpFun()
-refFun()
-selectInput(id_department)
-selectInput(id_state)
-selectInput(id_pref_location)
-selectInput(id_relationshipstatus)
 
-// console.log(flag);
-    if (flag == false) {
+let flag
+const error1 = document.getElementById('id_language1')
+const error2 = document.getElementById('id_language2')
+const error3 = document.getElementById('id_language3')
+const error4 = document.getElementById('id_tech1')
+const error5 = document.getElementById('id_tech2')
+const error6 = document.getElementById('id_tech3')
+const error7 = document.getElementById('id_tech4')
+const language = document.querySelectorAll('.language')
+const englishknown = document.querySelectorAll('.langknownenglish')
+const gujknown = document.querySelectorAll('.langknownguj')
+const hindiknown = document.querySelectorAll('.langknownhindi')
+const phpknown = document.getElementsByName('php')
+const mysqlknown = document.getElementsByName('mysql')
+const oracleknown = document.getElementsByName('oracle')
+const laravelknown = document.getElementsByName('laravel')
+
+let tech = document.querySelectorAll('.tech_valid')
+
+function validationFun() {
+
+    let arr = ["id_firstname", "id_lastname", "id_designation", "id_email", "id_address", "id_contact", "id_city", "id_zipcode", "id_dateofbirth", "id_sscnob", "id_hscnob", "id_sscpassingyear", "id_hscpassingyear", "id_bepassingyear", "id_mepassingyear", "id_sscpercentage", "id_hscpercentage", , "id_bepercentage", "id_mepercentage", "id_becoursename", "id_desg1", "id_desg2", "id_desg3", "id_from1", "id_from2", "id_from3", "id_to1", "id_to2", "id_to3", "id_refContact1", "id_refContact2", "id_refContact3", "id_refrelation1", "id_refrelation2", "id_refrelation3", "id_relationshipstatus", "id_state", "id_companyname1", "id_companyname2", "id_companyname3", "id_refname1", "id_refname2", "id_refname3", "id_mecoursename"];
+
+    arr.forEach(element => {
         
+        if (document.querySelector("#" + element).value != "") {
+            let rt = document.querySelector("#" + element).setAttribute("class", "form-control")
+
+        }
+    });
+
+    let span = document.querySelectorAll('span')
+    for (let i = 0; i < span.length; i++) {
+        span[i].remove()
+    }
+
+  flag = true
+
+    MainFun(id_firstname)
+    MainFun(id_lastname)
+    MainFun(id_designation)
+    MainFun(id_city)
+    emailFun(id_email)
+    emptyInput(id_address)
+    contactFun(id_contact)
+    zipcodeFun()
+    selectInput(id_state)
+    dateFun(id_dateofbirth)
+    educationDetailFun()
+    workexpFun()
+    refFun()
+    selectInput(id_relationshipstatus)
+    checkvalue(language[0],error1,hindiknown)
+    checkvalue(language[1],error2,englishknown)
+    checkvalue(language[2],error3,gujknown)
+    checkvalue(tech[0],error4,phpknown)
+    checkvalue(tech[1],error5,mysqlknown)
+    checkvalue(tech[2],error6,oracleknown)
+    checkvalue(tech[3],error7,laravelknown)
+    checklang(hindiknown,error1,language[0])
+    checklang(englishknown,error2,language[1])
+    checklang(gujknown,error3,language[2])
+    checklang(phpknown,error4,tech[0])
+    checklang(mysqlknown,error5,tech[1])
+    checklang(oracleknown,error6,tech[2])
+    checklang(laravelknown,error7,tech[3])
+
+    console.log(flag);
+
+    if (flag == false) {
+      
         return false;
     }
     else
     {
         return true
     }
-
+    
+   
 }
 
 
@@ -516,6 +674,6 @@ selectInput(id_relationshipstatus)
 
 
 
- 
+
 
 

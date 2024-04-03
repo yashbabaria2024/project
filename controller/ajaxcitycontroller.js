@@ -4,7 +4,7 @@ const {conn} = require('../connection/connection')
 
 
 const handlecitystate = (req,res)=>{
-    res.status(200).render('task14') 
+    res.status(200).render('citystatecombo') 
 }
 
 const handlestate = (req,res)=>{

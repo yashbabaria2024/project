@@ -10,7 +10,7 @@ function createToken(email){
  }
 
 const handlelogin =  (req, res) => {
-    res.render('task13/login')
+    res.render('registration/login')
 }
 
 const createlogin = (req, res) => {
@@ -34,14 +34,14 @@ const createlogin = (req, res) => {
              
          }
          else {
-             res.render('task13/login',{fail:fail})
+             res.render('registration/login',{fail:fail})
          }
      })
  });
 }
 
 const resetget = (req, res) => {
-    res.render('task13/resetpsw')
+    res.render('registration/resetpsw')
 }
 
 const resetpost = (req, res) => {
@@ -61,7 +61,7 @@ const resetpost = (req, res) => {
 
 const handleResetKey = (req, res) => {
     req.params.resetkey
-    res.render('task13/password')
+    res.render('registration/password')
 }
 
 const createresetKey =  (req, res) => {

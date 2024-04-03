@@ -1,7 +1,7 @@
 const {conn} = require('../connection/connection')
 
 const displComponent = (req,res)=>{
-    res.status(200).render('task6')
+    res.status(200).render('dynamicgrid')
 }
 let id
 const postComponent = (req, res)=>{
@@ -51,7 +51,7 @@ const postComponent = (req, res)=>{
                  return res.status(406).redirect('/dynamicgrid');
               }
               
-              return res.status(200).render('task6', {'row':row, 'pid':pid,'col':col,'id':id,'q':q, 'pagefield':pagefield, 'recordset':recordset})
+              return res.status(200).render('dynamicgrid', {'row':row, 'pid':pid,'col':col,'id':id,'q':q, 'pagefield':pagefield, 'recordset':recordset})
         })
         })
        

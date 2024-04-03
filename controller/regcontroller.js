@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 dotenv.config();
 
 const homecontroller = (req, res) => {
-    res.status(200).render('task13/home');
+    res.status(200).render('registration/home');
 }
 
 const createuser = (req, res) => {
@@ -39,10 +39,10 @@ const createuser = (req, res) => {
 
     conn.query(query, (err) => {
         if (err) {
-            res.status(404).render('task13/register', {alert:alert});
+            res.status(404).render('registration/register', {alert:alert});
         }
         else {
-            res.status(200).render('task13/thank', { "link": link })
+            res.status(200).render('registration/thank', { "link": link })
         }
     })
 }
@@ -56,7 +56,7 @@ const activelinkcontroller = (req, res) => {
         let currentime = new Date().toTimeString()
         let acivelinktime = new Date(new Date(result[0].employee_registered).getTime() + 500 * 600000000000).toTimeString();
         if (currentime < acivelinktime) {
-            res.status(200).render('task13/password')
+            res.status(200).render('registration/password')
         }
         else {
             res.status(408).send("Your Link is Expired");
@@ -96,7 +96,7 @@ const createactivelink = (req, res) => {
 }
 
 const handleregisterpage =  (req, res) => {
-    res.status(200).render('task13/register');
+    res.status(200).render('registration/register');
 }
 
 function createToken(email){
@@ -105,7 +105,7 @@ function createToken(email){
  }
 
 const handlelogin =  (req, res) => {
-    res.status(200).render('task13/login')
+    res.status(200).render('registration/login')
 }
 
 const createlogin = (req, res) => {
@@ -128,14 +128,14 @@ const createlogin = (req, res) => {
              
          }
          else {
-             res.status(401).render('task13/login',{fail:fail})
+             res.status(401).render('registration/login',{fail:fail})
          }
      })
  });
 }
 
 const resetget = (req, res) => {
-    res.status(202).render('task13/resetpsw')
+    res.status(202).render('registration/resetpsw')
 }
 
 const resetpost = (req, res) => {
@@ -147,7 +147,7 @@ let alert = "alert"
             res.status(202).redirect(`/reset/${row[0].resetkey}`)
         }
         else {
-            res.status(404).render('task13/resetpsw',{alert:alert})
+            res.status(404).render('registration/resetpsw',{alert:alert})
         }
 
     })
@@ -155,7 +155,7 @@ let alert = "alert"
 
 const handleResetKey = (req, res) => {
     req.params.resetkey
-    res.status(202).render('task13/password')
+    res.status(202).render('registration/password')
 }
 
 const createresetKey =  (req, res) => {

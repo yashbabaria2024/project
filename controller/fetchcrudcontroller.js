@@ -3,7 +3,7 @@ const {conn} = require('../connection/connection')
 
 
 const handlefetchCrud = (req, res) => {
-   res.status(200).render('task12');
+   res.status(200).render('fetchcrud');
 }
 
 const handleBasicDetail =  (req, res) => {
@@ -76,7 +76,7 @@ const handletechdetail =  (req, res) => {
 
 const handleuser =  (req, res) => {
     id = req.params.id;
- res.status(200).render('task12')
+ res.status(200).render('fetchcrud')
 }
 
 const createuser = (req, res) => {

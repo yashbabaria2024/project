@@ -239,7 +239,7 @@
             <table>
                 <tr>
                     <input type="text" name="lang_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input" name="lang" id="id_hindi" value="hindi"><label
+                    <td><input type="checkbox" class="form-check-input language" name="language" id="id_hindi" value="hindi"><label
                             for="id_hindi"> Hindi </label>
                     </td>
                     <td><input type="checkbox" class="langknownhindi form-check-input" name="read_hindi"
@@ -251,12 +251,14 @@
                     <td><input type="checkbox" class="langknownhindi form-check-input" name="speak_hindi"
                             id="id_speakhindi" value="1"><label for="id_speakhindi">Speak
                     </td>
-
+                    <td>
+                        <p id="id_language1" style="color: red;"></p>
+                    </td>
                 </tr>
 
                 <tr>
                     <input type="text" name="lang_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input" name="lang" id="id_english"
+                    <td><input type="checkbox" class="form-check-input language" name="language" id="id_english"
                             value="english"><label for="id_english">English</label>
                     </td>
                     <td><input type="checkbox" class="langknownenglish form-check-input " name="read_english"
@@ -268,11 +270,13 @@
                     <td><input type="checkbox" class="langknownenglish form-check-input " name="speak_english"
                             id="id_speakenglish" value="1"><label for="id_speakenglish">Speak</label>
                     </td>
-
+                    <td>
+                        <p id="id_language2" style="color: red;"></p>
+                    </td>
                 </tr>
                 <tr>
                     <input type="text" name="lang_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input" name="lang" id="id_gujarati"
+                    <td><input type="checkbox" class="form-check-input language" name="language" id="id_gujarati"
                             value="gujarati"><label for="id_gujarati">Gujarati</label>
                     </td>
                     <td><input type="checkbox" class="form-check-input langknownguj" name="read_gujarati"
@@ -284,7 +288,9 @@
                     <td><input type="checkbox" class="form-check-input" name="speak_gujarati" id="id_speakgujarati"
                             value="1"><label for="id_speakgujarati">Speak</label>
                     </td>
-
+                    <td>
+                        <p id="id_language3" style="color: red;"></p>
+                    </td>
                 </tr>
             </table>
             <a class="btn btn-primary" onclick="prev()">Prev </a>
@@ -295,7 +301,7 @@
             <table>
                 <tr>
                     <input type="text" name="tech_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input" name="techlang" id="id_PHP" value="php"><label
+                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_PHP" value="php"><label
                             for="id_PHP">PHP</label>
                     </td>
                     <td><input type="radio" class="form-check-input" name="php" id="id_BeginerPHP"
@@ -306,11 +312,14 @@
                     <td><input type="radio" class="form-check-input" name="php" id="id_ExpertPHP" value="Expert"><label
                             for="id_ExpertPHP">Expert</label>
                     </td>
+                    <td>
+                        <p id="id_tech1" style="color: red;"></p>
+                    </td>
 
                 </tr>
                 <tr>
                     <input type="text" name="tech_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input" name="techlang" id="id_Mysql"
+                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_Mysql"
                             value="mysql"><label for="id_Mysql">Mysql</label>
                     </td>
                     <td><input type="radio" class="form-check-input" name="mysql" id="id_BeginerMysql"
@@ -321,11 +330,14 @@
                     <td><input type="radio" class="form-check-input" name="mysql" id="id_ExpertMysql"
                             value="Expert"><label for="id_ExpertMysql">Expert</label>
                     </td>
+                    <td>
+                        <p id="id_tech2" style="color: red;"></p>
+                    </td>
 
                 </tr>
                 <tr>
                     <input type="text" name="tech_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input" name="techlang" id="id_Oracle"
+                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_Oracle"
                             value="oracle"><label for="id_Oracle">Oracle</label>
                     </td>
                     <td><input type="radio" class="form-check-input" name="oracle" id="id_BeginerOracle"
@@ -336,11 +348,13 @@
                     <td><input type="radio" class="form-check-input" name="oracle" id="id_ExpertOracle"
                             value="Expert"><label for="id_ExpertOracle">Expert</label>
                     </td>
-
+                    <td>
+                        <p id="id_tech3" style="color: red;"></p>
+                    </td>
                 </tr>
                 <tr>
                     <input type="text" name="tech_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input" name="techlang" id="id_laravel"
+                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_laravel"
                             value="laravel"><label for="id_laravel">Laravel</label>
                     </td>
                     <td><input type="radio" class="form-check-input" name="laravel" id="id_BeginerLaravel"
@@ -350,6 +364,9 @@
                             value="Mideator"> <label for="id_MideatorLaravel">Mideator</label></td>
                     <td><input type="radio" class="form-check-input" name="laravel" id="id_ExpertLaravel"
                             value="Expert"><label for="id_ExpertLaravel">Expert</label>
+                    </td>
+                    <td>
+                        <p id="id_tech4" style="color: red;"></p>
                     </td>
                 </tr>
             </table>
@@ -444,9 +461,9 @@
 
     </form>
     </div>
-    <script src="/task12/validation.js"></script>
-    <script src="/task12/page.js"></script>
-    <script src="/task12/fetchdata.js"></script>
+    <script src="/fetchcrud/validation.js"></script>
+    <script src="/fetchcrud/page.js"></script>
+    <script src="/fetchcrud/fetchdata.js"></script>
 
     <script>
 

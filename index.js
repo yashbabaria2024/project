@@ -1,36 +1,38 @@
 const express = require('express')
-const app = express()
 var cookieParser = require('cookie-parser')
 const bodyParser = require("body-parser");
-app.use(bodyParser.json())
+
 const dotenv = require('dotenv');
 const login = require('./router/regrouter')
 const logout = require('./router/logout')
 const display = require('./router/displayrouter')
-const task6 = require('./router/dynamicgrid');
-const task7 = require('./router/attendrouter')
-const task8 = require('./router/resultrouter')
-const task9 = require('./router/studdetailrouter')
-const task10 = require('./router/delimiterrouter')
-const task11 = require('./router/crudrouter')
-const task12 = require('./router/fetchcrudrouter')
-const task14 = require('./router/ajaxcityrouter')
-const task15 = require('./router/timeZoneRouter')
+const dynamicgrid = require('./router/dynamicgrid');
+const attendrouter = require('./router/attendrouter')
+const resultrouter = require('./router/resultrouter')
+const studdetailrouter = require('./router/studdetailrouter')
+const delimiterrouter = require('./router/delimiterrouter')
+const crudrouter = require('./router/crudrouter')
+const fetchcrudrouter = require('./router/fetchcrudrouter')
+const ajaxcityrouter = require('./router/ajaxcityrouter')
+const timeZoneRouter = require('./router/timezonerouter')
+
+const app = express()
+app.use(bodyParser.json())
 app.use(cookieParser())
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.use('/', login)
 app.use('/', display)
-app.use('/',task6)
-app.use('/attendence', task7)
-app.use('/', task8);
-app.use('/', task9)
-app.use('/', task10)
-app.use('/', task11)
-app.use('/', task12)
-app.use('/', task14)
-app.use('/',task15)
+app.use('/',dynamicgrid)
+app.use('/attendence', attendrouter)
+app.use('/', resultrouter);
+app.use('/', studdetailrouter)
+app.use('/', delimiterrouter)
+app.use('/', crudrouter)
+app.use('/', fetchcrudrouter)
+app.use('/', ajaxcityrouter)
+app.use('/',timeZoneRouter)
 app.use('/', logout)
 
 dotenv.config();

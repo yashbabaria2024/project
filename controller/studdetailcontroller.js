@@ -19,7 +19,7 @@ const handleStudDetail = (req, res) => {
 
     conn.query(`select * from stud_detail_50000  order by ${field} ${orderby} limit ${startIndex}, ${pageField};`, (err, row) => {
         if (err) throw err;
-        res.status(200).render('task9/display', { "row": row, "id": id, "orderby": orderby, "field": field });
+        res.status(200).render('searchgrid/display', { "row": row, "id": id, "orderby": orderby, "field": field });
     });
 }
 
@@ -46,7 +46,7 @@ const handleSearch = (req, res) => {
 
     conn.query(`select * from stud_detail_50000 where firstname like '${firstname}%' ${operator} address like '${address}%' ${operator} branch like '${branch}%' order by ${field} ${orderby} limit ${startIndex}, ${pageField};`, (err, row) => {
         if (err) throw err;
-        res.status(200).render('task9/search', { "row": row, "id": id, "orderby": orderby, "field": field });
+        res.status(200).render('searchgrid/search', { "row": row, "id": id, "orderby": orderby, "field": field });
     }
     )
 }
@@ -57,7 +57,7 @@ const handleidSearch = (req, res) => {
     let stud_id = req.query.stud_id
     conn.query(`select * from stud_detail_50000 where stud_id = '${stud_id}';`, (err, row) => {
         if (err) throw err;
-        res.status(200).render('task9/idsearch', { "row": row });
+        res.status(200).render('searchgrid/idsearch', { "row": row });
     })
 }
 

@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body >
     <style>
         .btn {
             width: 100px;
@@ -31,7 +31,7 @@
         <h2 id="task">Task:-Job Application Form</h2>
     
 
-        <form class="row g-3 needs-validation" name="myform" method="post" onsubmit="return validationFun()">
+        <form class="row g-3 needs-validation" name="myform" method="post" id="form" onsubmit="return validationFun()">
             <fieldset>
                 <legend>Basic Detial</legend>
 
@@ -518,7 +518,7 @@
                                 value="<%=lang[0].lang_id %>" hidden>
                             <% } %>
                     <tr>
-                    <td><input type="checkbox" class="form-check-input" name="lang" id="id_hindi"
+                    <td><input type="checkbox" class="form-check-input language" name="language" id="id_hindi"
                                 value="hindi" <% if(locals.lang && lang[0].lang_name=="hindi" ) {%> checked
                                     <% } %>><label for="id_hindi"> Hindi </label></td>
                         <td><input type="checkbox" class="langknownhindi form-check-input" name="read_hindi[]" id="id_readhindi" value="1" <% if(locals.lang && lang[0].lang_read=='1' ) {%> checked
@@ -539,7 +539,7 @@
                         <% if(locals.lang) { %> <input type="text" name="langid[]" id="langid"
                                 value="<%=lang[1].lang_id %>" hidden>
                             <% } %>
-                        <td><input type="checkbox" class="form-check-input" name="lang" id="id_english"
+                        <td><input type="checkbox" class="form-check-input language" name="language" id="id_english"
                                 value="english"  <% if(locals.lang && lang[1].lang_name=='english' ) {%> checked
                                     <% } %>><label for="id_english">English</label>
                         </td>
@@ -562,7 +562,7 @@
                         <% if(locals.lang) { %> <input type="text" name="langid[]" id="langid"
                                 value="<%=lang[2].lang_id %>" hidden>
                             <% } %>
-                        <td><input type="checkbox" class="form-check-input" name="lang" id="id_gujarati"
+                        <td><input type="checkbox" class="form-check-input language" name="language" id="id_gujarati"
                                 value="gujarati"  <% if(locals.lang && lang[2].lang_name=='gujarati' ) {%> checked
                                     <% } %>><label for="id_gujarati">Gujarati</label>
                         </td>
@@ -592,7 +592,7 @@
                         <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
                                 value="<%=tech[0].tech_id %>" hidden>
                             <% } %>
-                                <td><input type="checkbox" class="form-check-input" name="techlang" id="id_PHP"
+                                <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_PHP"
                                         value="php" <% if(locals.tech && tech[0].tech_name=='php' ) {%> checked <% } %>
                                         ><label for="id_PHP">PHP</label>
                                 </td>
@@ -613,7 +613,7 @@
                         <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
                                 value="<%=tech[1].tech_id %>" hidden>
                             <% } %>
-                                <td><input type="checkbox" class="form-check-input" name="techlang" id="id_Mysql"
+                                <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_Mysql"
                                         value="mysql" <% if(locals.tech && tech[1].tech_name=='mysql' ) {%> checked <% }
                                         %> ><label for="id_Mysql">Mysql</label>
                                 </td>
@@ -634,7 +634,7 @@
                         <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
                                 value="<%=tech[2].tech_id %>" hidden>
                             <% } %>
-                                <td><input type="checkbox" class="form-check-input" name="techlang" id="id_Oracle"
+                                <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_Oracle"
                                         value="oracle" <% if(locals.tech && tech[2].tech_name=='oracle' ) {%> checked <%
                                         } %> ><label for="id_Oracle">Oracle</label>
                                 </td>
@@ -648,14 +648,14 @@
                                         value="Expert" <% if(locals.tech && tech[2].tech_level=='Expert' ) {%> checked
                                     <% } %> ><label for="id_ExpertOracle">Expert</label></td>
                                 <td>
-                                    <p id="id_tech4" style="color: red;"></p>
+                                    <p id="id_tech3" style="color: red;"></p>
                                 </td>
                     </tr>
                     <tr>
                         <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
                                 value="<%=tech[3].tech_id %>" hidden>
                             <% } %>
-                                <td><input type="checkbox" class="form-check-input" name="techlang[]" id="id_laravel"
+                                <td><input type="checkbox" class="form-check-input tech_valid" name="techlang[]" id="id_laravel"
                                         value="laravel" <% if(locals.tech && tech[3].tech_name=='laravel' ) {%> checked
                                     <% } %> ><label for="id_laravel">Laravel</label>
                                 </td>
@@ -670,7 +670,7 @@
                                         value="Expert" <% if(locals.tech && tech[3].tech_level=='Expert' ) {%> checked
                                     <% } %> ><label for="id_ExpertLaravel">Expert</label></td>
                                 <td>
-                                    <p id="id_tech3" style="color: red;"></p>
+                                    <p id="id_tech4" style="color: red;"></p>
                                 </td>
                     </tr>
                 </table>
@@ -854,7 +854,7 @@
 
         <% } catch(err){ console.log("error");} %>
 
-<script src="/task11/jobform.js">
+<script src="/crud/jobform.js">
 
 
 

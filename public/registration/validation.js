@@ -150,6 +150,7 @@ function zipcodeFun() {
 
 
 let flag
+
 function validation()
 {
     let arr = ["id_firstname", "id_lastname", "id_designation", "id_email", "id_address", "id_contact", "id_city", "id_zipcode", "id_dateofbirth"];
@@ -168,7 +169,7 @@ function validation()
         span[i].remove()
     }
 
-    flag = true
+    
 
     MainFun(id_firstname)
     MainFun(id_lastname)
@@ -186,5 +187,8 @@ function validation()
     {
         console.log(false);
         return false;
+    }
+    else{
+        return true;
     }
 }

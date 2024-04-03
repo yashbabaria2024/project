@@ -1,0 +1,17 @@
+.page {
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.inp {
+    display: flex;
+    gap: 20px;
+}
+
+.note-label {
+    display: flex;
+    gap: 20px;
+}

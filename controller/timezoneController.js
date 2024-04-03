@@ -1,5 +1,5 @@
 const timeZoneFun = (req,res)=>{
-    res.status(200).render('task15');
+    res.status(200).render('timezone');
 }
 
 module.exports = {timeZoneFun}
