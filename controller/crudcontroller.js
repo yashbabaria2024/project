@@ -1,4 +1,7 @@
 const { conn } = require('../connection/connection')
+const bodyParser = require("body-parser");
+ bodyParser.urlencoded({ extended: true })
+
 const handleJobform = (req, res) => {
     res.render('task11')
 }
@@ -112,13 +115,18 @@ const createJobFormData = (req, res) => {
                 }
             }
 
-            let lang = req.body.lang
-            
+           
+           let lang = req.body.language;
+         if(lang != undefined || lang == "")
+         {
             for (let i = 0; i < lang.length; i++) {
-                if (lang[i] != "") {
-                    let read = req.body["read_" + lang[i]]
-                    let write = req.body["write_" + lang[i]]
-                    let speak = req.body["speak_" + lang[i]]
+               console.log(lang,length);
+                let langarr = req.body.language[i]
+                if (langarr[i] != "" || langarr[i] != undefined) {
+                    let read = req.body["read_" + langarr[i]]
+                    console.log(read);
+                    let write = req.body["write_" + langarr[i]]
+                    let speak = req.body["speak_" + langarr[i]]
                     if (read == undefined) {
                         read = 0;
                     }
@@ -128,14 +136,15 @@ const createJobFormData = (req, res) => {
                     if (speak == undefined) {
                         speak = 0;
                     }
+
+                                       
                     let query6 = `insert into lang_detail (emp_id,lang_name,lang_read, lang_write, lang_speak) values ('${id}','${lang[i]}','${read}','${write}','${speak}');`
                     conn.query(query6, (err) => {
                         if (err) throw err;
                     })
                 }
             }
-
-
+        }
 
             let preferedlocation = req.body.preferedlocation
             let noticeperiod = req.body.noticeperiod;
@@ -143,7 +152,7 @@ const createJobFormData = (req, res) => {
             let currentCTC = req.body.currentCTC;
             let Department = req.body.Department;
 
-            if (preferedlocation != "") {
+            if (preferedlocation != "" || preferedlocation == undefined) {
                 let query5 = `insert into pref_detail (emp_id,pref_location,notice_period,expacted_ctc,current_ctc,department)values('${id}','${preferedlocation}','${noticeperiod}','${expecedCTC}','${currentCTC}','${Department}');`
                 conn.query(query5, (err) => {
                     if (err) throw err;
@@ -157,25 +166,29 @@ const createJobFormData = (req, res) => {
             let mysql = req.body.mysql;
             let laravel = req.body.laravel;
             let oracle = req.body.oracle;
-
-            let techarr = [php, mysql, laravel, oracle]
-            // console.log(techarr);
+          
+            let techarr = [php, mysql, oracle,laravel ]
+         if(req.body.techlang != undefined || req.body.techlang != "")
+         {
             for (let i = 0; i < req.body.techlang.length; i++) {
                 techlang = req.body.techlang[i]
 
-                for (let j = 0; j < techarr.length; j++) {
-                    break;
-                }
-
+                for (let i = 0; i < techarr.length; i++) {
+                    break
+                 }
+                console.log(req.body.techlang.length);
                 techknown = techarr[i]
-
+               
+               
+                if(techlang[i] != undefined )
+                {
                 query7 = `insert into tech_detail (emp_id,tech_name,tech_level) values ('${id}','${techlang}','${techknown}');`
-
                 conn.query(`${query7}`, (err) => {
                     if (err) throw err;
                 })
             }
-
+            }
+        }
         } catch (error) {
             console.log("insert error" + error)
         }
@@ -310,8 +323,8 @@ const updatejobFormData = () => {
                     }
                 }
 
-                let langid = req.body.langid
-                let lang = req.body.lang
+                let langid = req.body.languageid
+                let lang = req.body.language
                 let query6
 
 

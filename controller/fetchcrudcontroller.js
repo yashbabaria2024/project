@@ -111,7 +111,7 @@ const createuser = (req, res) => {
 
     queryPromise1()
     async function sequentialQueries() {
-        try {
+        // try {
             const id = await queryPromise1();
             let nob = req.body.nob.split(',');
             const passingyear = req.body.passingyear.split(',');
@@ -131,8 +131,8 @@ const createuser = (req, res) => {
 
             let companyname = req.body.companyname.split(',')
             let designation = req.body.designation.split(',');
-            let from = req.body.from.split(',');
-            let to = req.body.to.split(',');
+            let from = req.body.dt_from.split(',');
+            let to = req.body.dt_to.split(',');
     
             for (let i = 0; i < companyname.length; i++) {
 
@@ -147,8 +147,10 @@ const createuser = (req, res) => {
                 }
             }
 
-            let lang = req.body.lang.split(',')
-
+            let lang = req.body.language
+         if(lang != undefined)
+         {
+                let lang = req.body.language.split(',');
             for (let i = 0; i < lang.length; i++) {
                 if (lang[i] != "") {
                     let read = req.body["read_" + lang[i]]
@@ -165,15 +167,17 @@ const createuser = (req, res) => {
                     if (speak == undefined) {
                         speak = 0;
                     }
+
+
                     let query6 = `insert into lang_detail (emp_id,lang_name,lang_read, lang_write, lang_speak) values ('${id}','${lang[i]}','${read}','${write}','${speak}');`
 
                     conn.query(query6, (err) => {
                         if (err) throw err;
                     })
                 }
-            }
-
-            let techlang = req.body.techlang.split(',');
+            }}
+        
+            let techlang = req.body.techlang;
 
             let query7;
             let php = req.body.php;
@@ -181,9 +185,13 @@ const createuser = (req, res) => {
             let oracle = req.body.oracle;
             let laravel = req.body.laravel;
 
+            if(techlang != undefined )
+            {
+               techlang = req.body.techlang.split(',');
+
             let techarr = [php, mysql, oracle, laravel]
 
-           
+          
             for (let i = 0; i < techlang.length; i++) {
 
                 query7 = `insert into tech_detail (emp_id,tech_name,tech_level) values ('${id}','${techlang[i]}','${techarr[i]}');`
@@ -191,7 +199,7 @@ const createuser = (req, res) => {
                 conn.query(`${query7}`, (err) => {
                     if (err) throw err;
                 })
-            }
+            }}
 
             let refname = req.body.refname.split(',');
             let refcontact = req.body.refcontact.split(',');
@@ -224,9 +232,9 @@ const createuser = (req, res) => {
                 })
             }
 
-        } catch (error) {
-
-        }
+        // } catch (error) {
+        //     console.log("error");
+        // }
     }
     sequentialQueries()
 }

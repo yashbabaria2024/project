@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 dotenv.config();
 
 function createToken(email){
-    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY)
+    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY,{expiresIn:"10h"})
        return Token
  }
 

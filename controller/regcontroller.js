@@ -100,7 +100,7 @@ const handleregisterpage =  (req, res) => {
 }
 
 function createToken(email){
-    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY,{expiresIn: "10s"})
+    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY,{expiresIn: "10m"})
        return Token
  }
 
