@@ -2,7 +2,7 @@ const { conn } = require('../connection/connection')
 
 const attendancecontrol = (req, res) => {
 
-    var month;
+    let month;
     if (req.query.id == undefined || req.query.month == undefined) {
         id = 1;
         month = 1;
@@ -11,6 +11,7 @@ const attendancecontrol = (req, res) => {
         id = parseInt(req.query.id);
         month = parseInt(req.query.month);
     }
+
     pagefield = 10
     currentpage = (id - 1) * pagefield;
 

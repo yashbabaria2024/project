@@ -1,3 +1,4 @@
+const { query } = require('express');
 const { conn } = require('../connection/connection')
 const bodyParser = require("body-parser");
 bodyParser.urlencoded({ extended: true })
@@ -11,7 +12,7 @@ const displayJobFormData = async (req, res) => {
     const queryselect = (str) => {
         return new Promise((resolve, reject) => {
 
-            conn.query(str, (error, result) => {
+            conn.query(str, [id], (error, result) => {
                 if (error) {
                     return reject(error);
                 }
@@ -20,20 +21,18 @@ const displayJobFormData = async (req, res) => {
         });
     };
 
-    let basic = await queryselect(`select * from basic_detail where emp_id = '${id}';`);
-    let edu = await queryselect(`select * from edu_detail where emp_id = '${id}';`)
-    let ref = await queryselect(`select * from ref_detail where emp_id = '${id}';`);
-    let pref = await queryselect(`select * from pref_detail where emp_id = '${id}';`);
-    let exp = await queryselect(`select * from work_exp where emp_id = '${id}';`);
-    let lang = await queryselect(`select * from lang_detail where emp_id = '${id}'`);
-    let tech = await queryselect(`select * from tech_detail where emp_id = '${id}'`);
-
+    let basic = await queryselect(`select * from basic_detail where emp_id =? ;`);
+    let edu = await queryselect(`select * from edu_detail where emp_id =? ;`)
+    let ref = await queryselect(`select * from ref_detail where emp_id =? ;`);
+    let pref = await queryselect(`select * from pref_detail where emp_id =? ;`);
+    let exp = await queryselect(`select * from work_exp where emp_id =? ;`);
+    let lang = await queryselect(`select * from lang_detail where emp_id =? `);
+    let tech = await queryselect(`select * from tech_detail where emp_id =? `);
 
     res.status(200).render('crud', { "basic": basic, "ref": ref, "pref": pref, "edu": edu, "exp": exp, "tech": tech, "lang": lang });
 }
 
 const createJobFormData = (req, res) => {
-
 
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
@@ -49,37 +48,221 @@ const createJobFormData = (req, res) => {
     const zipcode = req.body.zipcode;
     const dateofbirth = req.body.dateofbirth;
 
-    const query1 = `insert into basic_detail (first_name,last_name,desg,email,contact,gender,relation_status,add1,add2,city,state,zip_code,dob) values ('${firstname}','${lastname}','${desg}','${email}','${contact}','${gender}','${relationshipstatus}','${address}','${address2}','${city}','${state}','${zipcode}','${dateofbirth}')`
+    if (!(firstname && lastname && desg && email && address && contact && city && gender && state && relationshipstatus && zipcode && dateofbirth)) {
+        res.status(404).send({ msg: "Field empty" });
+    }
+    else {
+        const queryPromise1 = () => {
+            return new Promise((resolve, reject) => {
+                conn.query(`insert into basic_detail (first_name,last_name,desg,email,contact,gender,relation_status,add1,add2,city,state,zip_code,dob) values (?,?,?,?,?,?,?,?,?,?,?,?,?);`, [firstname, lastname, desg, email, contact, gender, relationshipstatus, address, address2, city, state, zipcode, dateofbirth], (error, results) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    return resolve(results.insertId);
+                });
+            });
+        }
 
-    const queryPromise1 = () => {
+        async function sequentialQueries() {
+
+            const id = await queryPromise1();
+
+            let nob = req.body.nob;
+            for (let i = 0; i < nob.length; i++) {
+                const board = req.body.nob[i];
+                const passingyear = req.body.passingyear[i];
+                const percentage = req.body.percentage[i];
+
+                if (board != "" && passingyear != "" && percentage != "") {
+                    conn.query(`insert into edu_detail (emp_id,nob,passing_yr,percentage) values (?,?,?,?);`, [id, board, passingyear, percentage], (err) => {
+                        if (err) throw err;
+                    })
+                }
+            }
+
+            let companyname = req.body.companyname
+            for (let i = 0; i < companyname.length; i++) {
+                let designation = req.body.designation;
+                let from = req.body.from;
+                let to = req.body.to;
+                if (companyname[i] != "") {
+                    conn.query(`insert into work_exp (emp_id,comp_name,desg,dt_from,dt_to) values (?,?,?,?,?)`, [id, companyname[i], designation[i], from[i], to[i]], (err) => {
+                        if (err) throw err;
+                    })
+                }
+            }
+
+            let refname = req.body.refname;
+            let refcontact = req.body.refcontact;
+            let refrelation = req.body.refrelation;
+            for (let i = 0; i < refname.length; i++) {
+
+                if (refname[i] != "" && refcontact[i] != "" && refrelation[i] != "") {
+                    conn.query(`insert into ref_detail (emp_id,ref_name,ref_contact,ref_relation)values (?,?,?,?)`, [id, refname[i], refcontact[i], refrelation[i]], (err) => {
+                        if (err) throw err;
+                    })
+                }
+            }
+
+
+            let lang = req.body.language
+            if (lang != undefined) {
+                for (let i = 0; i < lang.length; i++) {
+                    let langarr = req.body.language[i]
+                    if (langarr[i] != "" || langarr[i] != undefined) {
+
+                        let read = req.body["read_" + langarr]
+                        let write = req.body["write_" + langarr]
+                        let speak = req.body["speak_" + langarr]
+                        if (read == undefined) {
+                            read = 0;
+                        } if (write == undefined) {
+                            write = 0;
+                        } if (speak == undefined) {
+                            speak = 0;
+                        }
+
+                        conn.query(`insert into lang_detail (emp_id,lang_name,lang_read, lang_write, lang_speak) values (?,?,?,?,?);`, [id, langarr, read, write, speak], (err) => {
+                            if (err) throw err;
+                        })
+                    }
+                }
+            }
+
+            let techlang = req.body.techlang;
+            let techknown;
+            let php = req.body.php;
+            let mysql = req.body.mysql;
+            let laravel = req.body.laravel;
+            let oracle = req.body.oracle;
+
+            let techarr = [php, mysql, oracle, laravel]
+            if (techlang != undefined) {
+                for (let i = 0; i < req.body.techlang.length; i++) {
+                    techlang = req.body.techlang[i]
+                    techknown = techarr[i]
+                    if (techlang[i] != undefined) {
+                        conn.query(`insert into tech_detail (emp_id,tech_name,tech_level) values (?,?,?);`, [id, techlang, techknown], (err) => {
+                            if (err) throw err;
+                        })
+                    }
+                }
+            }
+
+            let preferedlocation = req.body.preferedlocation
+            let noticeperiod = req.body.noticeperiod;
+            let expecedCTC = req.body.expecedCTC;
+            let currentCTC = req.body.currentCTC;
+            let Department = req.body.Department;
+
+            if (preferedlocation != "" || preferedlocation == undefined) {
+                conn.query(`insert into pref_detail (emp_id,pref_location,notice_period,expacted_ctc,current_ctc,department)values
+                (?,?,?,?,?,?);`, [id, preferedlocation, noticeperiod, expecedCTC, currentCTC, Department], (err) => {
+                    if (err) throw err;
+                })
+            }
+        }
+        sequentialQueries()
+    }
+}
+
+const updatejobFormData = (req, res) => {
+
+    let id = req.params.id;
+
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const desg = req.body.desg;
+    const email = req.body.email
+    const address = req.body.address;
+    const address2 = req.body.address2
+    const contact = req.body.contact;
+    const city = req.body.city;
+    const gender = req.body.gender;
+    const state = req.body.state;
+    const relationshipstatus = req.body.relationshipstatus;
+    const zipcode = req.body.zipcode;
+    const dateofbirth = req.body.dateofbirth;
+
+
+    const updatebasic = () => {
         return new Promise((resolve, reject) => {
-            conn.query(query1, (error, results) => {
+            conn.query(`update  basic_detail set first_name = ?,last_name = ?,desg = ?,email = ? ,contact = ?,gender=?,relation_status =?,add1=?,add2=?,city=?,state=?,zip_code=?,dob=? where emp_id = ?;`, [firstname, lastname, desg, email, contact, gender, relationshipstatus, address, address2, city, state, zipcode, dateofbirth, id], (error, results) => {
+
                 if (error) {
                     return reject(error);
                 }
-                return resolve(results.insertId);
+                return resolve(id);
             });
         });
-    }
-    async function sequentialQueries() {
+    };
 
-        const id = await queryPromise1();
-        let nob = req.body.nob;
 
-        for (let i = 0; i < nob.length; i++) {
-            nob = req.body.nob[i];
-            const passingyear = req.body.passingyear[i];
-            const percentage = req.body.percentage[i];
+    const updateFun = async () => {
 
-            if (nob != "" && passingyear != "" && percentage != "") {
-                const edu = `insert into edu_detail (emp_id,nob,passing_yr,percentage) values ('${id}','${nob}','${passingyear}','${percentage}');`
 
-                conn.query(edu, (err) => {
+        const id = await updatebasic();
+
+        let preferedlocation = req.body.preferedlocation
+        let noticeperiod = req.body.noticeperiod;
+        let expecedCTC = req.body.expecedCTC;
+        let currentCTC = req.body.currentCTC;
+        let Department = req.body.Department;
+
+        if (!(preferedlocation || noticeperiod || expecedCTC || currentCTC || Department)) {
+            conn.query(`insert into pref_detail (emp_id,pref_location,notice_period,expacted_ctc,current_ctc,department)values
+                    (?,?,?,?,?,?);`, [id, preferedlocation, noticeperiod, expecedCTC, currentCTC, Department], (err) => {
+                if (err) throw err;
+            })
+        }
+
+        conn.query(`update pref_detail set pref_location = ? , notice_period = ?, expacted_ctc = ?, current_ctc = ?, department = ? where emp_id = ?;`, [preferedlocation, noticeperiod, expecedCTC, currentCTC, Department, id], (err) => { if (err) throw err; })
+
+
+        let refid = req.body.refid;
+        refname = req.body.refname;
+        let refcontact = req.body.refcontact;
+        let refrelation = req.body.refrelation;
+        for (let i = 0; i < refname.length; i++) {
+
+
+
+            if (refid[i] == undefined) {
+                if (!(refname[i])) {
+                    conn.query(`insert into ref_detail (emp_id,ref_name,ref_contact,ref_relation)values (?,?,?,?)`, [id, refname[i], refcontact[i], refrelation[i]], (err) => {
+                        if (err) throw err;
+                    })
+                }
+            }
+            else {
+                conn.query(`update ref_detail set ref_name = ?,ref_contact = ?,ref_relation=? where emp_id = ? and ref_id = ?;`, [refname[i], refcontact[i], refrelation[i], id, refid[i]], (err) => {
                     if (err) throw err;
                 })
             }
         }
 
+
+        let nob = req.body.nob
+        let eduid = req.body.eduid
+        let passingyear = req.body.passingyear;
+        let percentage = req.body.percentage;
+        for (let i = 0; i < nob.length; i++) {
+
+            if (!(eduid[i])) {
+                if (nob[i] != "") {
+                    conn.query(`insert into edu_detail (emp_id,nob,passing_yr,percentage) values (?,?,?,?);`, [id, nob[i], passingyear[i], percentage[i]], (err) => {
+                        if (err) throw err;
+                    })
+                }
+            }
+            else {
+                conn.query(`update edu_detail set nob=?,passing_yr=?,percentage=? where emp_id = ? and edu_id = ?;`, [nob[i], passingyear[i], percentage[i], id, eduid[i]], (err) => {
+                    if (err) throw err;
+                })
+            }
+        }
+
+        let expid = req.body.expid
         let companyname = req.body.companyname
         let designation = req.body.designation;
         let from = req.body.from;
@@ -87,45 +270,33 @@ const createJobFormData = (req, res) => {
 
         for (let i = 0; i < companyname.length; i++) {
 
-            {
+            if (!(expid[i])) {
                 if (companyname[i] != "") {
-                    let query3 = `insert into work_exp (emp_id,comp_name,desg,dt_from,dt_to) values ('${id}','${companyname[i]}','${designation[i]}','${from[i]}','${to[i]}')`;
-
-                    conn.query(query3, (err) => {
+                    conn.query(`insert into work_exp (emp_id,comp_name,desg,dt_from,dt_to) values (?,?,?,?,?)`, [id, companyname[i], designation[i], from[i], to[i]], (err) => {
                         if (err) throw err;
+                       
                     })
                 }
             }
-        }
-
-        let refname = req.body.refname;
-        for (let i = 0; i < refname.length; i++) {
-            refname = req.body.refname[i];
-            let refcontact = req.body.refcontact[i];
-            let refrelation = req.body.refrelation[i];
-
-            if (refname != "" || refcontact != "" && refrelation != "") {
-                let query4 = `insert into ref_detail (emp_id,ref_name,ref_contact,ref_relation)values('${id}','${refname}','${refcontact}','${refrelation}')`;
-
-                conn.query(query4, (err) => {
+            if (companyname[i] != "") {
+                conn.query(`update work_exp set comp_name = ?,desg = ? ,dt_from = ?, dt_to =? where emp_id = ? and work_id = ? `, [companyname[i], designation[i], from[i], to[i], id, expid[i]], (err) => {
                     if (err) throw err;
+                   
                 })
             }
         }
 
 
+        let langid = req.body.langid
+        let lang = req.body.language
 
-
-        if (req.body.language != undefined || req.body.language != "") {
-            for (let i = 0; i < req.body.language.length; i++) {
-
+        if (lang != undefined) {
+            for (let i = 0; i < lang.length; i++) {
                 let langarr = req.body.language[i]
-
                 if (langarr[i] != "" || langarr[i] != undefined) {
-
-                    let read = req.body["read_" + langarr]
-                    let write = req.body["write_" + langarr]
-                    let speak = req.body["speak_" + langarr]
+                    let read = req.body["read_" + lang[i]]
+                    let write = req.body["write_" + lang[i]]
+                    let speak = req.body["speak_" + lang[i]]
                     if (read == undefined) {
                         read = 0;
                     }
@@ -136,253 +307,60 @@ const createJobFormData = (req, res) => {
                         speak = 0;
                     }
 
-                    let query6 = `insert into lang_detail (emp_id,lang_name,lang_read, lang_write, lang_speak) values ('${id}','${langarr}','${read}','${write}','${speak}');`
-                    conn.query(query6, (err) => {
-                        if (err) throw err;
-                    })
+                    if (langid == undefined ) {
+                        if (lang[i] != undefined) {
+                            conn.query(`insert into lang_detail (emp_id,lang_name,lang_read, lang_write, lang_speak) values (?,?,?,?,?);`, [id, langarr, read, write, speak], (err) => {
+                                if (err) throw err;
+                            })
+                        } 
+                        }
+                        else{
+                            conn.query(`update lang_detail set lang_name = ?, lang_read = ?, lang_write= ?,lang_speak= ? where emp_id=? and lang_id = ?`, [langarr, read, write, speak, id, langid[i]], (err) => {
+                                if (err) throw err;
+                            })
+                        }
+                   
                 }
             }
         }
 
-        let preferedlocation = req.body.preferedlocation
-        let noticeperiod = req.body.noticeperiod;
-        let expecedCTC = req.body.expecedCTC;
-        let currentCTC = req.body.currentCTC;
-        let Department = req.body.Department;
-
-        if (preferedlocation != "" || preferedlocation == undefined) {
-            let query5 = `insert into pref_detail (emp_id,pref_location,notice_period,expacted_ctc,current_ctc,department)values('${id}','${preferedlocation}','${noticeperiod}','${expecedCTC}','${currentCTC}','${Department}');`
-            conn.query(query5, (err) => {
-                if (err) throw err;
-            })
-        }
-
-        let techlang;
-        let techknown;
-        let query7;
+        let techid = req.body.techid
+        
+        let techlang = req.body.techlang
         let php = req.body.php;
+        let oracle = req.body.oracle;
         let mysql = req.body.mysql;
         let laravel = req.body.laravel;
-        let oracle = req.body.oracle;
+        let techarr = [php, oracle, mysql, laravel]
+      
+        if (techlang != undefined) {
 
-        let techarr = [php, mysql, oracle, laravel]
-        if (req.body.techlang != undefined || req.body.techlang != "") {
-            for (let i = 0; i < req.body.techlang.length; i++) {
-                techlang = req.body.techlang[i]
-
-                for (let i = 0; i < techarr.length; i++) {
-                    break
-                }
-
-                techknown = techarr[i]
-                if (techlang[i] != undefined) {
-                    query7 = `insert into tech_detail (emp_id,tech_name,tech_level) values ('${id}','${techlang}','${techknown}');`
-                    conn.query(`${query7}`, (err) => {
+            for (let i = 0; i < techlang.length; i++) {
+                console.log(techid[i]);
+            //   let techlangarr = req.body.techlang[i]
+               
+                if (techid[i] == undefined || techid[i] == "") 
+                {
+                    if(techlang[i] != undefined)
+                    {
+                    conn.query(`insert into tech_detail (emp_id,tech_name,tech_level) values (?,?,?);`,[id,techlang[i],techarr[i]], (err) => {
                         if (err) throw err;
                     })
                 }
+                }
+                else 
+                {
+                if (techid[i] != undefined) {
+                        conn.query(`update tech_detail set tech_name = ?,tech_level = ? where emp_id = ? and tech_id = ?`,[techlang[i],techarr[i],id,techid[i]], (err) => {
+                        if (err) throw err;
+                    })
+                }}
             }
         }
-
     }
-    sequentialQueries()
+    updateFun()
 }
 
-const updatejobFormData = () => {
-    (req, res) => {
 
-        let id = req.params.id;
-
-        const firstname = req.body.firstname;
-        const lastname = req.body.lastname;
-        const desg = req.body.desg;
-        const email = req.body.email
-        const address = req.body.address;
-        const address2 = req.body.address2
-        const contact = req.body.contact;
-        const city = req.body.city;
-        const gender = req.body.gender;
-        const state = req.body.state;
-        const relationshipstatus = req.body.relationshipstatus;
-        const zipcode = req.body.zipcode;
-        const dateofbirth = req.body.dateofbirth;
-
-        const query1 = `update  basic_detail set first_name = '${firstname}',last_name = '${lastname}',desg = '${desg}',email = '${email}' ,contact = '${contact}',gender='${gender}',relation_status ='${relationshipstatus}',add1='${address}',add2='${address2}',city='${city}',state='${state}',zip_code='${zipcode}',dob='${dateofbirth}' where emp_id = ${id};`
-
-
-        const updatebasic = () => {
-            return new Promise((resolve, reject) => {
-                conn.query(query1, (error, results) => {
-                    if (error) {
-                        return reject(error);
-                    }
-
-                    return resolve(id);
-                });
-            });
-        };
-
-        const updateFun = async () => {
-            try {
-
-                const id = await updatebasic();
-
-                let preferedlocation = req.body.preferedlocation
-                let noticeperiod = req.body.noticeperiod;
-                let expecedCTC = req.body.expecedCTC;
-                let currentCTC = req.body.currentCTC;
-                let Department = req.body.Department;
-
-                let query2 = `update pref_detail set pref_location = '${preferedlocation}' , notice_period = '${noticeperiod}', expacted_ctc = '${expecedCTC}', current_ctc = '${currentCTC}', department = '${Department}' where emp_id = '${id}';`
-
-                conn.query(query2, (err) => { if (err) throw err; })
-
-
-
-                for (let i = 0; i < req.body.refname.length; i++) {
-                    let refid = req.body.refid[i];
-                    refname = req.body.refname[i];
-                    let refcontact = req.body.refcontact[i];
-                    let refrelation = req.body.refrelation[i];
-
-
-                    if (req.body.refid[i] == undefined) {
-                        if (refname != "") {
-                            let query4 = `insert into ref_detail (emp_id,ref_name,ref_contact,ref_relation)values('${id}','${refname}','${refcontact}','${refrelation}')`;
-
-                            conn.query(query4, (err) => {
-                                if (err) throw err;
-                            })
-                        }
-                    }
-                    else {
-                        let query4 = `update ref_detail set ref_name = '${refname}',ref_contact = '${refcontact}',ref_relation='${refrelation}' where emp_id = ${id} and ref_id = ${refid}`;
-
-                        conn.query(query4, (err) => {
-                            if (err) throw err;
-                        })
-                    }
-                }
-
-
-                for (let i = 0; i < req.body.nob.length; i++) {
-                    nob = req.body.nob[i];
-                    let eduid = req.body.eduid[i]
-                    const passingyear = req.body.passingyear[i];
-                    const percentage = req.body.percentage[i];
-
-                    if (req.body.eduid[i] == undefined) {
-                        if (nob != "") {
-                            const edui = `insert into edu_detail (emp_id,nob,passing_yr,percentage) values ('${id}','${nob}','${passingyear}','${percentage}');`
-                            conn.query(edui, (err) => {
-                                if (err) throw err;
-                            })
-                        }
-                    }
-                    else {
-                        const edu = `update edu_detail set nob='${nob}',passing_yr='${passingyear}',percentage='${percentage}' where emp_id = ${id} and edu_id = ${eduid};`
-
-                        conn.query(edu, (err) => {
-                            if (err) throw err;
-                        })
-                    }
-                }
-
-                let expid = req.body.expid
-
-                for (let i = 0; i < req.body.companyname.length; i++) {
-
-                    let companyname = req.body.companyname
-                    let designation = req.body.designation;
-                    let from = req.body.from;
-                    let to = req.body.to;
-
-                    if (req.body.expid[i] == undefined) {
-                        if (companyname[i] != "") {
-                            let query3i = `insert into work_exp (emp_id,comp_name,desg,dt_from,dt_to) values ('${id}','${companyname[i]}','${designation[i]}','${from[i]}','${to[i]}')`;
-                            conn.query(query3i, (err) => {
-                                if (err) throw err;
-                            })
-                        }
-                    }
-                    if (companyname[i] != "") {
-                        let query3 = `update work_exp set comp_name = '${companyname[i]}',desg = '${designation[i]}' ,dt_from = '${from[i]}', dt_to ='${to[i]}' where emp_id = '${id}' and work_id = '${expid[i]}' `;
-                        conn.query(query3, (err) => {
-                            if (err) throw err;
-                        })
-
-
-                    }
-                }
-
-                let langid = req.body.languageid
-                let lang = req.body.language
-                let query6
-
-
-                for (let i = 0; i < lang.length; i++) {
-                    if (lang[i] != "") {
-                        let read = req.body["read_" + lang[i]]
-                        let write = req.body["write_" + lang[i]]
-                        let speak = req.body["speak_" + lang[i]]
-                        if (read == undefined) {
-                            read = 0;
-                        }
-                        if (write == undefined) {
-                            write = 0;
-                        }
-                        if (speak == undefined) {
-                            speak = 0;
-                        }
-
-                        if (langid[i] == undefined) {
-                            let query6i = `insert into lang_detail (emp_id,lang_name,lang_read, lang_write, lang_speak) values ('${id}','${lang[i]}','${read}','${write}','${speak}');`
-                            conn.query(query6i, (err) => {
-                                if (err) throw err;
-                            })
-                        }
-                        else {
-                            query6 = `update lang_detail set lang_name = '${lang[i]}', lang_read = '${read}', lang_write='${write}',lang_speak='${speak}' where emp_id=${id} and lang_id = ${langid[i]}`
-                            conn.query(query6, (err) => {
-                                if (err) throw err;
-                            })
-                        }
-
-                    }
-                }
-
-
-                let techlang;
-                let php = req.body.php;
-                let oracle = req.body.oracle;
-                let mysql = req.body.mysql;
-                let laravel = req.body.laravel;
-                let techarr = [php, oracle, mysql, laravel]
-
-                for (let i = 0; i < req.body.techlang.length; i++) {
-
-                    techlang = req.body.techlang[i]
-                    techid = req.body.techid[i]
-
-                    if (techid == undefined) {
-                        let query7i = `insert into tech_detail (emp_id,tech_name,tech_level) values ('${id}','${techlang}','${techarr[i]}');`
-                        conn.query(query7i, (err) => {
-                            if (err) throw err;
-                        })
-                    }
-                    else if (techarr[i] != undefined) {
-                        let query7 = `update tech_detail set tech_name = '${techlang}',tech_level = '${techarr[i]}' where emp_id = '${id}' and tech_id = '${techid}'`
-                        conn.query(query7, (err) => {
-                            if (err) throw err;
-                        })
-                    }
-                }
-            } catch (error) {
-                console.log("update error" + error)
-            }
-        }
-        updateFun()
-    }
-}
 
 module.exports = { handleJobform, displayJobFormData, createJobFormData, updatejobFormData }

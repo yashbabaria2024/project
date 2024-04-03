@@ -11,7 +11,7 @@
 
 </head>
 
-<body >
+<body>
     <style>
         .btn {
             width: 100px;
@@ -27,9 +27,9 @@
 
     <% try { %>
         <div class="container grid"></div>
-        <h1 id="heading" >Name:- Babaria Yash Emp_id:- 24Dev013 </h1>
+        <h1 id="heading">Name:- Babaria Yash Emp_id:- 24Dev013 </h1>
         <h2 id="task">Task:-Job Application Form</h2>
-    
+
 
         <form class="row g-3 needs-validation" name="myform" method="post" id="form" onsubmit="return validationFun()">
             <fieldset>
@@ -37,7 +37,7 @@
 
                 <table>
                     <tr>
-                       
+
                         <td><label for="firstName" id="firstname">First Name</label></td>
 
                         <td id="td"><input type="text" class="form-control" name="firstname"
@@ -513,74 +513,222 @@
 
                 <legend> Language Known</legend>
                 <p id="id_language" style="color: red;"></p>
+
+
                 <table>
-                    <% if(locals.lang) { %> <input type="text" name="langid[]" id="langid"
-                                value="<%=lang[0].lang_id %>" hidden>
-                            <% } %>
-                    <tr>
-                    <td><input type="checkbox" class="form-check-input language" name="language" id="id_hindi"
-                                value="hindi" <% if(locals.lang && lang[0].lang_name=="hindi" ) {%> checked
-                                    <% } %>><label for="id_hindi"> Hindi </label></td>
-                        <td><input type="checkbox" class="langknownhindi form-check-input" name="read_hindi[]" id="id_readhindi" value="1" <% if(locals.lang && lang[0].lang_read=='1' ) {%> checked
-                                    <% } %> ><label for="id_readhindi">Read</label>
-                        </td>
-                        <td><input type="checkbox" class="langknownhindi form-check-input" name="write_hindi[]" id="id_writehindi"
-                                value="1"  <% if(locals.lang && lang[0].lang_write=='1' ) {%> checked
-                                    <% } %> ><label for="id_writehindi">Write</td>
-                        <td><input type="checkbox" class="langknownhindi form-check-input" name="speak_hindi[]" id="id_speakhindi"
-                                value="1"  <% if(locals.lang && lang[0].lang_speak=='1' ) {%> checked
-                                    <% } %> ><label for="id_speakhindi">Speak</td>
-                        <td>
-                            <p id="id_language1" style="color: red;"></p>
-                        </td>
-                    </tr>
-                  
-                    <tr>
-                        <% if(locals.lang) { %> <input type="text" name="langid[]" id="langid"
-                                value="<%=lang[1].lang_id %>" hidden>
-                            <% } %>
-                        <td><input type="checkbox" class="form-check-input language" name="language" id="id_english"
-                                value="english"  <% if(locals.lang && lang[1].lang_name=='english' ) {%> checked
-                                    <% } %>><label for="id_english">English</label>
-                        </td>
-                        <td><input type="checkbox" class="langknownenglish form-check-input " name="read_english[]" id="id_readenglish" 
-                                value="1"  <% if(locals.lang && lang[1].lang_read=='1' ) {%> checked
-                                    <% } %> ><label for="id_readenglish ">Read</label></td>
-                        <td><input type="checkbox" class="langknownenglish form-check-input " name="write_english[]" id="id_writeenglish"
-                                value="1"  <% if(locals.lang && lang[1].lang_write=='1' ) {%> checked
-                                    <% } %> ><label for="id_writeenglish">Write</label>
-                        </td>
-                        <td><input type="checkbox" class="langknownenglish form-check-input " name="speak_english[]" id="id_speakenglish"
-                                value="1"  <% if(locals.lang && lang[1].lang_speak=='1' ) {%> checked
-                                    <% } %> ><label for="id_speakenglish">Speak</label>
-                        </td>
-                        <td>
-                            <p id="id_language2" style="color: red;"></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <% if(locals.lang) { %> <input type="text" name="langid[]" id="langid"
-                                value="<%=lang[2].lang_id %>" hidden>
-                            <% } %>
-                        <td><input type="checkbox" class="form-check-input language" name="language" id="id_gujarati"
-                                value="gujarati"  <% if(locals.lang && lang[2].lang_name=='gujarati' ) {%> checked
-                                    <% } %>><label for="id_gujarati">Gujarati</label>
-                        </td>
-                        <td><input type="checkbox" class="form-check-input langknownguj" name="read_gujarati[]" id="id_readgujarati"
-                                value="1"  <% if(locals.lang && lang[2].lang_read=='1' ) {%> checked
-                                    <% } %> ><label for="id_readgujarati langknownguj">Read</label></td>
-                        <td><input type="checkbox" class="form-check-input langknownguj" name="write_gujarati[]"
-                                id="id_writegujarati" value="1"  <% if(locals.lang && lang[2].lang_write=='1' ) {%> checked
-                                    <% } %> ><label for="id_writegujarati">Write</label>
-                        </td>
-                        <td><input type="checkbox" class="form-check-input" name="speak_gujarati[]"
-                                id="id_speakgujarati" value="1"  <% if(locals.lang && lang[2].lang_speak=='1' ) {%> checked
-                                    <% } %> ><label for="id_speakgujarati">Speak</label>
-                        </td>
-                        <td>
-                            <p id="id_language3" style="color: red;"></p>
-                        </td>
-                    </tr>
+
+                    <% if(locals.lang) {%>
+                        <% if(locals.lang[0]) { %>
+                            <tr>
+                                <td><input type="checkbox" class="form-check-input language" name="language[]"
+                                        id="id_hindi" value="hindi" <% if(locals.lang && lang[0].lang_name=="hindi" )
+                                        {%> checked <% } %> ><label for="id_hindi"> Hindi </label></td>
+                                <td><input type="checkbox" class="langknownhindi form-check-input" name="read_hindi[]"
+                                        id="id_readhindi" value="1" <% if(locals.lang && lang[0].lang_read=='1' ) {%>
+                                    checked <% } %> ><label for="id_readhindi">Read</label>
+                                </td>
+                                <td><input type="checkbox" class="langknownhindi form-check-input" name="write_hindi[]"
+                                        id="id_writehindi" value="1" <% if(locals.lang && lang[0].lang_write=='1' ) {%>
+                                    checked <% } %> ><label for="id_writehindi">Write </label></td>
+                                <td><input type="checkbox" class="langknownhindi form-check-input" name="speak_hindi[]"
+                                        id="id_speakhindi" value="1" <% if(locals.lang && lang[0].lang_speak=='1' ) {%>
+                                    checked <% } %> ><label for="id_speakhindi">Speak</label>
+                                </td>
+                                <td>
+                                    <p id="id_language1" style="color: red;"></p>
+                                </td>
+                            </tr>
+                            <%} else {%>
+                                <tr>
+                                    <input type="text" name="langid" id="" hidden>
+                                    <td><input type="checkbox" class="form-check-input" name="language[]" id="id_hindi"
+                                            value="hindi"><label for="id_hindi"> Hindi </label>
+                                    </td>
+                                    <td><input type="checkbox" class="langknownhindi form-check-input" name="read_hindi"
+                                            id="id_readhindi" value="1"><label for="id_readhindi">Read</label>
+                                    </td>
+                                    <td><input type="checkbox" class="langknownhindi form-check-input"
+                                            name="write_hindi" id="id_writehindi" value="1"><label
+                                            for="id_writehindi">Write
+                                    </td>
+                                    <td><input type="checkbox" class="langknownhindi form-check-input"
+                                            name="speak_hindi" id="id_speakhindi" value="1"><label
+                                            for="id_speakhindi">Speak
+                                    </td>
+
+                                </tr>
+                                <% } if(locals.lang[1]){ %>
+                                    <tr>
+                                        <% if(locals.lang[1]) { %> <input type="text" name="langid" id="langid"
+                                                value="<%=lang[1].lang_id %>" hidden>
+                                            <% } %>
+                                                <td><input type="checkbox" class="form-check-input language"
+                                                        name="language[]" id="id_english" value="english" <%
+                                                        if(locals.lang && lang[1].lang_name=='english' ) {%> checked
+                                                    <% } %>><label for="id_english">English</label>
+                                                </td>
+                                                <td><input type="checkbox" class="langknownenglish form-check-input "
+                                                        name="read_english[]" id="id_readenglish" value="1" <%
+                                                        if(locals.lang && lang[1].lang_read=='1' ) {%> checked
+                                                    <% } %> ><label for="id_readenglish ">Read</label>
+                                                </td>
+                                                <td><input type="checkbox" class="langknownenglish form-check-input "
+                                                        name="write_english[]" id="id_writeenglish" value="1" <%
+                                                        if(locals.lang && lang[1].lang_write=='1' ) {%> checked
+                                                    <% } %> ><label for="id_writeenglish">Write</label>
+                                                </td>
+                                                <td><input type="checkbox" class="langknownenglish form-check-input "
+                                                        name="speak_english[]" id="id_speakenglish" value="1" <%
+                                                        if(locals.lang && lang[1].lang_speak=='1' ) {%> checked
+                                                    <% } %> ><label for="id_speakenglish">Speak</label>
+                                                </td>
+                                                <td>
+                                                    <p id="id_language2" style="color: red;"></p>
+                                                </td>
+                                    </tr>
+                                    <%} else {%>
+                                        <tr>
+                                            <input type="text" name="langid" id="" hidden>
+                                            <td><input type="checkbox" class="form-check-input" name="language[]"
+                                                    id="id_english" value="english"><label
+                                                    for="id_english">English</label>
+                                            </td>
+                                            <td><input type="checkbox" class="langknownenglish form-check-input "
+                                                    name="read_english" id="id_readenglish" value="1"><label
+                                                    for="id_readenglish ">Read</label>
+                                            </td>
+                                            <td><input type="checkbox" class="langknownenglish form-check-input "
+                                                    name="write_english" id="id_writeenglish" value="1"><label
+                                                    for="id_writeenglish">Write</label>
+                                            </td>
+                                            <td><input type="checkbox" class="langknownenglish form-check-input "
+                                                    name="speak_english" id="id_speakenglish" value="1"><label
+                                                    for="id_speakenglish">Speak</label>
+                                            </td>
+                                        </tr>
+
+
+                                        <%} if(locals.lang[2]) {%>
+                                            <tr>
+                                                <% if(locals.lang[2]) { %> <input type="text" name="langid" id="langid"
+                                                        value="<%=lang[2].lang_id %>" hidden>
+                                                    <% } %>
+                                                        <td><input type="checkbox" class="form-check-input language"
+                                                                name="language[]" id="id_gujarati" value="gujarati" <%
+                                                                if(locals.lang && lang[2].lang_name=='gujarati' ){%>
+                                                            checked <% } %>><label for="id_gujarati">Gujarati</label>
+                                                        </td>
+                                                        <td><input type="checkbox" class="form-check-input langknownguj"
+                                                                name="read_gujarati[]" id="id_readgujarati" value="1" <%
+                                                                if(locals.lang && lang[2].lang_read=='1' ) {%> checked
+                                                            <% } %> ><label
+                                                                    for="id_readgujarati langknownguj">Read</label>
+                                                        </td>
+                                                        <td><input type="checkbox" class="form-check-input langknownguj"
+                                                                name="write_gujarati[]" id="id_writegujarati" value="1"
+                                                                <% if(locals.lang && lang[2].lang_write=='1' ) {%>
+                                                            checked <% } %> ><label for="id_writegujarati">Write</label>
+                                                        </td>
+                                                        <td><input type="checkbox" class="form-check-input"
+                                                                name="speak_gujarati[]" id="id_speakgujarati" value="1"
+                                                                <% if(locals.lang && lang[2].lang_speak=='1' ) {%>
+                                                            checked <% } %> ><label for="id_speakgujarati">Speak</label>
+                                                        </td>
+                                                        <td>
+                                                            <p id="id_language3" style="color: red;"></p>
+                                                        </td>
+                                            </tr>
+
+                                            <% }else { %>
+                                                <tr>
+                                                    <input type="text" name="langid" id="" hidden>
+                                                    <td><input type="checkbox" class="form-check-input"
+                                                            name="language[]" id="id_gujarati" value="gujarati"><label
+                                                            for="id_gujarati">Gujarati</label>
+                                                    </td>
+                                                    <td><input type="checkbox" class="form-check-input langknownguj"
+                                                            name="read_gujarati" id="id_readgujarati" value="1"><label
+                                                            for="id_readgujarati langknownguj">Read</label>
+                                                    </td>
+                                                    <td><input type="checkbox" class="form-check-input langknownguj"
+                                                            name="write_gujarati" id="id_writegujarati" value="1"><label
+                                                            for="id_writegujarati">Write</label>
+                                                    </td>
+                                                    <td><input type="checkbox" class="form-check-input"
+                                                            name="speak_gujarati" id="id_speakgujarati" value="1"><label
+                                                            for="id_speakgujarati">Speak</label>
+                                                    </td>
+                                                </tr>
+
+
+                                                <% }} else{%>
+                                                    <tr>
+                                                        <input type="text" name="langid" id="" hidden>
+                                                        <td><input type="checkbox" class="form-check-input"
+                                                                name="language[]" id="id_hindi" value="hindi"><label
+                                                                for="id_hindi"> Hindi </label>
+                                                        </td>
+                                                        <td><input type="checkbox"
+                                                                class="langknownhindi form-check-input"
+                                                                name="read_hindi" id="id_readhindi" value="1"><label
+                                                                for="id_readhindi">Read</label>
+                                                        </td>
+                                                        <td><input type="checkbox"
+                                                                class="langknownhindi form-check-input"
+                                                                name="write_hindi" id="id_writehindi" value="1"><label
+                                                                for="id_writehindi">Write
+                                                        </td>
+                                                        <td><input type="checkbox"
+                                                                class="langknownhindi form-check-input"
+                                                                name="speak_hindi" id="id_speakhindi" value="1"><label
+                                                                for="id_speakhindi">Speak
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <input type="text" name="langid" id="" hidden>
+                                                        <td><input type="checkbox" class="form-check-input"
+                                                                name="language[]" id="id_english" value="english"><label
+                                                                for="id_english">English</label>
+                                                        </td>
+                                                        <td><input type="checkbox"
+                                                                class="langknownenglish form-check-input "
+                                                                name="read_english" id="id_readenglish" value="1"><label
+                                                                for="id_readenglish ">Read</label>
+                                                        </td>
+                                                        <td><input type="checkbox"
+                                                                class="langknownenglish form-check-input "
+                                                                name="write_english" id="id_writeenglish"
+                                                                value="1"><label for="id_writeenglish">Write</label>
+                                                        </td>
+                                                        <td><input type="checkbox"
+                                                                class="langknownenglish form-check-input "
+                                                                name="speak_english" id="id_speakenglish"
+                                                                value="1"><label for="id_speakenglish">Speak</label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <input type="text" name="langid" id="" hidden>
+                                                        <td><input type="checkbox" class="form-check-input"
+                                                                name="language[]" id="id_gujarati"
+                                                                value="gujarati"><label
+                                                                for="id_gujarati">Gujarati</label>
+                                                        </td>
+                                                        <td><input type="checkbox" class="form-check-input langknownguj"
+                                                                name="read_gujarati" id="id_readgujarati"
+                                                                value="1"><label
+                                                                for="id_readgujarati langknownguj">Read</label>
+                                                        </td>
+                                                        <td><input type="checkbox" class="form-check-input langknownguj"
+                                                                name="write_gujarati" id="id_writegujarati"
+                                                                value="1"><label for="id_writegujarati">Write</label>
+                                                        </td>
+                                                        <td><input type="checkbox" class="form-check-input"
+                                                                name="speak_gujarati" id="id_speakgujarati"
+                                                                value="1"><label for="id_speakgujarati">Speak</label>
+                                                        </td>
+                                                    </tr>
+                                                    <%}%>
                 </table>
             </fieldset>
             <fieldset>
@@ -588,91 +736,318 @@
                 <legend>Tech you Known</legend>
                 <p id="id_tech"></p>
                 <table>
-                    <tr>
-                        <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
-                                value="<%=tech[0].tech_id %>" hidden>
-                            <% } %>
-                                <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_PHP"
-                                        value="php" <% if(locals.tech && tech[0].tech_name=='php' ) {%> checked <% } %>
-                                        ><label for="id_PHP">PHP</label>
-                                </td>
-                                <td><input type="radio" class="form-check-input" name="php[]" id="id_BeginerPHP"
-                                        value="Beginer" <% if(locals.tech && tech[0].tech_level=='Beginer' ) {%> checked
-                                    <% } %> ><label for="id_BeginerPHP">Beginer</label></td>
-                                <td><input type="radio" class="form-check-input" name="php[]" id="id_MideatorPHP"
-                                        value="Mideator" <% if(locals.tech && tech[0].tech_level=='Mideator' ) {%>
-                                    checked <% } %> ><label for="id_MideatorPHP">Mideator</label></td>
-                                <td><input type="radio" class="form-check-input" name="php[]" id="id_ExpertPHP"
-                                        value="Expert" <% if(locals.tech && tech[0].tech_level=='Expert' ) {%> checked
-                                    <% } %> ><label for="id_ExpertPHP">Expert</label></td>
-                                <td>
-                                    <p id="id_tech1" style="color: red;"></p>
-                                </td>
-                    </tr>
-                    <tr>
-                        <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
-                                value="<%=tech[1].tech_id %>" hidden>
-                            <% } %>
-                                <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_Mysql"
-                                        value="mysql" <% if(locals.tech && tech[1].tech_name=='mysql' ) {%> checked <% }
-                                        %> ><label for="id_Mysql">Mysql</label>
-                                </td>
-                                <td><input type="radio" class="form-check-input" name="mysql[]" id="id_BeginerMysql"
-                                        value="Beginer" <% if(locals.tech && tech[1].tech_level=='Beginer' ) {%> checked
-                                    <% } %> ><label for="id_BeginerMysql">Beginer</label></td>
-                                <td><input type="radio" class="form-check-input" name="mysql[]" id="id_MideatorMysql"
-                                        value="Mideator" <% if(locals.tech && tech[1].tech_level=='Mideator' ) {%>
-                                    checked <% } %> ><label for="id_MideatorMysql">Mideator</label></td>
-                                <td><input type="radio" class="form-check-input" name="mysql[]" id="id_ExpertMysql"
-                                        value="Expert" <% if(locals.tech && tech[1].tech_level=='Expert' ) {%> checked
-                                    <% } %> ><label for="id_ExpertMysql">Expert</label></td>
-                                <td>
-                                    <p id="id_tech2" style="color: red;"></p>
-                                </td>
-                    </tr>
-                    <tr>
-                        <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
-                                value="<%=tech[2].tech_id %>" hidden>
-                            <% } %>
-                                <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_Oracle"
-                                        value="oracle" <% if(locals.tech && tech[2].tech_name=='oracle' ) {%> checked <%
-                                        } %> ><label for="id_Oracle">Oracle</label>
-                                </td>
-                                <td><input type="radio" class="form-check-input" name="oracle[]" id="id_BeginerOracle"
-                                        value="Beginer" <% if(locals.tech && tech[2].tech_level=='Beginer' ) {%> checked
-                                    <% } %> ><label for="id_BeginerOracle">Beginer</label></td>
-                                <td><input type="radio" class="form-check-input" name="oracle[]" id="id_MideatorOracle"
-                                        value="Mideator" <% if(locals.tech && tech[2].tech_level=='Mideator' ) {%>
-                                    checked <% } %> ><label for="id_MideatorOracle">Mideator</label></td>
-                                <td><input type="radio" class="form-check-input" name="oracle[]" id="id_ExpertOracle"
-                                        value="Expert" <% if(locals.tech && tech[2].tech_level=='Expert' ) {%> checked
-                                    <% } %> ><label for="id_ExpertOracle">Expert</label></td>
-                                <td>
-                                    <p id="id_tech3" style="color: red;"></p>
-                                </td>
-                    </tr>
-                    <tr>
-                        <% if(locals.tech) { %> <input type="text" name="techid[]" id="techid"
-                                value="<%=tech[3].tech_id %>" hidden>
-                            <% } %>
-                                <td><input type="checkbox" class="form-check-input tech_valid" name="techlang[]" id="id_laravel"
-                                        value="laravel" <% if(locals.tech && tech[3].tech_name=='laravel' ) {%> checked
-                                    <% } %> ><label for="id_laravel">Laravel</label>
-                                </td>
-                                <td><input type="radio" class="form-check-input" name="laravel[]" id="id_BeginerLaravel"
-                                        value="Beginer" <% if(locals.tech && tech[3].tech_level=='Beginer' ) {%> checked
-                                    <% } %> ><label for="id_BeginerLaravel">Beginer</label></td>
-                                <td><input type="radio" class="form-check-input" name="laravel[]"
-                                        id="id_MideatorLaravel" value="Mideator" <% if(locals.tech &&
-                                        tech[3].tech_level=='Mideator' ) {%> checked <% } %> ><label
-                                            for="id_MideatorLaravel">Mideator</label></td>
-                                <td><input type="radio" class="form-check-input" name="laravel[]" id="id_ExpertLaravel"
-                                        value="Expert" <% if(locals.tech && tech[3].tech_level=='Expert' ) {%> checked
-                                    <% } %> ><label for="id_ExpertLaravel">Expert</label></td>
-                                <td>
-                                    <p id="id_tech4" style="color: red;"></p>
-                                </td>
-                    </tr>
+                    <% if(locals.tech) {%>
+                        <% if(locals.tech[0]) {%>
+
+                            <tr>
+                                <% if(locals.tech) { %> <input type="text" name="techid" id="techid"
+                                        value="<%=tech[0].tech_id %>" hidden>
+                                    <% } %>
+                                        <td><input type="checkbox" class="form-check-input tech_valid" name="techlang[]"
+                                                id="id_PHP" value="php" <% if(locals.tech && tech[0].tech_name=='php' )
+                                                {%>
+                                            checked <% } %>
+                                                ><label for="id_PHP">PHP</label>
+                                        </td>
+                                        <td><input type="radio" class="form-check-input" name="php[]" id="id_BeginerPHP"
+                                                value="Beginer" <% if(locals.tech && tech[0].tech_level=='Beginer' ) {%>
+                                            checked
+                                            <% } %> ><label for="id_BeginerPHP">Beginer</label>
+                                        </td>
+                                        <td><input type="radio" class="form-check-input" name="php[]"
+                                                id="id_MideatorPHP" value="Mideator" <% if(locals.tech &&
+                                                tech[0].tech_level=='Mideator' ) {%>
+                                            checked <% } %> ><label for="id_MideatorPHP">Mideator</label></td>
+                                        <td><input type="radio" class="form-check-input" name="php[]" id="id_ExpertPHP"
+                                                value="Expert" <% if(locals.tech && tech[0].tech_level=='Expert' ) {%>
+                                            checked
+                                            <% } %> ><label for="id_ExpertPHP">Expert</label>
+                                        </td>
+                                        <td>
+                                            <p id="id_tech1" style="color: red;"></p>
+                                        </td>
+                            </tr>
+                            <% } else{ %>
+                                <input type="text" name="techid" id="techid" hidden>
+                                <tr>
+
+                                    <td><input type="checkbox" class="form-check-input" name="techlang[]" id="id_PHP"
+                                            value="php"><label for="id_PHP">PHP</label>
+                                    </td>
+                                    <td><input type="radio" class="form-check-input" name="php" id="id_BeginerPHP"
+                                            value="Beginer"><label for="id_BeginerPHP">Beginer</label>
+                                    </td>
+                                    <td><input type="radio" class="form-check-input" name="php" id="id_MideatorPHP"
+                                            value="Mideator"><label for="id_MideatorPHP">Mideator</label></td>
+                                    <td><input type="radio" class="form-check-input" name="php" id="id_ExpertPHP"
+                                            value="Expert"><label for="id_ExpertPHP">Expert</label>
+                                    </td>
+
+                                </tr>
+
+                                <%} if(locals.tech[1]) { %>
+                                    <tr>
+                                        <% if(locals.tech) { %> <input type="text" name="techid" id="techid"
+                                                value="<%=tech[1].tech_id %>" hidden>
+                                            <% } %>
+                                                <td><input type="checkbox" class="form-check-input tech_valid"
+                                                        name="techlang[]" id="id_Mysql" value="mysql" <% if(locals.tech
+                                                        && tech[1].tech_name=='mysql' ) {%> checked <% } %> ><label
+                                                            for="id_Mysql">Mysql</label>
+                                                </td>
+                                                <td><input type="radio" class="form-check-input" name="mysql[]"
+                                                        id="id_BeginerMysql" value="Beginer" <% if(locals.tech &&
+                                                        tech[1].tech_level=='Beginer' ) {%> checked
+                                                    <% } %> ><label for="id_BeginerMysql">Beginer</label>
+                                                </td>
+                                                <td><input type="radio" class="form-check-input" name="mysql[]"
+                                                        id="id_MideatorMysql" value="Mideator" <% if(locals.tech &&
+                                                        tech[1].tech_level=='Mideator' ) {%>
+                                                    checked <% } %> ><label for="id_MideatorMysql">Mideator</label></td>
+                                                <td><input type="radio" class="form-check-input" name="mysql[]"
+                                                        id="id_ExpertMysql" value="Expert" <% if(locals.tech &&
+                                                        tech[1].tech_level=='Expert' ) {%> checked
+                                                    <% } %> ><label for="id_ExpertMysql">Expert</label>
+                                                </td>
+                                                <td>
+                                                    <p id="id_tech2" style="color: red;"></p>
+                                                </td>
+                                    </tr>
+                                    <% } else {%>
+                                        <input type="text" name="techid" id="techid" hidden>
+                                        <tr>
+
+                                            <td><input type="checkbox" class="form-check-input" name="techlang[]"
+                                                    id="id_Mysql" value="mysql"><label for="id_Mysql">Mysql</label>
+                                            </td>
+                                            <td><input type="radio" class="form-check-input" name="mysql"
+                                                    id="id_BeginerMysql" value="Beginer"><label
+                                                    for="id_BeginerMysql">Beginer</label>
+                                            </td>
+                                            <td><input type="radio" class="form-check-input" name="mysql"
+                                                    id="id_MideatorMysql" value="Mideator"><label
+                                                    for="id_MideatorMysql">Mideator</label></td>
+                                            <td><input type="radio" class="form-check-input" name="mysql"
+                                                    id="id_ExpertMysql" value="Expert"><label
+                                                    for="id_ExpertMysql">Expert</label>
+                                            </td>
+
+                                        </tr>
+                                        <%} if(locals.tech[2]) { %>
+                                            <tr>
+                                                <% if(locals.tech) { %> <input type="text" name="techid" id="techid"
+                                                        value="<%=tech[2].tech_id %>" hidden>
+                                                    <% } %>
+                                                        <td><input type="checkbox" class="form-check-input tech_valid"
+                                                                name="techlang[]" id="id_Oracle" value="oracle" <%
+                                                                if(locals.tech && tech[2].tech_name=='oracle' ) {%>
+                                                            checked
+                                                            <% } %> ><label for="id_Oracle">Oracle</label>
+                                                        </td>
+                                                        <td><input type="radio" class="form-check-input" name="oracle[]"
+                                                                id="id_BeginerOracle" value="Beginer" <% if(locals.tech
+                                                                && tech[2].tech_level=='Beginer' ) {%> checked
+                                                            <% } %> ><label for="id_BeginerOracle">Beginer</label>
+                                                        </td>
+                                                        <td><input type="radio" class="form-check-input" name="oracle[]"
+                                                                id="id_MideatorOracle" value="Mideator" <%
+                                                                if(locals.tech && tech[2].tech_level=='Mideator' ) {%>
+                                                            checked <% } %> ><label
+                                                                    for="id_MideatorOracle">Mideator</label>
+                                                        </td>
+                                                        <td><input type="radio" class="form-check-input" name="oracle[]"
+                                                                id="id_ExpertOracle" value="Expert" <% if(locals.tech &&
+                                                                tech[2].tech_level=='Expert' ) {%> checked
+                                                            <% } %> ><label for="id_ExpertOracle">Expert</label>
+                                                        </td>
+                                                        <td>
+                                                            <p id="id_tech3" style="color: red;"></p>
+                                                        </td>
+                                            </tr>
+                                            <%} else {%>
+                                                <input type="text" name="techid" id="techid" hidden>
+                                                <tr>
+
+                                                    <td><input type="checkbox" class="form-check-input"
+                                                            name="techlang[]" id="id_Oracle" value="oracle"><label
+                                                            for="id_Oracle">Oracle</label>
+                                                    </td>
+                                                    <td><input type="radio" class="form-check-input" name="oracle"
+                                                            id="id_BeginerOracle" value="Beginer"><label
+                                                            for="id_BeginerOracle">Beginer</label>
+                                                    </td>
+                                                    <td><input type="radio" class="form-check-input" name="oracle"
+                                                            id="id_MideatorOracle" value="Mideator"><label
+                                                            for="id_MideatorOracle">Mideator</label></td>
+                                                    <td><input type="radio" class="form-check-input" name="oracle"
+                                                            id="id_ExpertOracle" value="Expert"><label
+                                                            for="id_ExpertOracle">Expert</label>
+                                                    </td>
+
+                                                </tr>
+                                                <% } if(locals.tech[3]){%>
+                                                    <tr>
+                                                        <% if(locals.tech) { %> <input type="text" name="techid"
+                                                                id="techid" value="<%=tech[3].tech_id %>" hidden>
+                                                            <% } %>
+                                                                <td><input type="checkbox"
+                                                                        class="form-check-input tech_valid"
+                                                                        name="techlang[]" id="id_laravel"
+                                                                        value="laravel" <% if(locals.tech &&
+                                                                        tech[3].tech_name=='laravel' ) {%>
+                                                                    checked
+                                                                    <% } %> ><label for="id_laravel">Laravel</label>
+                                                                </td>
+                                                                <td><input type="radio" class="form-check-input"
+                                                                        name="laravel[]" id="id_BeginerLaravel"
+                                                                        value="Beginer" <% if(locals.tech &&
+                                                                        tech[3].tech_level=='Beginer' ) {%> checked
+                                                                    <% } %> ><label
+                                                                            for="id_BeginerLaravel">Beginer</label>
+                                                                </td>
+                                                                <td><input type="radio" class="form-check-input"
+                                                                        name="laravel[]" id="id_MideatorLaravel"
+                                                                        value="Mideator" <% if(locals.tech &&
+                                                                        tech[3].tech_level=='Mideator' ) {%> checked <%
+                                                                        } %>
+                                                                        ><label
+                                                                            for="id_MideatorLaravel">Mideator</label>
+                                                                </td>
+                                                                <td><input type="radio" class="form-check-input"
+                                                                        name="laravel[]" id="id_ExpertLaravel"
+                                                                        value="Expert" <% if(locals.tech &&
+                                                                        tech[3].tech_level=='Expert' ) {%> checked
+                                                                    <% } %> ><label
+                                                                            for="id_ExpertLaravel">Expert</label>
+                                                                </td>
+                                                                <td>
+                                                                    <p id="id_tech4" style="color: red;"></p>
+                                                                </td>
+                                                    </tr>
+                                                    <%}else {%>
+                                                        <input type="text" name="techid" id="techid" hidden>
+                                                        <tr>
+
+                                                            <td><input type="checkbox" class="form-check-input"
+                                                                    name="techlang[]" id="id_laravel"
+                                                                    value="laravel"><label
+                                                                    for="id_laravel">Laravel</label>
+                                                            </td>
+                                                            <td><input type="radio" class="form-check-input"
+                                                                    name="laravel" id="id_BeginerLaravel"
+                                                                    value="Beginer"><label
+                                                                    for="id_BeginerLaravel">Beginer</label>
+                                                            </td>
+                                                            <td><input type="radio" class="form-check-input"
+                                                                    name="laravel" id="id_MideatorLaravel"
+                                                                    value="Mideator"> <label
+                                                                    for="id_MideatorLaravel">Mideator</label></td>
+                                                            <td><input type="radio" class="form-check-input"
+                                                                    name="laravel" id="id_ExpertLaravel"
+                                                                    value="Expert"><label
+                                                                    for="id_ExpertLaravel">Expert</label>
+                                                            </td>
+                                                        </tr>
+
+                                                        <% } %>
+                                                            <%} else{%>
+
+                                                                <input type="text" name="techid" id="techid" hidden>
+                                                                <tr>
+                                                                    <td><input type="checkbox" class="form-check-input"
+                                                                            name="techlang[]" id="id_PHP"
+                                                                            value="php"><label for="id_PHP">PHP</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="php" id="id_BeginerPHP"
+                                                                            value="Beginer"><label
+                                                                            for="id_BeginerPHP">Beginer</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="php" id="id_MideatorPHP"
+                                                                            value="Mideator"><label
+                                                                            for="id_MideatorPHP">Mideator</label></td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="php" id="id_ExpertPHP"
+                                                                            value="Expert"><label
+                                                                            for="id_ExpertPHP">Expert</label>
+                                                                    </td>
+                                                                </tr>
+                                                                <input type="text" name="techid" id="techid" hidden>
+                                                                <tr>
+
+                                                                    <td><input type="checkbox" class="form-check-input"
+                                                                            name="techlang[]" id="id_Mysql"
+                                                                            value="mysql"><label
+                                                                            for="id_Mysql">Mysql</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="mysql" id="id_BeginerMysql"
+                                                                            value="Beginer"><label
+                                                                            for="id_BeginerMysql">Beginer</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="mysql" id="id_MideatorMysql"
+                                                                            value="Mideator"><label
+                                                                            for="id_MideatorMysql">Mideator</label></td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="mysql" id="id_ExpertMysql"
+                                                                            value="Expert"><label
+                                                                            for="id_ExpertMysql">Expert</label>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <input type="text" name="techid" id="techid" hidden>
+                                                                <tr>
+
+                                                                    <td><input type="checkbox" class="form-check-input"
+                                                                            name="techlang[]" id="id_Oracle"
+                                                                            value="oracle"><label
+                                                                            for="id_Oracle">Oracle</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="oracle" id="id_BeginerOracle"
+                                                                            value="Beginer"><label
+                                                                            for="id_BeginerOracle">Beginer</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="oracle" id="id_MideatorOracle"
+                                                                            value="Mideator"><label
+                                                                            for="id_MideatorOracle">Mideator</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="oracle" id="id_ExpertOracle"
+                                                                            value="Expert"><label
+                                                                            for="id_ExpertOracle">Expert</label>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <input type="text" name="techid" id="techid" hidden>
+                                                                <tr>
+
+                                                                    <td><input type="checkbox" class="form-check-input"
+                                                                            name="techlang[]" id="id_laravel"
+                                                                            value="laravel"><label
+                                                                            for="id_laravel">Laravel</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="laravel" id="id_BeginerLaravel"
+                                                                            value="Beginer"><label
+                                                                            for="id_BeginerLaravel">Beginer</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="laravel" id="id_MideatorLaravel"
+                                                                            value="Mideator"> <label
+                                                                            for="id_MideatorLaravel">Mideator</label>
+                                                                    </td>
+                                                                    <td><input type="radio" class="form-check-input"
+                                                                            name="laravel" id="id_ExpertLaravel"
+                                                                            value="Expert"><label
+                                                                            for="id_ExpertLaravel">Expert</label>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <%}%>
                 </table>
             </fieldset>
             <fieldset>
@@ -797,19 +1172,20 @@
                 <legend>Preferance</legend>
                 <table>
                     <tr>
-                <td><label for="Prefered Location">Prefered Location</label> 
-                    <select  class="form-select" name="preferedlocation" id="id_pref_location">
-                    <option value="select"><label for="select" hidden>Select</label></option>
-                    <% if (locals.pref) { %>
-                        <option value="<%= pref[0].pref_location %>" selected hidden>
-                        <%= pref[0].pref_location %>
+                        <td><label for="Prefered Location">Prefered Location</label>
+                            <select class="form-select" name="preferedlocation" id="id_pref_location">
+                                <option value="select"><label for="select" hidden>Select</label></option>
+                                <% if (locals.pref) { %>
+                                    <option value="<%= pref[0].pref_location %>" selected hidden>
+                                        <%= pref[0].pref_location %>
                                     </option>
                                     <% } %>
-                    <option value="Ahmedabad"><label for="Ahmedabad">Ahmedabad</label></option>
-                    <option value="Surat"><label for="Surat">Surat</label></option>
-                    <option value="Rajkot"><label for="Rajkot">Rajkot</label></option>
-                </select></td>
-            </tr>
+                                        <option value="Ahmedabad"><label for="Ahmedabad">Ahmedabad</label></option>
+                                        <option value="Surat"><label for="Surat">Surat</label></option>
+                                        <option value="Rajkot"><label for="Rajkot">Rajkot</label></option>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <td><label for="Notice Period">Notice Period</label>
                             <input type="text" class="form-control" name="noticeperiod" id="id_noticeperiod"
@@ -852,13 +1228,9 @@
         </div>
 
 
-        <% } catch(err){ console.log("error");} %>
+        <% } catch(err){ console.log("error"+err);} %>
 
-<script src="/validation/jobform.js">
-
-
-
-    </script>
+            <script src="/validation/jobform.js"> </script>
 </body>
 
 </html>

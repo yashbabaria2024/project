@@ -4,8 +4,8 @@ var search;
 
 const searchDelim =  (req, res) => {
 
-        let q = `select * from stud_detail_50000 limit 0,200`;
-        conn.query(`${q}`, (err, row) => {
+ 
+        conn.query(`select * from stud_detail_50000 limit 0,200`, (err, row) => {
             if (err) throw err
             res.status(200).render('delimitersearch', { 'row': row, search: search })
         })
