@@ -119,11 +119,9 @@ const createuser = (req, res) => {
 
             for (let i = 0; i < nob.length; i++) {
 
-
                 if (nob[i] != "" && passingyear[i] != "" && percentage[i] != "") {
                     const edu = `insert into edu_detail (emp_id,nob,passing_yr,percentage) values ('${id}','${nob[i]}','${passingyear[i]}','${percentage[i]}');`
-       
-                    conn.query(edu, (err) => {
+                           conn.query(edu, (err) => {
                         if (err) throw err;
                     })
                 }
@@ -148,6 +146,7 @@ const createuser = (req, res) => {
             }
 
             let lang = req.body.language
+
          if(lang != undefined)
          {
                 let lang = req.body.language.split(',');
@@ -204,11 +203,12 @@ const createuser = (req, res) => {
             let refname = req.body.refname.split(',');
             let refcontact = req.body.refcontact.split(',');
             let refrelation = req.body.refrelation.split(',');
+
             for (let i = 0; i < refname.length; i++) {
 
 
 
-                if (refname != "" || refcontact != "" && refrelation != "") {
+                if (refname[i] != "") {
                     let query4 = `insert into ref_detail (emp_id,ref_name,ref_contact,ref_relation)values('${id}','${refname[i]}','${refcontact[i]}','${refrelation[i]}')`;
 
                     conn.query(query4, (err) => {
@@ -232,9 +232,6 @@ const createuser = (req, res) => {
                 })
             }
 
-        // } catch (error) {
-        //     console.log("error");
-        // }
     }
     sequentialQueries()
 }

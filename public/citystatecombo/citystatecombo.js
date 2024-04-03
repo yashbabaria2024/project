@@ -8,8 +8,7 @@ async function fetchFun()
 
 
 async function stateFun()
-{
-    
+{  
     let data = await fetchFun()
     let select = document.getElementById('stateid');
     data.forEach(element => {
@@ -24,7 +23,6 @@ async function stateFun()
 async function city()
 {
     let id = document.getElementById('stateid').value
-    // console.log(id);
     let url = `http://localhost:8000/city/${id}`;
     let data = await fetch(url);
     let jsonval = await data.json()
