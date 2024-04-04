@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/major.css">
-    <link rel="stylesheet" href="   /dynamicgrid/dynamicgrid.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/major.css">
+    <link rel="stylesheet" href="/dynamicgrid/dynamicgrid.css">
     <title>Document</title>
 </head>
 
@@ -48,70 +48,36 @@
                     <% }) %>
             </table>
 
+          
             <div class="tbl">
                 <div class="btn">
-                    <a href="" id="dec0" onclick="dec0()"><button class="btn" id="btn1"> << </button></a>
-                    <a href="" id="dec1" onclick="dec1()"><button id="btn2" class="btn"> < </button></a>
-                     <label id="display"> <%= pid %></label>
-                    <a href="" id="inc1" onclick="inc1()"><button id="btn3" class="btn">></button></a>
-                    <a href="" id="inc0" onclick="inc0()"><button id="btn4" class="btn">>></button></a>
+
+
+                    <% if(pid == 1 ) { %>
+                        <a><<</a>
+                        <a><</a>
+                        <span><%= pid %></span>
+                    <% } else { %>
+                       <a href="/data?pid=1"><<</a>
+                        <a href="/data?pid= <%= --pid %>"><</a>
+                        <span><%= ++pid %></span>
+                    <% } %>    
+                    <% if( pid ==  Math.ceil(recordset/20)  ) { %>
+                             <a>></a>
+                            <a>>></a>
+                        <% } else { %>               
+                <a href="/data?pid=<%= ++pid %>">></a>
+                <a href="/data?pid=<%= Math.ceil(recordset/20) %>">>></a>            
+                        <% } %>
 
                 </div>
             </div>
 
-            <div id="pagefield" style="visibility: hidden;">
-                <%= pagefield %>
-            </div>
-            <div>Total Record: <%= recordset %></div>
-            <div id="recordset" style="visibility: hidden;" ><%= recordset %></div>
+           
+            <div>Total Record: <span id="recordset"> <%= recordset %></span></div>
+           
+          
             <% } catch(err) { } %>
-
-                <script>
-                    let pagefield = document.getElementById("pagefield").innerHTML;
-                    let sql = ' '
-
-                    fieldlen = document.getElementById('recordset').innerHTML
-                    
-                    minlen = 1;
-                    maxlen = Math.ceil(fieldlen / pagefield);
-
-                    let display = document.getElementById("display")
-
-                    if (display.innerHTML == minlen) {
-                        document.getElementById("btn1").disabled = true;
-                        document.getElementById("btn2").disabled = true;
-                    }
-                    if (display.innerHTML == maxlen) {
-                        document.getElementById("btn3").disabled = true;
-                        document.getElementById("btn4").disabled = true;
-                    }
-                    function dec0() {
-                        let display = document.getElementById("display")
-                        display.innerHTML = minlen
-                        document.getElementById('dec0').href = `/data?pid=${minlen}&query=${sql}`
-                    }
-
-                    function dec1() {
-
-                        let display = document.getElementById("display")
-                        if (display.innerHTML > minlen) {
-                            display.innerHTML = parseInt(display.innerHTML) - 1;
-                            document.getElementById('dec1').href = `/data?pid=${parseInt(display.innerHTML)}&query=${sql}`
-                        }
-                    }
-
-                    function inc1() {
-                        let display = document.getElementById("display")
-                        if (display.innerHTML < maxlen) {
-                            display.innerHTML = parseInt(display.innerHTML) + 1;
-                            document.getElementById('inc1').href = `/data?pid=${parseInt(display.innerHTML)}&query=${sql}`
-                        }
-                    }
-                    function inc0() {
-                        let display = document.getElementById("display")
-                        display.innerHTML = maxlen;
-                        document.getElementById('inc0').href = `/data?pid=${maxlen}&query=${sql}`
-                    }
-                </script>
+                
 </body>
 </html>

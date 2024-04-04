@@ -27,7 +27,7 @@ const result = (req, res) => {
    sum(case when exam_id=1 then result_master.p_obtain end)+sum(case when exam_id=1 then result_master.th_obtain end)
    + sum(case when exam_id=2 then result_master.p_obtain end) +   sum(case when exam_id=2 then result_master.th_obtain end) 
    + sum(case when exam_id=3 then result_master.p_obtain end) +   sum(case when exam_id=3 then result_master.th_obtain end) as totalobtain
-   from result_master inner join student_detail on result_master.stud_id = student_detail.stud_id group by result_master.stud_id limit ${currentPage},${pagefield}`, (err, row) => {
+   from result_master inner join student_detail on result_master.stud_id = student_detail.stud_id group by result_master.stud_id limit ?,?`,[currentPage,pagefield] ,(err, row) => {
         if (err) throw err;
 
         res.status(200).render('resultgrid/result', { 'row': row, 'id': id })
@@ -41,7 +41,7 @@ const resultView = (req, res) => {
     from result_master inner join subject_detail on result_master.sub_id = subject_detail.sub_id 
     inner join exam_detail on result_master.exam_id = exam_detail.exam_id
     inner join student_detail on result_master.stud_id = student_detail.stud_id 
-    where result_master.stud_id = ${sid}`, (err, row) => {
+    where result_master.stud_id = ?`,[sid], (err, row) => {
         if (err) throw err
         res.status(200).render('resultgrid/gen', { 'row': row, 'sid': sid })
     })

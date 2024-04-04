@@ -17,7 +17,7 @@ const handleStudDetail = (req, res) => {
     let pageField = 200
     let startIndex = (id - 1) * pageField;
 
-    conn.query(`select * from stud_detail_50000  order by ${field} ${orderby} limit ${startIndex}, ${pageField};`, (err, row) => {
+    conn.query(`select * from stud_detail_50000  order by ${field} ${orderby} limit ?, ?;`,[startIndex,pageField], (err, row) => {
         if (err) throw err;
         res.status(200).render('searchgrid/display', { "row": row, "id": id, "orderby": orderby, "field": field });
     });
@@ -44,10 +44,12 @@ const handleSearch = (req, res) => {
     address = req.query.address;
     branch = req.query.branch;
 
-    conn.query(`select * from stud_detail_50000 where firstname like '${firstname}%' ${operator} address like '${address}%' ${operator} branch like '${branch}%' order by ${field} ${orderby} limit ${startIndex}, ${pageField};`, (err, row) => {
+    conn.query(`select * from stud_detail_50000 where firstname like ? ${operator} address like ? ${operator} branch like ? order by ${field} ${orderby} limit ?, ?;`,[firstname+'%',address+'%',branch+'%',startIndex,pageField] ,(err, row) => {
+        
         if (err) throw err;
         res.status(200).render('searchgrid/search', { "row": row, "id": id, "orderby": orderby, "field": field });
     }
+
     )
 }
 
@@ -55,12 +57,10 @@ const handleSearch = (req, res) => {
 const handleidSearch = (req, res) => {
 
     let stud_id = req.query.stud_id
-    conn.query(`select * from stud_detail_50000 where stud_id = '${stud_id}';`, (err, row) => {
+    conn.query(`select * from stud_detail_50000 where stud_id = ?;`,[stud_id] ,(err, row) => {
         if (err) throw err;
         res.status(200).render('searchgrid/idsearch', { "row": row });
     })
 }
-
-
 
 module.exports = { handleStudDetail, handleSearch, handleidSearch }

@@ -35,9 +35,7 @@ const createuser = (req, res) => {
 
     let link = activeFun()
     let alert = "alert"
-    let query = `insert into employee_details (first_name,last_name,desg,email,contact,gender,relation_status,add1,add2,city,state,zip_code,dob,activelink, activestatus ) values ('${firstname}','${lastname}','${desg}','${email}','${contact}','${gender}','${relationshipstatus}','${address}','${address2}','${city}','${state}','${zipcode}','${dateofbirth}','${link}','deactive') `
-
-    conn.query(query, (err) => {
+     conn.query( `insert into employee_details (first_name,last_name,desg,email,contact,gender,relation_status,add1,add2,city,state,zip_code,dob,activelink, activestatus ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) `,[firstname,lastname,desg,email,contact,gender,relationshipstatus,address,address2,city,state,zipcode,dateofbirth,link,'deactive'] ,(err) => {
         if (err) {
             res.status(404).render('registration/register', {alert:alert});
         }
@@ -51,7 +49,7 @@ const activelinkcontroller = (req, res) => {
 
     let link = req.params.link;
 
-    conn.query(`select employee_registered from employee_details where activelink = '${link}'`, (err, result) => {
+    conn.query(`select employee_registered from employee_details where activelink = ?`,[link], (err, result) => {
         if (err) throw err
         let currentime = new Date().toTimeString()
         let acivelinktime = new Date(new Date(result[0].employee_registered).getTime() + 500 * 600000000000).toTimeString();
@@ -68,8 +66,6 @@ const createactivelink = (req, res) => {
 
     let link = req.params.link
     let psw = req.body.password;
-
-
     const reset = 'abcdefghijklmnopqrstuvwxyz1234567890'
     let resetcode = '';
 
@@ -86,13 +82,12 @@ const createactivelink = (req, res) => {
 
     let password = psw.concat(result)
 
-    let query = `update employee_details set password = '${md5(password)}',activestatus = 'active',saltkey = '${result}', resetkey = '${resetcode}' where activelink = '${link}'`
-    // console.log(query);
-    conn.query(query, (err) => {
+    let query = `update employee_details set password = ?,activestatus = 'active',saltkey = ?, resetkey = ? where activelink = ?`
+ 
+    conn.query(query,[md5(password),result,resetcode,link] ,(err) => {
         if (err) throw err
         res.status(302).redirect('/login')
     })
-
 }
 
 const handleregisterpage =  (req, res) => {
@@ -100,54 +95,52 @@ const handleregisterpage =  (req, res) => {
 }
 
 function createToken(email){
-    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY,{expiresIn: "10m"})
+    const Token = jwt.sign({email:email},process.env.JWT_SECRET_KEY)
        return Token
  }
 
-const handlelogin =  (req, res) => {
-    res.status(200).render('registration/login')
+ const handlelogin =  (req, res) => {
+    res.render('registration/login')
 }
 
 const createlogin = (req, res) => {
 
 
-    conn.query(`select saltkey from employee_details where email='${req.body.email}'`, (err, result) => {
+    conn.query(`select saltkey from employee_details where email= ?`,[req.body.email] , (err, result) => {
      if (err) throw err
  
      let fail = "fail"
-     conn.query(`select count(*) as count from employee_details where email='${req.body.email}' and password = '${md5(req.body.password + result[0].saltkey)}'`, (err, row) => {
+     conn.query(`select count(*) as count from employee_details where email=? and password = ?`,[req.body.email,md5(req.body.password + result[0].saltkey)], (err, row) => {
          if (err) throw err;
 
          if (row[0].count == 1) {
 
           let token = createToken(req.body.email)  
-         res.cookie("access_token", token, {
-             httpOnly: true
-         })
-             res.status(200).redirect('/displ')
-             
+
+         res.cookie("access_token", token)
+             res.status(200).redirect('/displ')       
          }
          else {
-             res.status(401).render('registration/login',{fail:fail})
+             res.render('registration/login',{fail:fail})
          }
      })
  });
 }
 
 const resetget = (req, res) => {
-    res.status(202).render('registration/resetpsw')
+    res.render('registration/resetpsw')
 }
 
 const resetpost = (req, res) => {
-let alert = "alert"
-    conn.query(`select count(*) as count, resetkey from employee_details where email = '${req.body.emailreset}'`, (err, row) => {
+
+    conn.query(`select count(*) as count, resetkey from employee_details where email = ?`,[req.body.emailreset], (err, row) => {
         if (err) throw err;
 
         if (row[0].count == 1) {
-            res.status(202).redirect(`/reset/${row[0].resetkey}`)
+            res.redirect(`/reset/${row[0].resetkey}`)
         }
         else {
-            res.status(404).render('registration/resetpsw',{alert:alert})
+            res.send("Email id does not exist")
         }
 
     })
@@ -155,7 +148,7 @@ let alert = "alert"
 
 const handleResetKey = (req, res) => {
     req.params.resetkey
-    res.status(202).render('registration/password')
+    res.render('registration/password')
 }
 
 const createresetKey =  (req, res) => {
@@ -179,15 +172,11 @@ const createresetKey =  (req, res) => {
 
     let password = psw.concat(result)
 
-    let query = `update employee_details set password = '${md5(password)}',saltkey = '${result}', resetkey = '${resetcode}' where resetkey = '${resetkey}'`
-
-    // console.log(query);
-    conn.query(query, (err) => {
+    conn.query(`update employee_details set password = ?,saltkey = ?, resetkey = ? where resetkey = ?`,[md5(password),resetcode,resetkey], (err) => {
         if (err) throw err
-        res.status(200).redirect('/login')
+        res.redirect('/login')
     })
 }
 
 
-// module.exports = {handlelogin,createlogin,resetget,resetpost,handleResetKey,createresetKey }
 module.exports = {handleregisterpage,homecontroller,createuser,activelinkcontroller,createactivelink,handlelogin,createlogin,resetget,resetpost,handleResetKey,createresetKey}

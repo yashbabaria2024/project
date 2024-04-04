@@ -20,10 +20,7 @@ function MainFun(id) {
         document.getElementById(`${id.id}`).focus()
         document.getElementById(`${id.id}`).after(error);
         flag = false
-    } else
-    {
-        flag = true
-    }
+    } 
 }
 
 function contactFun(id) {
@@ -53,10 +50,7 @@ function contactFun(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
-    else
-    {
-        flag = true
-    }
+    
 }
 
 function emptyInput(id) {
@@ -71,10 +65,7 @@ function emptyInput(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
-    else
-    {
-        flag = true
-    }
+    
 }
 
 function selectInput(id) {
@@ -89,10 +80,7 @@ function selectInput(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
-    else
-    {
-        flag = true
-    }
+  
    
 }
 
@@ -122,10 +110,7 @@ function emailFun(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
-    else
-    {
-        flag = true
-    }
+    
 }
 
 function dateFun(id) {
@@ -150,10 +135,7 @@ function dateFun(id) {
         document.getElementById(`${id.id}`).focus()
         document.getElementById(`${id.id}`).after(error);
         flag = false
-    } else
-    {
-        flag = true
-    }
+    } 
 }
 
 function percentageFun(id) { 
@@ -179,10 +161,7 @@ function percentageFun(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
-    else
-    {
-        flag = true
-    }
+    
 }
 
 function passingyr(id) {
@@ -209,10 +188,7 @@ function passingyr(id) {
         document.getElementById(`${id.id}`).after(error);
         flag = false
     }
-    else
-    {
-        flag = true
-    }
+    
 }
 
 function zipcodeFun() {
@@ -236,10 +212,7 @@ function zipcodeFun() {
         document.getElementById("id_zipcode").after(error);
         flag = false
     }
-    else
-    {
-        flag = true
-    }
+    
 }
 
 // education Detail
@@ -406,52 +379,52 @@ function workexpFun() {
 }
 
 
-function checkvalue(lang, error, name) {
-    let arr = []
-    if (lang.checked) {
-        name.forEach(element => {
+// function checkvalue(lang, error, name) {
+//     let arr = []
+//     if (lang.checked) {
+//         name.forEach(element => {
 
-            if (element.checked) {
-                arr.push(element)
-            }
-            if (arr.length === 0) {
-                error.innerHTML = "Please select any one skill"
-            }
-            else {
-                error.innerHTML = " "
-            }
-        })
-        if(flag != false)
-    {
-        flag = true
-    }
-    }
+//             if (element.checked) {
+//                 arr.push(element)
+//             }
+//             if (arr.length === 0) {
+//                 error.innerHTML = "Please select any one skill"
+//             }
+//             else {
+//                 error.innerHTML = " "
+//             }
+//         })
+//         if(flag != false)
+//     {
+//         flag = true
+//     }
+//     }
     
    
-}
+// }
 
-function checklang(name, error, lang) {
-    let arr = []
+// function checklang(name, error, lang) {
+//     let arr = []
  
-    name.forEach(element => {
-        if (element.checked) {
+//     name.forEach(element => {
+//         if (element.checked) {
            
-            if (!lang.checked)
-           {
-            error.innerHTML = "Please select skill"
-            flag = false
-           }
-           else {
-            error.innerHTML = " " 
+//             if (!lang.checked)
+//            {
+//             error.innerHTML = "Please select skill"
+//             flag = false
+//            }
+//            else {
+//             error.innerHTML = " " 
             
-        }
-        } 
-    })
-    if(flag != false)
-    {
-        flag = true
-    }   
-}
+//         }
+//         } 
+//     })
+//     if(flag != false)
+//     {
+//         flag = true
+//     }   
+// }
 
 
 function refFun() {
@@ -577,7 +550,7 @@ let span = document.querySelectorAll('span')
 for (let i = 0; i < span.length; i++) {
     span[i].remove()
 }
-
+flag = true
     MainFun(id_firstname)   
     MainFun(id_lastname)
     MainFun(id_designation)
@@ -618,10 +591,7 @@ console.log(flag);
 
         return false;
     }
-    else
-    {
-        return true
-    }
+   
        
     
 }

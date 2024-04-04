@@ -7,15 +7,7 @@ document.getElementById('expdetail').style.display = "none"
 
 let count = 0;
 
-function submitFun()
-{
-    let flag = validationFun()
 
-    if(flag !=  false)
-    {
-        postData()
-    }
-}
 
 
 

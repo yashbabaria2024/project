@@ -93,7 +93,7 @@ const searchData = (req, res) => {
     }
     query = query.slice(0, query.length - 6);
 
-    conn.query(`${query}`, (err, row) => {
+    conn.query(query, (err, row) => {
         if (err) throw err;
         else {
             res.status(200).render('delimitersearch', { row: row, search: search })
