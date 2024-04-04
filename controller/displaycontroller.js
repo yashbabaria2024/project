@@ -68,6 +68,10 @@ const handleRoute = (req, res) => {
             res.status(200).redirect('/timeZone')
             break; 
         
+        case '16':
+            res.status(200).redirect('/jsonplaceholder')
+            break;
+        
 
         default:
             res.status(204).end("end")

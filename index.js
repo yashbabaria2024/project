@@ -16,6 +16,7 @@ const fetchcrudrouter = require('./router/fetchcrudrouter')
 const ajaxcityrouter = require('./router/ajaxcityrouter')
 const timeZoneRouter = require('./router/timezonerouter')
 const userviewrouter = require('./router/userviewrouter')
+const jsonplaceholder = require('./router/jsonplaceholderrouter')
 const app = express()
 app.use(bodyParser.json())
 app.use(cookieParser())
@@ -34,7 +35,13 @@ app.use('/', fetchcrudrouter)
 app.use('/', ajaxcityrouter)
 app.use('/',timeZoneRouter)
 app.use('/',userviewrouter)
+app.use('/',jsonplaceholder)
 app.use('/', logout)
+
+
+
+ 
+
 
 dotenv.config();
 let port = process.env.PORT;
