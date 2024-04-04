@@ -15,7 +15,7 @@ const crudrouter = require('./router/crudrouter')
 const fetchcrudrouter = require('./router/fetchcrudrouter')
 const ajaxcityrouter = require('./router/ajaxcityrouter')
 const timeZoneRouter = require('./router/timezonerouter')
-
+const userviewrouter = require('./router/userviewrouter')
 const app = express()
 app.use(bodyParser.json())
 app.use(cookieParser())
@@ -33,6 +33,7 @@ app.use('/', crudrouter)
 app.use('/', fetchcrudrouter)
 app.use('/', ajaxcityrouter)
 app.use('/',timeZoneRouter)
+app.use('/',userviewrouter)
 app.use('/', logout)
 
 dotenv.config();

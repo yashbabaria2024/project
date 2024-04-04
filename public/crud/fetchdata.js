@@ -98,7 +98,7 @@ const techDetail = async () => {
 
   let techid = document.getElementsByName('tech_id')
 
-  let tech = document.getElementsByName('techlang')
+  let tech = document.getElementsByName('techlang[]')
 
 
 
@@ -133,7 +133,7 @@ const langDetail = async () => {
   let fetchdata = await fetch(`http://localhost:8000/flangdetail/${Id}`)
   let data = await fetchdata.json()
   let langid = document.getElementsByName('lang_id')
-  let lang = document.getElementsByName('language')
+  let lang = document.getElementsByName('language[]')
 
   lang.forEach(item => {
       let key = Object.keys(data)

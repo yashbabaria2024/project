@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/major.css">
+  <link rel="stylesheet" href="/delimitersearch/delimitersearch.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+  hello user
+  <% try {%>
+    <td><a href="http://localhost:8000/jobform/" class="btn btn-primary">Create User</a></td>
+  <table class="table table-bordered">
+  
+    <tr>
+    <% col.forEach(element => { %>
+      <td><%= element %></td>
+    <% }); %>
+  </tr>
+    <% row.forEach(element => { %>
+      <tr>
+        <% col.forEach(record => { %>
+          <td><%= element[record] %></td>
+          
+       <% }); %>
+       <td><a href="http://localhost:8000/jobform/<%= element.Id %>" class="btn btn-primary">update</a></td>
+       <td><a href="http://localhost:8000/userview/<%= element.Id %>" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this User?')">delete</a></td>
+      </tr>    
+   <% });  %>
+</table>
+<% } catch(err){console.log("error userview front"+err);} %>
+</div></div>
+</body>
+</html>

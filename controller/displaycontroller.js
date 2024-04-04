@@ -49,7 +49,7 @@ const handleRoute = (req, res) => {
             break;
 
         case '11':
-            res.status(200).redirect('/jobform')
+            res.status(200).redirect('/userview')
             break;
 
         case '12':
@@ -67,7 +67,8 @@ const handleRoute = (req, res) => {
         case '15':
             res.status(200).redirect('/timeZone')
             break; 
-            
+        
+
         default:
             res.status(204).end("end")
             break;

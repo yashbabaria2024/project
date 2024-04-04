@@ -181,7 +181,7 @@ const updatejobFormData = (req, res) => {
     };
 
     const updateFun = async () => {
-        try {
+        // try {
 
             const id = await updatebasic();
            
@@ -278,12 +278,14 @@ const updatejobFormData = (req, res) => {
 
 
             let techlang = req.body.techlang  ;
+            if(techlang != undefined)
+            {
             let php = req.body.php;
-            let oracle = req.body.oracle;
             let mysql = req.body.mysql;
+            let oracle = req.body.oracle;
             let laravel = req.body.laravel;
             tech_id = req.body.tech_id  
-            let techarr = [php, oracle, mysql, laravel]
+            let techarr = [php,mysql,oracle,laravel]
             for (let i = 0; i < techlang.length; i++) {
 
                 if (tech_id[i] == "") {
@@ -300,8 +302,10 @@ const updatejobFormData = (req, res) => {
                 }
             }
 
-
+        }
             let refname = req.body.refname  ;
+            if(refname != undefined)
+            {
             let ref_id = req.body.ref_id  ;
             let refcontact = req.body.refcontact  ;
             let refrelation = req.body.refrelation  ;
@@ -324,7 +328,7 @@ const updatejobFormData = (req, res) => {
                         })
                     }
                 }
-            }
+            }}
 
            
             let pref_id = req.body.pref_id;
@@ -334,8 +338,9 @@ const updatejobFormData = (req, res) => {
             let currentCTC = req.body.currentCTC;
             let Department = req.body.Department;
 
-            if (pref_id == "") {
-                conn.query(`insert into pref_detail (emp_id,pref_location,notice_period,expacted_ctc,current_ctc,department)values ?,?,?,?,?,?`, [id, preferedlocation, noticeperiod, expecedCTC, currentCTC, Department], (err) => {
+            if (pref_id == "" && preferedlocation != "select") {
+
+                conn.query(`insert into pref_detail (emp_id,pref_location,notice_period,expacted_ctc,current_ctc,department)values (?,?,?,?,?,?);`, [id, preferedlocation, noticeperiod, expecedCTC, currentCTC, Department], (err) => {
                     if (err) throw err;
                 })
             }
@@ -346,9 +351,9 @@ const updatejobFormData = (req, res) => {
             }
 
 
-        } catch (error) {
-            console.log("update error" + error)
-        }
+        // } catch (error) {
+        //     console.log("update error" + error)
+        // }
     }
 
     updateFun()

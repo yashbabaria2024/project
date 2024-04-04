@@ -13,7 +13,7 @@
 
 <body>
         <h1 id="heading" >Name:- Babaria Yash Emp_id:- 24Dev013 </h1>
-        <h2 id="task">Task:-Job Appllication Form using fetch </h2>
+        <h2 id="task">Task:-Job Appllication Form </h2>
    
     <form name="myform" id="form" method="post" onsubmit="return validationFun()">
         <div class="diplay basicdetail" id="basicdetail">
@@ -239,7 +239,7 @@
             <table>
                 <tr>
                     <input type="text" name="lang_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input language" name="language" id="id_hindi" value="hindi"><label
+                    <td><input type="checkbox" class="form-check-input language" name="language[]" id="id_hindi" value="hindi"><label
                             for="id_hindi"> Hindi </label>
                     </td>
                     <td><input type="checkbox" class="langknownhindi form-check-input" name="read_hindi"
@@ -258,7 +258,7 @@
 
                 <tr>
                     <input type="text" name="lang_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input language" name="language" id="id_english"
+                    <td><input type="checkbox" class="form-check-input language" name="language[]" id="id_english"
                             value="english"><label for="id_english">English</label>
                     </td>
                     <td><input type="checkbox" class="langknownenglish form-check-input " name="read_english"
@@ -276,7 +276,7 @@
                 </tr>
                 <tr>
                     <input type="text" name="lang_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input language" name="language" id="id_gujarati"
+                    <td><input type="checkbox" class="form-check-input language" name="language[]" id="id_gujarati"
                             value="gujarati"><label for="id_gujarati">Gujarati</label>
                     </td>
                     <td><input type="checkbox" class="form-check-input langknownguj" name="read_gujarati"
@@ -301,7 +301,7 @@
             <table>
                 <tr>
                     <input type="text" name="tech_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_PHP" value="php"><label
+                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang[]" id="id_PHP" value="php"><label
                             for="id_PHP">PHP</label>
                     </td>
                     <td><input type="radio" class="form-check-input" name="php" id="id_BeginerPHP"
@@ -319,7 +319,7 @@
                 </tr>
                 <tr>
                     <input type="text" name="tech_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_Mysql"
+                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang[]" id="id_Mysql"
                             value="mysql"><label for="id_Mysql">Mysql</label>
                     </td>
                     <td><input type="radio" class="form-check-input" name="mysql" id="id_BeginerMysql"
@@ -337,7 +337,7 @@
                 </tr>
                 <tr>
                     <input type="text" name="tech_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_Oracle"
+                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang[]" id="id_Oracle"
                             value="oracle"><label for="id_Oracle">Oracle</label>
                     </td>
                     <td><input type="radio" class="form-check-input" name="oracle" id="id_BeginerOracle"
@@ -354,7 +354,7 @@
                 </tr>
                 <tr>
                     <input type="text" name="tech_id" id="" hidden>
-                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang" id="id_laravel"
+                    <td><input type="checkbox" class="form-check-input tech_valid" name="techlang[]" id="id_laravel"
                             value="laravel"><label for="id_laravel">Laravel</label>
                     </td>
                     <td><input type="radio" class="form-check-input" name="laravel" id="id_BeginerLaravel"
@@ -463,13 +463,6 @@
     
      <script src="/validation/jobform.js"></script>
      <script src="/crud/fetchdata.js"></script>
-   
-    <script>
-    
-   
-       
-        </script>
-
 </body>
 
 </html>
