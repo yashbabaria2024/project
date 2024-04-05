@@ -94,22 +94,17 @@ const createJobFormData = (req, res) => {
             }
 
             let techlang = req.body.techlang;
-            let php = req.body.php;
-            let mysql = req.body.mysql;
-            let oracle = req.body.oracle;
-            let laravel = req.body.laravel;
-
+          
             if (techlang != undefined) {
                 techlang = req.body.techlang  ;
-                let techarr = [php, mysql, oracle, laravel]
-
                 for (let i = 0; i < techlang.length; i++) {
-                    conn.query(`insert into tech_detail (emp_id,tech_name,tech_level) values (?,?,?)`, [id, techlang, techarr], (err) => {
+                let techlevel = req.body[req.body.techlang[i]]
+                
+                    conn.query(`insert into tech_detail (emp_id,tech_name,tech_level) values (?,?,?)`, [id, techlang[i], techlevel], (err) => {
                         if (err) throw err;
                     })
                 }
             }
-
 
             let ref = req.body.refname
             
@@ -181,7 +176,7 @@ const updatejobFormData = (req, res) => {
     };
 
     const updateFun = async () => {
-        // try {
+        try {
 
             const id = await updatebasic();
            
@@ -280,22 +275,19 @@ const updatejobFormData = (req, res) => {
             let techlang = req.body.techlang  ;
             if(techlang != undefined)
             {
-            let php = req.body.php;
-            let mysql = req.body.mysql;
-            let oracle = req.body.oracle;
-            let laravel = req.body.laravel;
-            tech_id = req.body.tech_id  
-            let techarr = [php,mysql,oracle,laravel]
+                      tech_id = req.body.tech_id  
+            
             for (let i = 0; i < techlang.length; i++) {
-
-                if (tech_id[i] == "") {
-                    conn.query(`insert into tech_detail(emp_id,tech_name,tech_level) values (?,?,?)`, [id, techlang[i], techarr[i]], (err) => {
+               let techlevel = req.body[req.body.techlang[i]]
+               
+                if (tech_id[i] == "" && techlevel[i] != undefined && techlang[i] != "") {
+                    conn.query(`insert into tech_detail(emp_id,tech_name,tech_level) values (?,?,?)`, [id, techlang[i], techlevel], (err) => {
                         if (err) throw err;
                     })
                 }
                 else {
                     if (tech_id[i] != "") {
-                        conn.query(`update tech_detail set tech_name = ?,tech_level = ? where emp_id = ? and tech_id = ?`, [techlang[i], techarr[i], id, tech_id[i]], (err) => {
+                        conn.query(`update tech_detail set tech_name = ?,tech_level = ? where emp_id = ? and tech_id = ?`, [techlang[i], techlevel, id, tech_id[i]], (err) => {
                             if (err) throw err;
                         })
                     }
@@ -351,9 +343,9 @@ const updatejobFormData = (req, res) => {
             }
 
 
-        // } catch (error) {
-        //     console.log("update error" + error)
-        // }
+        } catch (error) {
+            console.log("update error" + error)
+        }
     }
 
     updateFun()

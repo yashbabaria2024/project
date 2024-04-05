@@ -150,20 +150,18 @@ const createuser = (req, res) => {
                     })
                 }
             }}
+
         
             let techlang = req.body.techlang;
-            let php = req.body.php;
-            let mysql = req.body.mysql;
-            let oracle = req.body.oracle;
-            let laravel = req.body.laravel;
-
+          
             if(techlang != undefined )
             {
                techlang = req.body.techlang.split(',');
-                let techarr = [php, mysql, oracle, laravel]
-  
+          
+               let techlevel = req.body[req.body[techlang[i]]]
+              
             for (let i = 0; i < techlang.length; i++) {
-                conn.query(`insert into tech_detail (emp_id,tech_name,tech_level) values (?,?,?)`,[id,techlang[i],techarr[i]], (err) => {
+                conn.query(`insert into tech_detail (emp_id,tech_name,tech_level) values (?,?,?)`,[id,techlang[i],techlevel], (err) => {
                     if (err) throw err;
                 })
             }}
@@ -232,7 +230,7 @@ const updateuser = (req, res) => {
     };
 
     const updateFun = async () => {
-        try {
+        // try {
 
             const id = await updatebasic();
             let pref_id = req.body.pref_id;   
@@ -365,31 +363,38 @@ const updateuser = (req, res) => {
 
                    
 
-            let techlang = req.body.techlang.split(',');
-            let php = req.body.php;
-            let oracle = req.body.oracle;
-            let mysql = req.body.mysql;
-            let laravel = req.body.laravel;
-            tech_id = req.body.tech_id.split(',')
-            let techarr = [php, oracle, mysql, laravel]
-            for (let i = 0; i < techlang.length; i++) {
+               let techlang = req.body.techlang  ;
 
-                if (tech_id[i] == "") {
-                  conn.query(`insert into tech_detail(emp_id,tech_name,tech_level) values (?,?,?)`,[id,techlang[i],techarr[i]],(err) => {
-                        if (err) throw err;
-                    })
-                }
-                else {
-                    if (tech_id[i] != "") {
-                        conn.query( `update tech_detail set tech_name = ?,tech_level = ? where emp_id = ? and tech_id = ?`,[techlang[i],techarr[i],id,tech_id[i]], (err) => {
-                            if (err) throw err;
-                        })
-                    }
-                }
-            }
-        } catch (error) {
-            console.log("update error" + error)
-        }
+               if(techlang != undefined)
+               {
+                   techlang = req.body.techlang.split(',');
+                    
+                    tech_id = req.body.tech_id.split(',')
+               
+               for (let i = 0; i < techlang.length; i++) {
+              
+                  let techlevel = req.body[techlang[i]]
+                       
+                   if (tech_id[i] == "" && techlang[i] != "") {
+                       conn.query(`insert into tech_detail(emp_id,tech_name,tech_level) values (?,?,?)`, [id, techlang[i], techlevel], (err) => {
+                           if (err) throw err;
+                       })
+                   }
+                   else {
+                       if (tech_id[i] != "") {
+                           conn.query(`update tech_detail set tech_name = ?,tech_level = ? where emp_id = ? and tech_id = ?`, [techlang[i], techlevel, id, tech_id[i]], (err) => {
+                               if (err) throw err;
+                           })
+                       }
+                   }
+               }
+   
+           }          
+          
+           
+        // } catch (error) {
+        //     console.log("update error" + error)
+        // }
     }
 
     updateFun()

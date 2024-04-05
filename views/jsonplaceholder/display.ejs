@@ -58,9 +58,11 @@
         </form>
       </td>
   <table class="table table-success table-striped" id="mytbl">
+    <% try { %>
     <tr>
       <td id="snum" hidden><%= number %></td>
     </tr> 
+    <%} catch(err){console.log("error jsonplaceHolder:"+err);} %>
     <tr>
         <td>Id</td>
         <td>Slug</td>
@@ -87,6 +89,7 @@
     <button class="btn btn-outline-secondary" id="lastpage">>></button>
 </div>
     <script src="/jsonplaceholder/display.js"></script>
+   
 </body>
 </html>
 

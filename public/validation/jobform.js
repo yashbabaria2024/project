@@ -233,6 +233,8 @@ function educationDetailFun() {
     let bepr = document.getElementById("id_bepercentage").value
     let mepr = document.getElementById("id_mepercentage").value
 
+
+
     if (ssc != "") {
         passingyr(id_sscpassingyear)
         percentageFun(id_sscpercentage)
@@ -244,9 +246,14 @@ function educationDetailFun() {
     if (sscpr != "") {
         selectInput(id_sscnob)
         passingyr(id_sscpassingyear)
-    }
+    } 
 
+ 
+   
     if (hsc != "") {
+        selectInput(id_sscnob)
+        passingyr(id_sscpassingyear)
+        percentageFun(id_sscpercentage)
         passingyr(id_hscpassingyear)
         percentageFun(id_hscpercentage)
     }
@@ -259,7 +266,12 @@ function educationDetailFun() {
         passingyr(id_hscpassingyear)
     }
 
+
     if (becourse != "") {
+
+        passingyr(id_hscpassingyear)
+        percentageFun(id_hscpercentage)
+        selectInput(id_hscnob)
         percentageFun(id_bepercentage)
         passingyr(id_bepassingyear)
     }
@@ -272,7 +284,12 @@ function educationDetailFun() {
         passingyr(id_bepassingyear)
     }
 
+  
+
     if (mecourse != "") {
+        percentageFun(id_bepercentage)
+        passingyr(id_bepassingyear)
+        selectInput(id_becoursename) 
         percentageFun(id_mepercentage)
         passingyr(id_mepassingyear)
     }
@@ -284,8 +301,12 @@ function educationDetailFun() {
         selectInput(id_mecoursename)
         passingyr(id_mepassingyear)
     }
-
 }
+
+
+   
+
+
 
 // Work Experience
 
@@ -380,8 +401,8 @@ function workexpFun() {
 
 
 // function checkvalue(lang, error, name) {
-//     let arr = []
 //     if (lang.checked) {
+//         let arr = []
 //         name.forEach(element => {
 
 //             if (element.checked) {
@@ -389,18 +410,15 @@ function workexpFun() {
 //             }
 //             if (arr.length === 0) {
 //                 error.innerHTML = "Please select any one skill"
+//                 flag = false
 //             }
 //             else {
 //                 error.innerHTML = " "
+//                 flag = true
 //             }
 //         })
-//         if(flag != false)
-//     {
-//         flag = true
-//     }
-//     }
-    
-   
+       
+//     } 
 // }
 
 // function checklang(name, error, lang) {
@@ -516,18 +534,23 @@ function prefFun(){
     }
 }
 
+
 let flag
-const error1 = document.getElementById('id_language1')
-const error2 = document.getElementById('id_language2')
-const error3 = document.getElementById('id_language3')
+
 const error4 = document.getElementById('id_tech1')
 const error5 = document.getElementById('id_tech2')
 const error6 = document.getElementById('id_tech3')
 const error7 = document.getElementById('id_tech4')
 const language = document.querySelectorAll('.language')
-const englishknown = document.querySelectorAll('.langknownenglish')
+    const hindiknown = document.querySelectorAll('.langknownhindi')
+    const error1 = document.getElementById('id_language1')
+
+        const englishknown = document.querySelectorAll('.langknownenglish')
+          
+    const error2 = document.getElementById('id_language2')
+const error3 = document.getElementById('id_language3')
 const gujknown = document.querySelectorAll('.langknownguj')
-const hindiknown = document.querySelectorAll('.langknownhindi')
+
 const phpknown = document.getElementsByName('php[]')
 const mysqlknown = document.getElementsByName('mysql[]')
 const oracleknown = document.getElementsByName('oracle[]')
@@ -567,7 +590,8 @@ flag = true
     selectInput(id_relationshipstatus)
     prefFun()
 
-//     checkvalue(language[0],error1,hindiknown)
+ 
+// checkvalue(language[0],error1,hindiknown)
 // checkvalue(language[1],error2,englishknown)
 // checkvalue(language[2],error3,gujknown)
 // checkvalue(tech[0],error4,phpknown)
