@@ -60,7 +60,11 @@
   <table class="table table-success table-striped" id="mytbl">
     <% try { %>
     <tr>
-      <td id="snum" hidden><%= number %></td>
+      <% if(locals.number){ %>
+      <td id="snum" hidden><% if(locals.number) %><% if(locals.number[0]){ %><%= number %><% } else {%> 1 <% } %> </td>
+      <% } else { %>
+      <td id="snum" hidden>1</td>
+      <% } %>
     </tr> 
     <%} catch(err){console.log("error jsonplaceHolder:"+err);} %>
     <tr>

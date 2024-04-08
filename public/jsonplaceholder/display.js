@@ -27,7 +27,7 @@ async function renderFun() {
     length = data.length;
 
 
-    const res = newdata.map(element => {
+     newdata.map(element => {
         const tr = document.createElement('tr')
         const id = document.createElement('td');
         const slug = document.createElement('td');
@@ -152,7 +152,7 @@ function nextButtonFun() {
 function lastpageFun() {
     lastpage = Math.ceil(length / pagefield);
     currentPage = lastpage
-    console.log(currentPage);
+  
     if (currentPage != 1) {
         document.getElementById('firstpage').disabled = false;
         document.getElementById('prevButton').disabled = false;
